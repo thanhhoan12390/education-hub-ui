@@ -20,6 +20,9 @@ function SearchItem({ searchItemURL }: SearchItemProps) {
         revalidateOnFocus: false,
     });
 
+    if (isLoading) return <div>Loading....</div>;
+    if (error) return <div>Co loi xay ra....</div>;
+
     return data ? (
         <div className={cx('wrapper')}>
             <Link href="" className={cx('container')}>

@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
@@ -38,8 +38,11 @@ function SearchBar() {
             debouncedValue !== '' && data
                 ? data.results.filter((item) => item.name.startsWith(debouncedValue.toLowerCase()))
                 : [],
-        [debouncedValue],
+        [debouncedValue, data],
     );
+
+    if (isLoading) return <div>Loading....</div>;
+    if (error) return <div>Co loi xay ra....</div>;
 
     return (
         <div className={cx('wrapper')}>

@@ -11,7 +11,7 @@ function SWRProvider({ children }: SWRProviderProps) {
     return (
         <SWRConfig
             value={{
-                fetcher: (key: string | [string, Record<string, any>?]) => {
+                fetcher: (key: string | [string, Record<string, string | number>?]) => {
                     // Nếu key là mảng -> giải mảng
                     if (Array.isArray(key)) {
                         const [url, params] = key;

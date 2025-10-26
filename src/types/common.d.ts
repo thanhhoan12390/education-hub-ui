@@ -25,6 +25,4 @@ export interface Course {
 export interface ListParams {
     offset?: number;
     limit?: number;
-
-    [key: string]: any;
 }

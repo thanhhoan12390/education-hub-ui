@@ -82,7 +82,7 @@ function Popover({ children, targetRef, className }: PopoverProps) {
             setArrowDirection((prev) => (prev === nextArrow ? prev : nextArrow));
         };
         updatePosition();
-    }, []);
+    }, [targetRef]);
 
     return ReactDOM.createPortal(
         <div style={{ ...style }} className={cx('popover-wrapper')}>
