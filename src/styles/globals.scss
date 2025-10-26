@@ -1,0 +1,53 @@
+@import 'normalize.css';
+
+:root {
+    --text-color: #2a2b3f;
+    --heading-color: #595c73;
+    --border-color: #d1d2e0;
+
+    --white-color: #fff;
+    --black-color: #16161d;
+    --purple-color: #6d28d2;
+    --light-purple-color: #d2caff;
+    --gray-color: #9194ac;
+    --ribbon-color: #0d5261;
+    --dark-green-color: #206241;
+
+    --btn-focus-color: #6d28d2;
+    --btn-focus-background-color: color-mix(in oklch, oklch(48.41% 0.2342 293.93deg) 12%, transparent);
+    --primary-btn-focus-background-color: #892de1;
+    --btn-focus-light-background-color: #e9eaf2;
+    --ribbon-background-color: #c2e9eb;
+
+    --btn-border-radius: 0.4rem;
+}
+
+html {
+    font-size: 62.5%; // 1rem = 10px
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--tiktok-font);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-rendering: optimizeSpeed;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

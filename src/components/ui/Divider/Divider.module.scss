@@ -1,0 +1,9 @@
+.wrapper {
+    position: relative;
+    display: block;
+    line-height: 1px;
+    height: 1px;
+    flex-grow: 1;
+    overflow: hidden;
+    background: var(--border-color);
+}

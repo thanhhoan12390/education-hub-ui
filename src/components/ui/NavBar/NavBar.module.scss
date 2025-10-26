@@ -1,0 +1,20 @@
+.wrapper {
+    box-shadow: 0 2px 4px rgba(6, 17, 118, 0.08), 0 4px 12px rgba(6, 17, 118, 0.08);
+    position: relative;
+    z-index: 1;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-inline-size: 100%;
+    max-block-size: 4.8rem;
+    overflow-y: hidden;
+    /*
+    overflow quyết định cách hiển thị cho nội dung bên trong khi vượt quá kích thước thẻ cha.
+    Trong component SubNav, .sub-nav-content có vị trí (position: absolute;) phụ thuộc vào thẻ .wrapper (position: relative;)
+    cấp cao hơn thẻ hiện tại. Vì vậy không bị thuộc tính overflow-y: hidden của thẻ hiện tại ẩn đi.
+    */
+}

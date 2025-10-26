@@ -1,0 +1,87 @@
+.wrapper {
+    block-size: 100%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+
+    a {
+        text-decoration: none;
+    }
+
+    &:hover .sub-nav-content {
+        display: block;
+        /*
+        Mặc dù .sub-nav-content có vị trí (position: absolute;) phụ thuộc vào thẻ có (position: relative;) cấp cao hơn
+        thẻ này, nhưng vì .sub-nav-content vẫn là con của thẻ này nên css selector vẫn hoạt động bình thường
+        */
+    }
+}
+
+.sub-nav-btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 4.8rem;
+    padding-block: 0.8rem;
+    padding-inline: 1.6rem;
+    color: var(--text-color);
+
+    &:hover {
+        color: var(--btn-focus-color);
+
+        &::after {
+            display: block;
+        }
+    }
+
+    &:has(+ .sub-nav-content:hover) {
+        &::after {
+            display: block;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        border-inline-start: 0.8rem solid transparent;
+        border-inline-end: 0.8rem solid transparent;
+        border-block-end: 0.8rem solid #16161d;
+        inset-block-end: 0;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
+        display: none;
+    }
+}
+
+.sub-nav-content {
+    position: absolute;
+    left: 0;
+    inline-size: 100%;
+    display: none;
+}
+
+.nav-link-list {
+    max-inline-size: 100%;
+    max-block-size: 4.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    background-color: var(--black-color);
+}
+
+.sub-nav-item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 4.8rem;
+    padding-block: 0.8rem;
+    padding-inline: 1.6rem;
+    color: var(--white-color);
+
+    &:hover {
+        color: var(--light-purple-color);
+    }
+}

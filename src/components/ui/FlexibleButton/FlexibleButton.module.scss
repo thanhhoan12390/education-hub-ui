@@ -1,0 +1,106 @@
+.wrapper {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    min-inline-size: 8rem;
+    block-size: 4rem;
+    padding-block: 0;
+    padding-inline: 1.2rem;
+    border-radius: var(--btn-border-radius);
+    border: 1px solid transparent;
+    color: var(--purple-color);
+    background-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+
+    + .wrapper {
+        margin-left: 0.8rem;
+    }
+
+    // Disabled
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        user-select: none;
+    }
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 0.8rem;
+}
+
+.icon {
+    display: inline-block;
+    width: 2rem;
+    text-align: center;
+}
+
+// Button types
+.outline {
+    border-color: var(--purple-color);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+
+    &:hover {
+        background-color: var(--btn-focus-background-color);
+    }
+}
+
+.rounded {
+    border-radius: 999rem;
+    border-color: var(--purple-color);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+
+    &:hover {
+        background-color: var(--btn-focus-background-color);
+    }
+}
+
+.underlined {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    text-decoration-color: oklch(67.76% 0.2011 301.5deg);
+}
+
+.hover {
+    &:hover {
+        background-color: var(--btn-focus-background-color);
+    }
+}
+
+.primary {
+    color: var(--white-color);
+    background-color: var(--purple-color);
+
+    &:hover {
+        background-color: var(--primary-btn-focus-background-color);
+    }
+}
+
+.text {
+    block-size: 2.4rem;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Button sizes
+.small {
+    block-size: 2.8rem;
+}
+
+.large {
+    block-size: 4.8rem;
+}

@@ -1,0 +1,7 @@
+.wrapper {
+    background-color: var(--white-color);
+    border-radius: 0.8rem;
+    box-shadow: 0 0 0 1px oklch(86.72% 0.0192 282.72deg),
+        0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent),
+        0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent);
+}

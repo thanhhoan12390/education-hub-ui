@@ -1,0 +1,45 @@
+.wrapper {
+    --search-item-hover-color: #f6f7f9;
+
+    padding-inline: 1.2rem 0.8rem;
+
+    &:hover {
+        background-color: var(--search-item-hover-color);
+    }
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding-block: 0.8rem;
+    padding-inline: 0.4rem;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.search-icon {
+    display: flex;
+    align-items: flex-start;
+    margin-block-start: 0.6rem;
+    margin-inline-start: 0.4rem;
+    margin-inline-end: 2rem;
+    inline-size: 2.4rem;
+    block-size: 2.4rem;
+    opacity: 0.8;
+}
+
+.search-content {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content-title {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+}

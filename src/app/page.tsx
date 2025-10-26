@@ -1,95 +1,111 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import classNames from 'classnames/bind';
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import Divider from '~/components/ui/Divider';
+import NavBar from '~/components/ui/NavBar';
+import ImageSlider from '~/components/ui/ImageSlider';
+import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
+import CardCarousel from '~/components/ui/CardCarousel/CardCarousel';
+import images from '~/assets/images';
+import { getCourses } from '~/lib/getCourses';
+import styles from './page.module.scss';
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+const cx = classNames.bind(styles);
+
+function Home() {
+    const coursesPromise = getCourses();
+
+    const bannerFloatContent = (title: string, content: React.ReactNode) => (
+        <div className={cx('banner-float-content')}>
+            <h1 className={cx('banner-heading')}>{title}</h1>
+            {content}
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
+
+    return (
+        <div className={cx('wrapper')}>
+            <Divider />
+            <NavBar />
+
+            <div className={cx('home-container')}>
+                <div className={cx('home-content')}>
+                    {/** banner */}
+                    <div className={cx('banner-container')}>
+                        <div className={cx('welcome-area')}>
+                            <div style={{ width: '6.4rem', height: '6.4rem' }} className={cx('default-avatar')}>
+                                HT
+                            </div>
+                            <div className={cx('user-detail')}>
+                                <h3 className={cx('welcome-heading')}>Welcome back</h3>
+                                <div className={cx('welcome-btn')}>
+                                    <FlexibleButton small hover underlined>
+                                        Add occupation and interests
+                                    </FlexibleButton>
+                                </div>
+                            </div>
+                        </div>
+                        <ImageSlider
+                            carouselData={[
+                                {
+                                    img: images.homeSliderImg0,
+                                    floatContent: bannerFloatContent(
+                                        '24-Hour Flash Sale',
+                                        <p>
+                                            Learn valuable, practical skills for as low as ₫279,000. Sale ends tonight!
+                                        </p>,
+                                    ),
+                                },
+
+                                {
+                                    img: images.homeSliderImg1,
+                                    floatContent: bannerFloatContent(
+                                        'Prep for your IT certificate',
+                                        <p>
+                                            <a target="_blank" href="">
+                                                Explore a future in IT
+                                            </a>
+                                            . Start learning toward AWS certification, CompTIA A+ certification, and
+                                            more.
+                                        </p>,
+                                    ),
+                                },
+
+                                {
+                                    img: images.homeSliderImg2,
+                                    floatContent: bannerFloatContent(
+                                        'Learn from anywhere',
+                                        <p>
+                                            On the couch, from the backyard, or on your commute.{' '}
+                                            <a target="_blank" href="">
+                                                Our app
+                                            </a>{' '}
+                                            lets you decide.
+                                        </p>,
+                                    ),
+                                },
+                            ]}
+                        />
+                    </div>
+
+                    {/** page container */}
+                    <div className={cx('page-container')}>
+                        {/** advertising banner */}
+                        <div className={cx('page-advertising')}>
+                            <span>Training 2 or more people?</span>
+                            <span>Get your team access to top 30,000+ courses</span>
+                        </div>
+
+                        {/** courses section */}
+                        <div className={cx('courses-section')}>
+                            <h2 className={cx('courses-heading')}>What to learn next</h2>
+                            <CardCarousel carouselHeading="Recommended for you" courses={coursesPromise} />
+                            <CardCarousel carouselHeading="Short and sweet courses for you" courses={coursesPromise} />
+                            <CardCarousel carouselHeading="Newest courses in Data Science" courses={coursesPromise} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
+
+export default Home;

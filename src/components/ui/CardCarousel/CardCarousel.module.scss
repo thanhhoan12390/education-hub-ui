@@ -1,0 +1,115 @@
+.carousel-wrapper {
+    background-color: transparent;
+}
+
+.carousel-wrapper + .carousel-wrapper {
+    margin-block-start: 4.8rem;
+}
+
+.carousel-heading {
+    margin-block-end: 1.6rem;
+    display: flex;
+    justify-content: flex-start;
+    max-inline-size: 100%;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+.carousel-container {
+    position: relative;
+}
+
+.carousel-track {
+    display: grid;
+    grid-auto-columns: clamp(17.3rem, 75%, 37.5rem);
+    grid-auto-flow: column;
+    grid-gap: 1.6rem;
+    overflow: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card-wrapper {
+    min-inline-size: 0.1rem;
+    scroll-snap-align: start;
+}
+
+.btn {
+    position: absolute;
+    inset-block-start: 25%;
+    inline-size: 4.8rem;
+    block-size: 4.8rem;
+    padding-block: 0;
+    padding-inline: 1.2rem;
+    transform: translateY(-50%);
+    border-radius: 100rem;
+    border: none;
+    box-shadow: 0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent),
+        0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--btn-focus-light-background-color);
+    }
+}
+
+.next-btn {
+    inset-inline-end: -2.4rem;
+}
+
+.previous-btn {
+    inset-inline-start: -2.4rem;
+}
+
+@media screen and (max-width: 37.5625rem) {
+    .carousel-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carousel-track {
+        grid-auto-flow: row;
+        grid-auto-columns: 100%;
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 37.5625rem) {
+    .carousel-track {
+        grid-auto-columns: calc((100% - (2 - 1) * 1.6rem) / 2);
+    }
+}
+
+@media screen and (min-width: 37.5625rem) {
+    .carousel-track {
+        grid-auto-columns: calc((100% - (2 - 1) * 1.6rem) / 2);
+    }
+}
+
+@media screen and (min-width: 43.8125rem) {
+    .carousel-track {
+        grid-auto-columns: calc((100% - (3 - 1) * 1.6rem) / 3);
+    }
+}
+
+@media screen and (min-width: 61.3125rem) {
+    .carousel-track {
+        grid-auto-columns: calc((100% - (4 - 1) * 1.6rem) / 4);
+    }
+}
+
+@media screen and (min-width: 75.0625rem) {
+    .carousel-track {
+        grid-auto-columns: calc((100% - (5 - 1) * 1.6rem) / 5);
+    }
+}
