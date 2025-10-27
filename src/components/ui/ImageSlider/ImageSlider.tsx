@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef, memo, useCallback } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +28,7 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
         track.scrollTo({ left: slideWidth * slideIndex, behavior: 'smooth' });
     };
 
-    const handleNextSlide = () => {
+    const handleNextSlide = useCallback(() => {
         const track = trackRef.current;
         if (!track) return;
 
@@ -36,7 +36,7 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
         const newSlideIndex = Math.round(track.scrollLeft / slideWidth) + 1;
 
         goToSlide(newSlideIndex);
-    };
+    }, []);
 
     const handlePrevSlide = () => {
         const track = trackRef.current;
@@ -161,7 +161,7 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
             if (inactivityTimer) clearTimeout(inactivityTimer);
             if (autoSlideInterval) clearInterval(autoSlideInterval);
         };
-    }, []);
+    }, [handleNextSlide]);
 
     return (
         <div className={cx('slider-wrapper')}>
