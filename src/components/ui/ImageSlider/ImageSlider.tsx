@@ -122,6 +122,47 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
         return () => track.removeEventListener('scrollend', handleScrollEnd);
     }, [carouselData.length]);
 
+    useEffect(() => {
+        const wrapper = trackRef.current?.parentElement;
+        if (!wrapper) return;
+
+        let inactivityTimer: NodeJS.Timeout | null = null;
+        let autoSlideInterval: NodeJS.Timeout | null = null;
+
+        // reset đếm lại thời gian mỗi khi có tương tác
+        const resetInactivityTimer = () => {
+            // nếu người dùng vừa tương tác, reset thời gian chờ
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+
+            // nếu đang auto chạy thì tạm dừng
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
+            }
+
+            // sau 5s không tương tác thì bắt đầu auto slide mỗi 8s
+            inactivityTimer = setTimeout(() => {
+                autoSlideInterval = setInterval(() => {
+                    handleNextSlide();
+                }, 5000);
+            }, 5000);
+        };
+
+        // Các loại tương tác cần theo dõi
+        const events = ['mousemove', 'click', 'touchstart'];
+
+        events.forEach((event) => wrapper.addEventListener(event, resetInactivityTimer));
+
+        // Gọi ngay để bắt đầu đếm 5s từ đầu
+        resetInactivityTimer();
+
+        return () => {
+            events.forEach((event) => wrapper.removeEventListener(event, resetInactivityTimer));
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+        };
+    }, []);
+
     return (
         <div className={cx('slider-wrapper')}>
             <div ref={trackRef} className={cx('slider-track')}>

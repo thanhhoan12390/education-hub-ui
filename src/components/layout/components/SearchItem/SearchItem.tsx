@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import useSWR from 'swr';
 import { memo } from 'react';
+import { Skeleton, Alert } from 'antd';
 
 import type { SearchItemInfo } from '~/types';
 import styles from './SearchItem.module.scss';
@@ -20,8 +21,16 @@ function SearchItem({ searchItemURL }: SearchItemProps) {
         revalidateOnFocus: false,
     });
 
-    if (isLoading) return <div>Loading....</div>;
-    if (error) return <div>Co loi xay ra....</div>;
+    if (isLoading) return <Skeleton.Input active size="large" block />;
+    if (error)
+        return (
+            <Alert
+                type="error"
+                message="Somethings went wrong..."
+                banner
+                style={{ width: '100%', borderRadius: '0.4rem' }}
+            />
+        );
 
     return data ? (
         <div className={cx('wrapper')}>

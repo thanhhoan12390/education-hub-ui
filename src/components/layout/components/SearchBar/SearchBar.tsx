@@ -5,6 +5,8 @@ import { useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
+import { Alert, Flex, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import SearchItem from '../SearchItem';
 import SearchAutoComplete from '../SearchAutoComplete';
@@ -21,9 +23,13 @@ function SearchBar() {
 
     const baseURl = 'https://pokeapi.co/api/v2/pokemon';
 
-    const { data, error, isLoading } = useSWR<ListPokemon>([baseURl, { limit: 1000, offset: 0 }], {
-        revalidateOnFocus: false,
-    });
+    // chi goi khi co debouncedValue
+    const { data, error, isLoading } = useSWR<ListPokemon>(
+        debouncedValue ? [baseURl, { limit: 1000, offset: 0 }] : null,
+        {
+            revalidateOnFocus: false,
+        },
+    );
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchValue = e.target.value;
@@ -40,9 +46,6 @@ function SearchBar() {
                 : [],
         [debouncedValue, data],
     );
-
-    if (isLoading) return <div>Loading....</div>;
-    if (error) return <div>Co loi xay ra....</div>;
 
     return (
         <div className={cx('wrapper')}>
@@ -68,7 +71,7 @@ function SearchBar() {
                 </button>
             </div>
 
-            {filteredList.length > 0 && (
+            {filteredList.length > 0 && !isLoading && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     {filteredList.slice(0, 5).map((data, index) => (
                         <SearchAutoComplete key={index} searchText={data.name} />
@@ -77,6 +80,25 @@ function SearchBar() {
                     {filteredList.slice(0, 7).map((data, index) => (
                         <SearchItem key={index} searchItemURL={data.url} />
                     ))}
+                </div>
+            )}
+
+            {isLoading && (
+                <div className={cx('search-result')} tabIndex={-1}>
+                    <Flex align="center" gap="middle" justify="center" style={{ paddingBlock: '1rem' }}>
+                        <Spin indicator={<LoadingOutlined style={{ fontSize: '3.2rem' }} spin />} />
+                    </Flex>
+                </div>
+            )}
+
+            {error && (
+                <div className={cx('search-result')} tabIndex={-1}>
+                    <Alert
+                        type="error"
+                        message="Somethings went wrong. Please reload and retry ..."
+                        banner
+                        style={{ width: '100%', borderRadius: '0.4rem' }}
+                    />
                 </div>
             )}
         </div>

@@ -3,7 +3,20 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     /* config options here */
     images: {
-        domains: ['raw.githubusercontent.com', 'res.cloudinary.com', 'example.com', 'cdn.example.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'example.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'raw.githubusercontent.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            },
+        ],
     },
 };
 

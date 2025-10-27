@@ -198,9 +198,10 @@ function Header() {
                 <MultiSubNavigationMenu menuFieldData={exploreMenuData} className={cx('multi-nav-menu')} />
             </nav>
 
+            {/* Search bar */}
             <SearchBar />
 
-            <div className={cx('nav-item', 'nav-business')}>
+            <div className={cx('nav-item', 'nav-business', 'align-end')}>
                 <Link className={cx('nav-link')} href="">
                     My Business
                 </Link>
@@ -258,7 +259,7 @@ function Header() {
 
             <div className={cx('nav-item', 'nav-cart')}>
                 <Link className={cx('nav-link')} href="">
-                    <CartIcon width="100%" height="2rem" className={cx('nav-icon')} />
+                    <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />
                 </Link>
 
                 <PopperWrapper className={cx('nav-cart-wrapper')}>
