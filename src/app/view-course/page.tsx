@@ -1,25 +1,7 @@
-import classNames from 'classnames/bind';
+import { notFound } from 'next/navigation';
 
-import styles from './ViewCourse.module.scss';
+export default function Page() {
+    notFound();
 
-const cx = classNames.bind(styles);
-
-function ViewCourse() {
-    return (
-        <div className={cx('wrapper')}>
-            <div className={cx('top-container')}>
-                <div className={cx('top-content')}></div>
-            </div>
-
-            <div className={cx('absolute-sidebar')}>
-                <div className={cx('sidebar-content')}></div>
-            </div>
-
-            <div className={cx('bot-container')}>
-                <div className={cx('bot-content')}></div>
-            </div>
-        </div>
-    );
+    return null;
 }
-
-export default ViewCourse;

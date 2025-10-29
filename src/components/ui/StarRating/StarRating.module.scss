@@ -1,20 +1,19 @@
 .card-rating-wrapper {
     margin-top: 0;
     display: flex;
-    align-items: center;
-    line-height: 1rem;
+    color: #c4710d;
 }
 
 .card-rating {
+    display: inline-flex;
+    line-height: 1;
     position: relative;
     white-space: nowrap;
     cursor: pointer;
 }
 
 .card-star-icon {
-    color: #c4710d;
-    height: 1rem;
-    width: 1rem;
+    font-size: 1rem;
     padding-inline: 0.3rem;
 }
 

@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import '@ant-design/v5-patch-for-react-19';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
 
 import DefaultLayout from '~/components/layout/DefaultLayout';
 import SWRProvider from '~/providers/SWRProvider';
 import '~/styles/globals.scss';
+
+config.autoAddCss = false; // Ngăn FA tự chèn CSS chậm trong Fontawesome
 
 export const tikTokFont = localFont({
     src: [

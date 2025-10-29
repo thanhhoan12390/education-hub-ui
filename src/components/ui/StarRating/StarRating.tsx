@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import { useRef, useEffect } from 'react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -9,9 +11,10 @@ const cx = classNames.bind(styles);
 
 interface StarRatingProps {
     rating: number;
+    style?: React.CSSProperties;
 }
 
-function StarRating({ rating = 0 }: StarRatingProps) {
+function StarRating({ rating = 0, style }: StarRatingProps) {
     const ratingRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -23,7 +26,7 @@ function StarRating({ rating = 0 }: StarRatingProps) {
     }, [rating]);
 
     return (
-        <div className={cx('card-rating-wrapper')}>
+        <div className={cx('card-rating-wrapper')} style={style}>
             <span className={cx('card-rating')} onClick={(e) => e.preventDefault()}>
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />

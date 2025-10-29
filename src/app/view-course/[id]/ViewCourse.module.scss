@@ -1,0 +1,440 @@
+.wrapper {
+    --max-inline: 118.4rem;
+
+    position: relative;
+}
+
+// Top layer
+.top-container {
+    background-color: var(--black-color);
+    padding-block: 3.2rem;
+    padding-inline: 0;
+}
+
+.top-content {
+    max-inline-size: var(--max-inline);
+    margin: 0 auto;
+}
+
+.link-title {
+    display: flex;
+    align-items: center;
+    max-inline-size: 70rem;
+    margin-inline: 4.8rem;
+    margin-block: 0 1.6rem;
+    padding: 0.4rem;
+    color: var(--purple-color-100);
+    font-size: 1.4rem;
+    font-weight: 600;
+
+    a {
+        padding-block: 0.4rem;
+    }
+}
+
+.introduction-content {
+    max-inline-size: 70rem;
+    margin-inline: 4.8rem;
+    color: var(--white-color);
+}
+
+.intro-heading {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    margin: 0;
+    margin-block-end: 1.6rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+.intro-detail {
+    margin-block-end: 2.4rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.tag-groups {
+    display: flex;
+    align-items: center;
+    margin-block-end: 1.6rem;
+}
+
+.intro-tag {
+    margin-inline-end: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.4rem 0.4rem;
+    padding-inline: 0.8rem 0.8rem;
+    white-space: nowrap;
+    background-color: var(--ribbon-background-color);
+    color: var(--ribbon-color);
+    border-radius: 0.4rem;
+    user-select: none;
+    -webkit-user-select: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}
+
+.intro-rate {
+    margin-inline-end: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--dark-yellow-color);
+}
+
+.rate-count {
+    margin-inline: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--purple-color-100);
+}
+
+.student-count {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.intro-instructor {
+    margin-block-end: 1.6rem;
+    margin-inline-end: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+
+    a {
+        color: var(--purple-color-100);
+        text-decoration: underline;
+        font-weight: 600;
+    }
+}
+
+.intro-date {
+    display: flex;
+    align-items: center;
+    margin-block-end: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+
+    span {
+        margin-inline: 0.8rem;
+    }
+}
+
+// Absolute sidebar
+.sidebar-container {
+    max-inline-size: var(--max-inline);
+    margin: 0 auto;
+}
+
+.sidebar-content {
+    position: absolute;
+    inset-block-start: 3.2rem;
+    margin-inline-start: calc(var(--max-inline) - 34rem - 4.8rem);
+    inline-size: 34rem;
+    background-color: var(--white-color);
+}
+
+.sidebar-content-group {
+    border-block-end: 1px solid var(--gray-color);
+}
+
+.intro-asset {
+    position: relative;
+    padding-inline: 0.4rem;
+    cursor: pointer;
+
+    img {
+        inline-size: 100%;
+        max-inline-size: 100%;
+        block-size: auto;
+        vertical-align: middle;
+    }
+}
+
+.play-btn-overlay {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 6.4rem;
+    inline-size: 6.4rem;
+    border-radius: 100rem;
+    background-color: var(--white-color);
+    color: var(--gray-color);
+}
+
+.purchase-section {
+    padding: 2.4rem;
+}
+
+.purchase-price {
+    display: flex;
+    align-items: center;
+    margin-block-end: 0.8rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+
+    span:first-child {
+        text-decoration: underline;
+    }
+
+    span:last-child {
+        margin-inline-start: 1.2rem;
+        font-size: 1.4rem;
+    }
+}
+
+.left-day {
+    margin-block-end: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    color: var(--red-color);
+}
+
+.cart-wishlist-btn {
+    display: flex;
+    margin-block: 1.6rem 0.8rem;
+
+    button,
+    a {
+        font-size: 1.6rem;
+    }
+}
+
+.refund-text {
+    margin-block: 1.6rem 0.8rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.includes-heading {
+    margin-block: 1.6rem 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2rem;
+    letter-spacing: 0;
+}
+
+.course-includes {
+    list-style: none;
+}
+
+.include-item {
+    display: flex;
+    align-items: center;
+    padding-block: 0.4rem;
+    padding-inline: 0;
+    font-size: 1.4rem;
+}
+
+.include-text {
+    margin-inline-start: 1.6rem;
+}
+
+.share-btn {
+    inline-size: unset;
+    padding-inline: 0.4rem;
+    margin-inline: -0.4rem;
+    block-size: 4rem;
+    color: var(--text-color);
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-color: #af72fd;
+
+    &:hover {
+        background-color: #2a2b3f1f;
+    }
+}
+
+// Bottom, course content
+.bot-container {
+    padding-block-start: 3.2rem;
+    max-inline-size: var(--max-inline);
+    margin: 0 auto;
+}
+
+.bot-content {
+    max-inline-size: 70rem;
+    // margin không được tính vào kích thước element gồm: border, padding, content.
+    // Và không được tính vào inline-size hoặc width, block-size hoặc height
+    // vì luôn có set box-sizing: border-box ở global.css nên inline-size hoặc width, block-size hoặc height, border, content
+    // được tính toán sao cho tổng bằng với size được set ( tự động hoặc thủ công)
+    margin-inline: 4.8rem;
+}
+
+.learn-group {
+    padding-block: 2.4rem 1.6rem;
+    margin-block-end: 3.2rem;
+    border: 1px solid var(--border-color);
+}
+
+.what-learn-heading {
+    margin-inline: 2.4rem;
+    margin-block: 0 1.6rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+.learn-list {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 2.4rem;
+    margin-inline: 2.4rem;
+    list-style: none;
+}
+
+.what-item {
+    display: flex;
+    align-items: flex-start;
+    padding-block: 0.4rem;
+    padding-inline: 0;
+    font-size: 1rem;
+
+    span {
+        margin-inline-start: 1.6rem;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        text-align: start;
+    }
+}
+
+.related-topic {
+    margin-block-end: 3.2rem;
+}
+
+.related-heading {
+    margin-block: 0 1.6rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+.related-btn-group {
+    display: flex;
+}
+
+.topic-btn {
+    block-size: 3.4rem;
+    inline-size: unset;
+    border: 1px solid var(--gray-color);
+    border-radius: 0.4rem;
+    color: var(--text-color);
+
+    &:hover {
+        background-color: #f9f6f7;
+    }
+}
+
+.course-content {
+    margin-block-end: 3.2rem;
+}
+
+.course-content-heading {
+    margin-block: 0 1.6rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+.lectures-group {
+    list-style: none;
+}
+
+.lecture-item {
+    display: flex;
+    align-items: flex-start;
+    inline-size: 100%;
+    block-size: auto;
+    text-align: start;
+    letter-spacing: normal;
+    white-space: normal;
+    padding-block: 0.8rem;
+    padding-inline: 0;
+}
+
+.lecture-icon {
+    margin-block-start: 0.4rem;
+}
+
+.lecture-field {
+    display: flex;
+    flex: 1;
+    min-block-size: 2.24rem;
+    min-inline-size: 1px;
+    margin-inline-start: 1.6rem;
+    color: var(--heading-color);
+}
+
+.lecture-name {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-inline-end: 4.8rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.preview-btn {
+    inline-size: unset;
+    block-size: 2.24rem;
+    text-decoration: underline;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding-inline: 0;
+
+    span:last-child {
+        margin-inline-start: 0;
+    }
+}
+
+.lecture-minute {
+    margin-inline-start: 3.2rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0;
+}

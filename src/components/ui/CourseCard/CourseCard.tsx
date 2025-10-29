@@ -25,21 +25,21 @@ function CourseCard({ course }: CourseCardProps) {
     return (
         <div className={cx('wrapper')} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
             <div ref={cardRef} className={cx('course-card-wrapper')}>
-                <div className={cx('course-img')}>
-                    <Image src={course.imageUrl} width={480} height={270} priority alt="course image" />
-                </div>
-                <div className={cx('course-content')}>
-                    <h3 className={cx('course-heading')}>
-                        <Link href="">{course.title}</Link>
-                    </h3>
-                    <div className={cx('course-instructor')}>{course.instructor}</div>
-                    <div className={cx('course-rating')}>
-                        <span className={cx('rating-number')}>{course.rating.toFixed(1)}</span>
-                        <StarRating rating={course.rating} />
-                        <span className={cx('rating-count')}>({course.ratingCount})</span>
+                <Link href={`/view-course/${course.courseId}`}>
+                    <div className={cx('course-img')}>
+                        <Image src={course.imageUrl} width={480} height={270} priority alt="course image" />
                     </div>
-                    <div className={cx('course-price')}>{course.price}</div>
-                </div>
+                    <div className={cx('course-content')}>
+                        <h3 className={cx('course-heading')}>{course.title}</h3>
+                        <div className={cx('course-instructor')}>{course.instructor}</div>
+                        <div className={cx('course-rating')}>
+                            <span className={cx('rating-number')}>{course.rating.toFixed(1)}</span>
+                            <StarRating rating={course.rating} />
+                            <span className={cx('rating-count')}>({course.ratingCount})</span>
+                        </div>
+                        <div className={cx('course-price')}>{course.price}</div>
+                    </div>
+                </Link>
             </div>
 
             {open && (

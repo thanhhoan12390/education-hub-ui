@@ -1,0 +1,73 @@
+.wrapper {
+    border-inline-start: 1px solid var(--border-color);
+    border-inline-end: 1px solid var(--border-color);
+    border-block-start: 1px solid var(--border-color);
+
+    &:last-child {
+        border-block-end: 1px solid var(--border-color);
+    }
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    padding-block: 1.6rem;
+    padding-inline: 2.4rem;
+    background-color: var(--gray-color-100);
+    cursor: pointer;
+}
+
+.title-icon {
+    font-size: 1rem;
+    transition: transform 150ms linear;
+}
+
+.expand-panel-icon-rotate {
+    transform: rotate(-180deg);
+}
+
+.panel-heading-group {
+    display: flex;
+    justify-content: space-between;
+    inline-size: 100%;
+    margin-inline-start: 1.2rem;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.panel-heading {
+    flex: 1;
+    max-inline-size: 60rem;
+    font-weight: 700;
+}
+
+.total-lecture {
+    margin-inline-start: 2.4rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-inline-start: 0.4rem;
+    }
+}
+
+.panel-container {
+    max-block-size: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.panel-container-expand {
+    max-block-size: none;
+    overflow: visible;
+    visibility: visible;
+}
+
+.panel-content {
+    padding-block: 1.6rem;
+    padding-inline: 2.4rem;
+    border-block-start: 1px solid var(--border-color);
+}
