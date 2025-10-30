@@ -7,7 +7,6 @@ import {
     faCheck,
     faChevronRight,
     faCircleExclamation,
-    faCirclePlay,
     faCode,
     faDownload,
     faEarth,
@@ -21,7 +20,8 @@ import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
 import { getCourses } from '~/lib/getCourses';
 import StarRating from '~/components/ui/StarRating';
 import FlexibleButton from '~/components/ui/FlexibleButton';
-import AccordionPanel from '~/components/ui/AccordionPanel';
+import ViewCourseContent from '~/components/ui/ViewCourseContent';
+import Badge from '~/components/ui/Badge';
 import styles from './ViewCourse.module.scss';
 
 const cx = classNames.bind(styles);
@@ -56,7 +56,7 @@ async function ViewCourse({ params }: ViewCourseProps) {
                             websites, games and apps!
                         </div>
                         <div className={cx('tag-groups')}>
-                            <div className={cx('intro-tag')}>Bestseller</div>
+                            <Badge />
                             <div className={cx('intro-rate')}>4.6</div>
                             <StarRating rating={4.6} style={{ color: 'var(--dark-yellow-color)' }} />
                             <div className={cx('rate-count')}>{`(${Number(132131).toLocaleString(
@@ -89,6 +89,7 @@ async function ViewCourse({ params }: ViewCourseProps) {
                                 alt="introduction asset"
                                 width={480}
                                 height={270}
+                                priority
                             />
                             <div className={cx('play-btn-overlay')}>
                                 <div className={cx('play-btn')}>
@@ -292,164 +293,8 @@ async function ViewCourse({ params }: ViewCourseProps) {
                         </div>
                     </div>
 
-                    <div className={cx('course-content')}>
-                        <h2 className={cx('course-content-heading')}>Course content</h2>
-                        <div>
-                            <AccordionPanel
-                                defaultExpand
-                                heading="Course introduction"
-                                totalLecture={3}
-                                totalLectureMin={7}
-                            >
-                                <ul className={cx('lectures-group')}>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faYoutubeSquare}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Introduction to the Course</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-                                                <FlexibleButton
-                                                    leftIcon={
-                                                        <FontAwesomeIcon
-                                                            fontSize="1.6rem"
-                                                            color="#333"
-                                                            icon={faCirclePlay}
-                                                        />
-                                                    }
-                                                    className={cx('preview-btn')}
-                                                >
-                                                    Preview
-                                                </FlexibleButton>
-                                                <span className={cx('lecture-minute')}>03:33</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faYoutubeSquare}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Course Help and Welcome</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-                                                <FlexibleButton
-                                                    leftIcon={
-                                                        <FontAwesomeIcon
-                                                            fontSize="1.6rem"
-                                                            color="#333"
-                                                            icon={faCirclePlay}
-                                                        />
-                                                    }
-                                                    className={cx('preview-btn')}
-                                                >
-                                                    Preview
-                                                </FlexibleButton>
-                                                <span className={cx('lecture-minute')}>00:36</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faNewspaper}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Course FAQs</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-                                                <span className={cx('lecture-minute')}>03:02</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </AccordionPanel>
-                            <AccordionPanel heading="Environment Setup" totalLecture={1} totalLectureMin={11}>
-                                <ul className={cx('lectures-group')}>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faYoutubeSquare}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Python Environment Setup</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-                                                <FlexibleButton
-                                                    leftIcon={
-                                                        <FontAwesomeIcon
-                                                            fontSize="1.6rem"
-                                                            color="#333"
-                                                            icon={faCirclePlay}
-                                                        />
-                                                    }
-                                                    className={cx('preview-btn')}
-                                                >
-                                                    Preview
-                                                </FlexibleButton>
-                                                <span className={cx('lecture-minute')}>11:14</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </AccordionPanel>
-                            <AccordionPanel heading="Jupyter Overview" totalLecture={3} totalLectureMin={24}>
-                                <ul className={cx('lectures-group')}>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faNewspaper}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Updates to Notebook Zip</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-                                                <span className={cx('lecture-minute')}>00:09</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faYoutubeSquare}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Jupyter Notebooks</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-
-                                                <span className={cx('lecture-minute')}>13:48</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className={cx('lecture-item')}>
-                                            <FontAwesomeIcon
-                                                className={cx('lecture-icon')}
-                                                fontSize="1.4rem"
-                                                icon={faYoutubeSquare}
-                                            />
-                                            <div className={cx('lecture-field')}>
-                                                <h4 className={cx('lecture-name')}>Optional: Virtual Environments</h4>
-                                                <span style={{ flex: '1 1 0%' }} />
-
-                                                <span className={cx('lecture-minute')}>09:51</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </AccordionPanel>
-                        </div>
-                    </div>
+                    {/* course content */}
+                    <ViewCourseContent />
                 </div>
             </div>
         </div>

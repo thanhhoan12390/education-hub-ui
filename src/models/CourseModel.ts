@@ -8,8 +8,9 @@ const CourseSchema = new Schema<Course>({
     title: { type: String, required: true },
     instructor: { type: String, required: true },
     rating: { type: Number, required: true },
-    ratingCount: { type: String, required: true },
-    price: { type: String, required: true },
+    ratingCount: { type: Number, required: true },
+    price: { type: Number, required: true },
+    bestSeller: { type: Boolean, required: false },
 });
 
 // Thêm middleware trước khi lưu

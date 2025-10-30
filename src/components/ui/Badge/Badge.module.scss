@@ -1,0 +1,17 @@
+.badge-tag {
+    margin-inline-end: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.4rem 0.4rem;
+    padding-inline: 0.8rem 0.8rem;
+    white-space: nowrap;
+    background-color: var(--ribbon-background-color);
+    color: var(--ribbon-color);
+    border-radius: 0.4rem;
+    user-select: none;
+    -webkit-user-select: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}

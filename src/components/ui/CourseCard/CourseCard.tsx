@@ -8,8 +8,9 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import Popover from '../Popover/';
 import StarRating from '../StarRating';
-import FlexibleButton from '../FlexibleButton/FlexibleButton';
+import FlexibleButton from '../FlexibleButton';
 import type { Course } from '~/types';
+import Badge from '../Badge';
 import styles from './CourseCard.module.scss';
 
 const cx = classNames.bind(styles);
@@ -24,8 +25,8 @@ function CourseCard({ course }: CourseCardProps) {
 
     return (
         <div className={cx('wrapper')} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-            <div ref={cardRef} className={cx('course-card-wrapper')}>
-                <Link href={`/view-course/${course.courseId}`}>
+            <Link href={`/view-course/${course.courseId}`}>
+                <div ref={cardRef} className={cx('course-card-wrapper')}>
                     <div className={cx('course-img')}>
                         <Image src={course.imageUrl} width={480} height={270} priority alt="course image" />
                     </div>
@@ -37,10 +38,14 @@ function CourseCard({ course }: CourseCardProps) {
                             <StarRating rating={course.rating} />
                             <span className={cx('rating-count')}>({course.ratingCount})</span>
                         </div>
-                        <div className={cx('course-price')}>{course.price}</div>
+                        <div className={cx('course-price')}>
+                            <span>đ</span>
+                            {`${course.price.toLocaleString('en-US')}`}
+                        </div>
+                        {course.bestSeller && <Badge />}
                     </div>
-                </Link>
-            </div>
+                </div>
+            </Link>
 
             {open && (
                 <Popover targetRef={cardRef}>

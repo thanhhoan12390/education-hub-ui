@@ -18,8 +18,9 @@ export interface Course {
     title: string;
     instructor: string;
     rating: number;
-    ratingCount: string;
-    price: string;
+    ratingCount: number;
+    price: number;
+    bestSeller?: boolean;
 }
 
 export interface ListParams {

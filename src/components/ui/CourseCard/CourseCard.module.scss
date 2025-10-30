@@ -1,5 +1,6 @@
 .wrapper {
     cursor: pointer;
+    block-size: 100%;
 
     &:hover .course-img img {
         transition: opacity linear 100ms;
@@ -102,6 +103,10 @@
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0;
+
+    span {
+        text-decoration: underline;
+    }
 }
 
 // popover content
