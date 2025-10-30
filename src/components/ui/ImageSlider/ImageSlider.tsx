@@ -167,7 +167,13 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
         <div className={cx('slider-wrapper')}>
             <div ref={trackRef} className={cx('slider-track')}>
                 <div className={cx('slide-container')}>
-                    <Image priority src={carouselData[carouselData.length - 1].img} alt="slider img" />
+                    <Image
+                        width={1340}
+                        height={400}
+                        priority
+                        src={carouselData[carouselData.length - 1].img}
+                        alt="slider img"
+                    />
                     {carouselData[carouselData.length - 1].floatContent && (
                         <div className={cx('float-content')}>{carouselData[carouselData.length - 1].floatContent}</div>
                     )}
@@ -175,13 +181,13 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
 
                 {carouselData.map((data, index) => (
                     <div className={cx('slide-container')} key={index}>
-                        <Image priority src={data.img} alt="slider img" />
+                        <Image width={1340} height={400} priority src={data.img} alt="slider img" />
                         {data.floatContent && <div className={cx('float-content')}>{data.floatContent}</div>}
                     </div>
                 ))}
 
                 <div className={cx('slide-container')}>
-                    <Image priority src={carouselData[0].img} alt="slider img" />
+                    <Image width={1340} height={400} priority src={carouselData[0].img} alt="slider img" />
                     {carouselData[0].floatContent && (
                         <div className={cx('float-content')}>{carouselData[0].floatContent}</div>
                     )}
