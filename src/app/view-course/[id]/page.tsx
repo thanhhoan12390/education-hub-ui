@@ -182,7 +182,7 @@ async function ViewCourse({ params }: ViewCourseProps) {
             <div className={cx('bot-container')}>
                 <div className={cx('bot-content')}>
                     <div className={cx('learn-group')}>
-                        <h2 className={cx('what-learn-heading')}>What you'll learn</h2>
+                        <h2 className={cx('what-learn-heading')}>What you&apos;ll learn</h2>
                         <ul className={cx('learn-list')}>
                             <li>
                                 <div className={cx('what-item')}>
