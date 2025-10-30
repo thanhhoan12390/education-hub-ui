@@ -39,6 +39,8 @@ interface ViewCourseProps {
 async function ViewCourse({ params }: ViewCourseProps) {
     const { id } = await params;
 
+    console.log(id);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('top-container')}>
