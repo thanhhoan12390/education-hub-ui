@@ -1,15 +1,15 @@
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Suspense } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAward,
     faCheck,
     faChevronRight,
-    faCircleExclamation,
+    faCircle,
     faCode,
     faDownload,
-    faEarth,
     faInfinity,
     faMobileScreen,
     faPlay,
@@ -17,11 +17,11 @@ import {
 import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
 
-import { getCourses } from '~/lib/getCourses';
-import StarRating from '~/components/ui/StarRating';
+import { getCourses, getCourseById } from '~/lib/data';
 import FlexibleButton from '~/components/ui/FlexibleButton';
-import ViewCourseContent from '~/components/ui/ViewCourseContent';
-import Badge from '~/components/ui/Badge';
+import ViewCourseContent from '~/components/features/course/ViewCourseContent';
+import CourseDescription from '~/components/features/course/CourseDescription';
+import SkeletonNoAnimation from '~/components/ui/SkeletonNoAnimation';
 import styles from './ViewCourse.module.scss';
 
 const cx = classNames.bind(styles);
@@ -39,7 +39,7 @@ interface ViewCourseProps {
 async function ViewCourse({ params }: ViewCourseProps) {
     const { id } = await params;
 
-    console.log(id);
+    const coursePromise = getCourseById(+id);
 
     return (
         <div className={cx('wrapper')}>
@@ -52,32 +52,9 @@ async function ViewCourse({ params }: ViewCourseProps) {
                     </div>
 
                     <div className={cx('introduction-content')}>
-                        <h1 className={cx('intro-heading')}>100 Days of Code: The Complete Python Pro Bootcamp</h1>
-                        <div className={cx('intro-detail')}>
-                            Master Python by building 100 projects in 100 days. Learn data science, automation, build
-                            websites, games and apps!
-                        </div>
-                        <div className={cx('tag-groups')}>
-                            <Badge />
-                            <div className={cx('intro-rate')}>4.6</div>
-                            <StarRating rating={4.6} style={{ color: 'var(--dark-yellow-color)' }} />
-                            <div className={cx('rate-count')}>{`(${Number(132131).toLocaleString(
-                                'en-US',
-                            )} ratings)`}</div>
-
-                            <div className={cx('student-count')}>{`${Number(1676840).toLocaleString(
-                                'en-US',
-                            )} students`}</div>
-                        </div>
-                        <div className={cx('intro-instructor')}>
-                            Created by <Link href={''}>Dr. Angela Yu, Developer and Lead Instructor</Link>
-                        </div>
-                        <div className={cx('intro-date')}>
-                            <FontAwesomeIcon icon={faCircleExclamation} />
-                            <span>Last updated 8/2025</span>
-                            <FontAwesomeIcon icon={faEarth} />
-                            <span>English</span>
-                        </div>
+                        <Suspense fallback={<SkeletonNoAnimation />}>
+                            <CourseDescription course={coursePromise} />
+                        </Suspense>
                     </div>
                 </div>
             </div>
@@ -297,6 +274,52 @@ async function ViewCourse({ params }: ViewCourseProps) {
 
                     {/* course content */}
                     <ViewCourseContent />
+
+                    <div className={cx('requirement-content')}>
+                        <h2 className={cx('related-heading')}>Requirements</h2>
+                        <ul className={cx('requirement-list')}>
+                            <li>
+                                <FontAwesomeIcon icon={faCircle} fontSize="0.6rem" />
+                                <span>No prior experience is required. We will start from the very basics</span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCircle} fontSize="0.6rem" />
+                                <span>
+                                    You&apos;ll need to install Anaconda. We will show you how to do that step by step
+                                </span>
+                            </li>
+                            <li>
+                                <FontAwesomeIcon icon={faCircle} fontSize="0.6rem" />
+                                <span>Microsoft Excel 2003, 2010, 2013, 2016, or 365</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className={cx('des-content')}>
+                        <h2 className={cx('related-heading')}>Description</h2>
+                        <div>
+                            <p>*Update 2025: Intro to Data Science module updated for recent AI developments*</p>
+                            <p>The Problem</p>
+                            <p>
+                                Data scientist is one of the best suited professions to thrive this century. It is
+                                digital, programming-oriented, and analytical. Therefore, it comes as no surprise that
+                                the demand for data scientists has been surging in the job marketplace.
+                            </p>
+                            <p>
+                                However, supply has been very limited. It is difficult to acquire the skills necessary
+                                to be hired as a data scientist.
+                            </p>
+                            <p>And how can you do that?</p>
+                            <p>
+                                Universities have been slow at creating specialized data science programs. (not to
+                                mention that the ones that exist are very expensive and time consuming)
+                            </p>
+                            <p>
+                                Most online courses focus on a specific topic and it is difficult to understand how the
+                                skill they teach fit in the complete picture
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

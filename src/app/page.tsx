@@ -6,7 +6,7 @@ import ImageSlider from '~/components/ui/ImageSlider';
 import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
 import CardCarousel from '~/components/ui/CardCarousel/CardCarousel';
 import images from '~/assets/images';
-import { getCourses } from '~/lib/getCourses';
+import { getCourses } from '~/lib/data';
 import styles from './page.module.scss';
 
 const cx = classNames.bind(styles);
@@ -60,11 +60,8 @@ function Home() {
                                     floatContent: bannerFloatContent(
                                         'Prep for your IT certificate',
                                         <p>
-                                            <a target="_blank" href="">
-                                                Explore a future in IT
-                                            </a>
-                                            . Start learning toward AWS certification, CompTIA A+ certification, and
-                                            more.
+                                            Explore a future in IT. Start learning toward AWS certification, CompTIA A+
+                                            certification, and more.
                                         </p>,
                                     ),
                                 },
@@ -74,11 +71,8 @@ function Home() {
                                     floatContent: bannerFloatContent(
                                         'Learn from anywhere',
                                         <p>
-                                            On the couch, from the backyard, or on your commute.{' '}
-                                            <a target="_blank" href="">
-                                                Our app
-                                            </a>{' '}
-                                            lets you decide.
+                                            On the couch, from the backyard, or on your commute. Our app lets you
+                                            decide.
                                         </p>,
                                     ),
                                 },

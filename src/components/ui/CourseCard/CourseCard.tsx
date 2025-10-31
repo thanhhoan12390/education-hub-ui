@@ -25,7 +25,7 @@ function CourseCard({ course }: CourseCardProps) {
 
     return (
         <div className={cx('wrapper')} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-            <Link href={`/view-course/${course.courseId}`}>
+            <Link target="_blank" href={`/view-course/${course.courseId}`}>
                 <div ref={cardRef} className={cx('course-card-wrapper')}>
                     <div className={cx('course-img')}>
                         <Image src={course.imageUrl} width={480} height={270} priority alt="course image" />
