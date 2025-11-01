@@ -42,7 +42,7 @@ function CourseCard({ course }: CourseCardProps) {
                             <span>đ</span>
                             {`${course.price.toLocaleString('en-US')}`}
                         </div>
-                        {course.bestSeller && <Badge />}
+                        <div className={cx('card-badge')}>{course.bestSeller && <Badge />}</div>
                     </div>
                 </div>
             </Link>
@@ -50,12 +50,16 @@ function CourseCard({ course }: CourseCardProps) {
             {open && (
                 <Popover targetRef={cardRef}>
                     <div className={cx('popover-content')}>
-                        <Link href="" className={cx('popover-heading')}>
-                            100 Days of Code: The Complete Course Pro Bootcamp
+                        <Link
+                            target="_blank"
+                            href={`/view-course/${course.courseId}`}
+                            className={cx('popover-heading')}
+                        >
+                            {course.title}
                         </Link>
 
                         <div className={cx('popover-badge')}>
-                            <div className={cx('popover-tag')}>Bestseller</div>
+                            {course.bestSeller && <Badge />}
                             <span className={cx('popover-date')}>
                                 Updated<span>August 2025</span>
                             </span>
@@ -68,8 +72,8 @@ function CourseCard({ course }: CourseCardProps) {
                         </div>
 
                         <div className={cx('popover-detail')}>
-                            Master Python by building 100 projects in 100 days. Learn data science, automation, build
-                            websites, games and apps!
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit mollitia unde autem
+                            debitis ab nulla iusto doloribus voluptas, a fugiat.
                         </div>
 
                         <ul className={cx('popover-benefits')}>

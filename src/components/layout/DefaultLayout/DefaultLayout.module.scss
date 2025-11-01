@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    block-size: 100vh;
+    // Không thêm block-size hoặc height vì sẽ làm lỗi popover
     min-block-size: 100vh;
 }
 

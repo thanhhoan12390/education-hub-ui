@@ -12,9 +12,10 @@ const cx = classNames.bind(styles);
 interface StarRatingProps {
     rating: number;
     style?: React.CSSProperties;
+    className?: string;
 }
 
-function StarRating({ rating = 0, style }: StarRatingProps) {
+function StarRating({ rating = 0, style, className }: StarRatingProps) {
     const ratingRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -26,7 +27,7 @@ function StarRating({ rating = 0, style }: StarRatingProps) {
     }, [rating]);
 
     return (
-        <div className={cx('card-rating-wrapper')} style={style}>
+        <div className={cx('card-rating-wrapper', className)} style={style}>
             <span className={cx('card-rating')} onClick={(e) => e.preventDefault()}>
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />

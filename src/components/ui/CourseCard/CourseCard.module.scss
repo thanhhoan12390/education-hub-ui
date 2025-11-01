@@ -109,6 +109,11 @@
     }
 }
 
+.card-badge {
+    display: flex;
+    margin-block: 0.8rem 0.4rem;
+}
+
 // popover content
 .popover-content {
     position: relative;
@@ -122,6 +127,10 @@
     letter-spacing: 0;
     max-inline-size: 36em;
     color: var(--black-color);
+
+    &:hover {
+        color: var(--purple-color);
+    }
 }
 
 .popover-badge {
@@ -130,22 +139,6 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.8rem;
-
-    .popover-tag {
-        display: inline-flex;
-        align-items: center;
-        padding-block: 0.4rem 0.4rem;
-        padding-inline: 0.8rem 0.8rem;
-        white-space: nowrap;
-        background-color: var(--ribbon-background-color);
-        color: var(--ribbon-color);
-        border-radius: 0.4rem;
-
-        font-size: 1.2rem;
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: 0;
-    }
 
     .popover-date {
         font-size: 1.2rem;

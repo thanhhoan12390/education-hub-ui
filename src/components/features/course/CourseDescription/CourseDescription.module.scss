@@ -1,5 +1,9 @@
 .wrapper {
     background-color: transparent;
+
+    .light-theme {
+        color: var(--purple-color);
+    }
 }
 
 .intro-heading {
@@ -34,7 +38,15 @@
 .tag-groups {
     display: flex;
     align-items: center;
+}
+
+.tag-rating-group {
+    display: flex;
+    align-items: center;
     margin-block-end: 1.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .intro-rate {
@@ -44,6 +56,15 @@
     line-height: 1.2;
     letter-spacing: 0;
     color: var(--dark-yellow-color);
+}
+
+.rating-star {
+    display: flex;
+}
+
+.mobile-rating-star {
+    display: none;
+    margin-inline-end: 0.4rem;
 }
 
 .rate-count {
@@ -88,5 +109,32 @@
 
     span {
         margin-inline: 0.8rem;
+    }
+}
+
+@media (max-width: 43.75rem) {
+    .wrapper {
+        .intro-heading {
+            font-size: 2.8rem;
+            font-weight: 600;
+        }
+
+        .rating-star {
+            display: none;
+        }
+
+        .mobile-rating-star {
+            display: block;
+        }
+        .course-des {
+            margin-inline: 2.4rem;
+        }
+
+        .tag-groups {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
     }
 }

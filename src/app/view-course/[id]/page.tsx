@@ -1,27 +1,16 @@
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Suspense } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faAward,
-    faCheck,
-    faChevronRight,
-    faCircle,
-    faCode,
-    faDownload,
-    faInfinity,
-    faMobileScreen,
-    faPlay,
-} from '@fortawesome/free-solid-svg-icons';
-import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
-import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
+import { faCheck, faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { getCourses, getCourseById } from '~/lib/data';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import ViewCourseContent from '~/components/features/course/ViewCourseContent';
 import CourseDescription from '~/components/features/course/CourseDescription';
 import SkeletonNoAnimation from '~/components/ui/SkeletonNoAnimation';
+import FixedSubHeader from '~/components/features/course/FixedSubHeader';
+import ViewCourseSidebar from '~/components/features/course/ViewCourseSidebar';
 import styles from './ViewCourse.module.scss';
 
 const cx = classNames.bind(styles);
@@ -43,6 +32,10 @@ async function ViewCourse({ params }: ViewCourseProps) {
 
     return (
         <div className={cx('wrapper')}>
+            {/* Fixed sub header */}
+            <FixedSubHeader course={coursePromise} />
+
+            {/* Page */}
             <div className={cx('top-container')}>
                 <div className={cx('top-content')}>
                     <div className={cx('link-title')}>
@@ -59,104 +52,7 @@ async function ViewCourse({ params }: ViewCourseProps) {
                 </div>
             </div>
 
-            <div className={cx('sidebar-container')}>
-                <div className={cx('sidebar-content')}>
-                    <div className={cx('sidebar-content-group')}>
-                        <div className={cx('intro-asset')}>
-                            <Image
-                                src="https://res.cloudinary.com/dypjq4erd/image/upload/v1761461011/course-img-7_e2ojel.webp"
-                                alt="introduction asset"
-                                width={480}
-                                height={270}
-                                priority
-                            />
-                            <div className={cx('play-btn-overlay')}>
-                                <div className={cx('play-btn')}>
-                                    <FontAwesomeIcon fontSize="2.4rem" icon={faPlay} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className={cx('purchase-section')}>
-                            <div className={cx('purchase-price')}>
-                                <span>đ</span>
-                                {`${Number(309000).toLocaleString('en-US')}`}
-                                <span>82% off</span>
-                            </div>
-
-                            <div className={cx('left-day')}>
-                                <FontAwesomeIcon icon={faClock} style={{ marginInlineEnd: '0.4rem' }} />2 days left at
-                                this price!
-                            </div>
-
-                            <div className={cx('cart-wishlist-btn')}>
-                                <FlexibleButton large primary>
-                                    Add to cart
-                                </FlexibleButton>
-
-                                <FlexibleButton style={{ inlineSize: '4.8rem', minInlineSize: 'unset' }} large outline>
-                                    <FontAwesomeIcon fontSize="2rem" icon={faHeart} />
-                                </FlexibleButton>
-                            </div>
-
-                            <FlexibleButton style={{ fontSize: '1.6rem' }} outline large>
-                                Buy now
-                            </FlexibleButton>
-
-                            <div className={cx('refund-text')}>30-Day Money-Back Guarantee</div>
-
-                            <h2 className={cx('includes-heading')}>This course include:</h2>
-
-                            <ul className={cx('course-includes')}>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faYoutubeSquare} />
-                                        <div className={cx('include-text')}>61 hours on-demand video</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faCode} />
-                                        <div className={cx('include-text')}>22 practical examples</div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faNewspaper} />
-                                        <div className={cx('include-text')}>66 articles</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faDownload} />
-                                        <div className={cx('include-text')}>194 downloadable resources</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faMobileScreen} />
-                                        <div className={cx('include-text')}>Access on mobile and TV</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faInfinity} />
-                                        <div className={cx('include-text')}>Full lifetime access</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className={cx('include-item')}>
-                                        <FontAwesomeIcon icon={faAward} />
-                                        <div className={cx('include-text')}>Certificate of completion</div>
-                                    </div>
-                                </li>
-                            </ul>
-
-                            <FlexibleButton className={cx('share-btn')}>Share this course</FlexibleButton>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ViewCourseSidebar course={coursePromise} />
 
             <div className={cx('bot-container')}>
                 <div className={cx('bot-content')}>

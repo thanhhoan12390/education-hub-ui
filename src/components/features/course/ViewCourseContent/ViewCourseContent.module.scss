@@ -53,8 +53,7 @@
     -webkit-box-orient: block-axis;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-inline-end: 4.8rem;
+    white-space: normal;
     font-size: 1.4rem;
     line-height: 1.6;
     font-weight: 400;
@@ -89,4 +88,16 @@
 
 .more-section-btn-hidden {
     display: none;
+}
+
+@media (max-width: 43.75rem) {
+    .wrapper {
+        .lecture-name {
+            -webkit-line-clamp: 2;
+        }
+
+        .lecture-minute {
+            display: none;
+        }
+    }
 }

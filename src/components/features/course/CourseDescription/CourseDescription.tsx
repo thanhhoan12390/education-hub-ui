@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleExclamation, faEarth } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faEarth, faStar } from '@fortawesome/free-solid-svg-icons';
 import { use } from 'react';
 
 import StarRating from '~/components/ui/StarRating';
@@ -12,7 +12,9 @@ import styles from './CourseDescription.module.scss';
 const cx = classNames.bind(styles);
 
 interface CourseDescriptionProps {
+    className?: string;
     course: Promise<Course>;
+    lightTheme?: boolean;
 }
 
 // Hàm giả lập delay
@@ -21,11 +23,11 @@ interface CourseDescriptionProps {
 //     return { message: `Done after ${ms / 1000}s` };
 // }
 
-function CourseDescription({ course }: CourseDescriptionProps) {
+function CourseDescription({ course, className, lightTheme }: CourseDescriptionProps) {
     const courseData = use(course);
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', className)}>
             <h1 className={cx('intro-heading')}>{courseData.title}</h1>
             <div className={cx('intro-detail')}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, fugit corrupti magnam omnis molestiae
@@ -33,14 +35,32 @@ function CourseDescription({ course }: CourseDescriptionProps) {
             </div>
             <div className={cx('tag-groups')}>
                 {courseData.bestSeller && <Badge />}
-                <div className={cx('intro-rate')}>{courseData.rating.toFixed(1)}</div>
-                <StarRating rating={4.6} style={{ color: 'var(--dark-yellow-color)' }} />
-                <div className={cx('rate-count')}>{`(${courseData.ratingCount.toLocaleString('en-US')} ratings)`}</div>
+                <div className={cx('tag-rating-group')}>
+                    <div className={cx('intro-rate')}>{courseData.rating.toFixed(1)}</div>
+                    <StarRating
+                        className={cx('rating-star')}
+                        rating={4.6}
+                        style={{ color: 'var(--dark-yellow-color)' }}
+                    />
+                    <FontAwesomeIcon
+                        className={cx('mobile-rating-star')}
+                        style={{ color: 'var(--dark-yellow-color)', fontSize: '1.2rem' }}
+                        icon={faStar}
+                    />
+                    <div
+                        className={cx('rate-count', {
+                            ['light-theme']: lightTheme,
+                        })}
+                    >{`(${courseData.ratingCount.toLocaleString('en-US')} ratings)`}</div>
 
-                <div className={cx('student-count')}>{`${Number(1676840).toLocaleString('en-US')} students`}</div>
+                    <div className={cx('student-count')}>{`${Number(1676840).toLocaleString('en-US')} students`}</div>
+                </div>
             </div>
             <div className={cx('intro-instructor')}>
-                Created by <Link href={''}>{courseData.instructor}</Link>
+                Created by{' '}
+                <Link href={''} className={cx({ ['light-theme']: lightTheme })}>
+                    {courseData.instructor}
+                </Link>
             </div>
             <div className={cx('intro-date')}>
                 <FontAwesomeIcon icon={faCircleExclamation} />

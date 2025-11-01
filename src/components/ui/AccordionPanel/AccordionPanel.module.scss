@@ -71,3 +71,11 @@
     padding-inline: 2.4rem;
     border-block-start: 1px solid var(--border-color);
 }
+
+@media (max-width: 43.75rem) {
+    .wrapper {
+        .total-lecture {
+            display: none;
+        }
+    }
+}
