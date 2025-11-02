@@ -24,14 +24,14 @@ async function TopDescription({ params }: TopDescriptionProps) {
         <Fragment>
             <FixedSubHeader course={course} />
             <div className={cx('wrapper')}>
-                <div className={cx('top-content')}>
+                <div className={cx('top-container')}>
                     <div className={cx('link-title')}>
                         <Link href={''}>Development</Link>
                         <FontAwesomeIcon fontSize={'0.8rem'} style={{ marginInline: '1.2rem' }} icon={faChevronRight} />
                         <Link href={''}>Programming course</Link>
                     </div>
 
-                    <div className={cx('introduction-content')}>
+                    <div className={cx('top-content')}>
                         <CourseDescription course={course} />
                     </div>
                 </div>

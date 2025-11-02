@@ -3,6 +3,7 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
+import useSWR from 'swr';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
-import useSWR from 'swr';
+import { Skeleton, Alert } from 'antd';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
@@ -59,8 +60,51 @@ function MultiPurposeSidebar() {
         };
     }, []);
 
-    if (isLoading) return <div>loading...</div>;
-    if (!courseData || error) return <div>Some thing went wrong...</div>;
+    if (isLoading)
+        return (
+            <div className={cx('wrapper')}>
+                <div
+                    className={cx('sidebar-container', {
+                        ['sidebar-container-fixed']: isSidebarFixed,
+                    })}
+                >
+                    <div className={cx('sidebar-content')} style={{ display: 'grid', gap: '1.6rem' }}>
+                        <div
+                            className={cx('intro-asset', {
+                                ['intro-asset-hidden']: isSidebarFixed,
+                            })}
+                        >
+                            <div className={cx('image-gallery')}>
+                                <Skeleton.Image
+                                    style={{ position: 'absolute', top: '0', blockSize: '100%', inlineSize: '100%' }}
+                                    active
+                                />
+                            </div>
+                        </div>
+                        <Skeleton paragraph={{ rows: 9 }} active />
+                        <Skeleton paragraph={{ rows: 10 }} active />
+                    </div>
+                </div>
+            </div>
+        );
+
+    if (!courseData || error)
+        return (
+            <div className={cx('wrapper')}>
+                <div
+                    className={cx('sidebar-container', {
+                        ['sidebar-container-fixed']: isSidebarFixed,
+                    })}
+                >
+                    <Alert
+                        className={cx('error-boundary')}
+                        message="Error"
+                        description="Something went wrong ..."
+                        type="error"
+                    />
+                </div>
+            </div>
+        );
 
     return (
         <div className={cx('wrapper')}>

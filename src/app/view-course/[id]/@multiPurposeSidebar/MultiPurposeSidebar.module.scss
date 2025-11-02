@@ -273,6 +273,10 @@
                 font-size: 1.6rem;
             }
         }
+
+        .error-boundary {
+            min-block-size: unset;
+        }
     }
 }
 
@@ -282,6 +286,11 @@
 
         .sidebar-container {
             margin-inline-start: 69.6rem;
+        }
+
+        .error-boundary {
+            min-block-size: calc(100vh - 3.2rem);
+            border-radius: 0;
         }
     }
 }

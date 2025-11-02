@@ -34,7 +34,7 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
             <div className={cx('tag-groups')}>
                 {course.bestSeller && <Badge />}
                 <div className={cx('tag-rating-group')}>
-                    <div className={cx('intro-rate')}>{course.rating.toFixed(1)}</div>
+                    <div className={cx('intro-rate')}>{course.rating?.toFixed(1)}</div>
                     <StarRating
                         className={cx('rating-star')}
                         rating={4.6}
@@ -49,9 +49,9 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
                         className={cx('rate-count', {
                             ['light-theme']: lightTheme,
                         })}
-                    >{`(${course.ratingCount.toLocaleString('en-US')} ratings)`}</div>
+                    >{`(${course.ratingCount?.toLocaleString('en-US')} ratings)`}</div>
 
-                    <div className={cx('student-count')}>{`${Number(1676840).toLocaleString('en-US')} students`}</div>
+                    <div className={cx('student-count')}>{`${Number(1676840)?.toLocaleString('en-US')} students`}</div>
                 </div>
             </div>
             <div className={cx('intro-instructor')}>

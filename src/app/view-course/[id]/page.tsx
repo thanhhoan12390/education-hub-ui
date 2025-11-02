@@ -1,12 +1,20 @@
-import { getCourses } from '~/lib/data';
+import { getCourses, getCourseById } from '~/lib/data';
+import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
     const courses = await getCourses();
 
-    return courses.map((courses) => ({ id: `${courses.courseId}` }));
+    return courses.map((course) => ({ id: `${course.courseId}` }));
 }
 
-async function ViewCourse() {
+async function ViewCourse({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const course = await getCourseById(+id);
+
+    if (!course.courseId) {
+        notFound();
+    }
+
     return null;
 }
 

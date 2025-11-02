@@ -38,12 +38,12 @@
 .tag-groups {
     display: flex;
     align-items: center;
+    margin-block-end: 1.6rem;
 }
 
 .tag-rating-group {
     display: flex;
     align-items: center;
-    margin-block-end: 1.6rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

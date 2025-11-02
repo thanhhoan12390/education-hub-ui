@@ -5,7 +5,7 @@
     padding-inline: 0;
 }
 
-.top-content {
+.top-container {
     max-inline-size: var(--max-inline);
     margin: 0 auto;
 }
@@ -26,7 +26,7 @@
     }
 }
 
-.introduction-content {
+.top-content {
     max-inline-size: 70rem;
     margin-inline: 4.8rem;
     color: var(--white-color);
@@ -45,7 +45,21 @@
 }
 
 @media (min-width: 67.5em) {
+    .top-container {
+        max-inline-size: 108.4rem;
+    }
+
+    .top-content {
+        max-inline-size: 60rem;
+    }
 }
 
 @media screen and (min-width: 73.75em) {
+    .top-container {
+        max-inline-size: var(--max-inline);
+    }
+
+    .top-content {
+        max-inline-size: 70rem;
+    }
 }
