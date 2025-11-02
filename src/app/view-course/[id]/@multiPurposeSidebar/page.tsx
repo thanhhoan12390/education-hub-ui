@@ -3,7 +3,8 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense, use, useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAward,
@@ -16,23 +17,29 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
+import useSWR from 'swr';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
-import CourseDescription from '../CourseDescription';
-import SkeletonNoAnimation from '~/components/ui/SkeletonNoAnimation/SkeletonNoAnimation';
-import styles from './ViewCourseSidebar.module.scss';
+import CourseDescription from '~/components/features/course/CourseDescription';
+import styles from './MultiPurposeSidebar.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface ViewCourseSidebar {
-    course: Promise<Course>;
-}
-
-function ViewCourseSidebar({ course }: ViewCourseSidebar) {
-    const courseData = use(course);
-
+function MultiPurposeSidebar() {
     const [isSidebarFixed, setIsSidebarFixed] = useState(false);
+
+    const { id } = useParams<{ id: string }>();
+
+    const url = `/api/courses/${id}`;
+
+    const {
+        data: courseData,
+        error,
+        isLoading,
+    } = useSWR<Course>(url, {
+        revalidateOnFocus: false,
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,6 +58,9 @@ function ViewCourseSidebar({ course }: ViewCourseSidebar) {
             window.removeEventListener('resize', handleScroll);
         };
     }, []);
+
+    if (isLoading) return <div>loading...</div>;
+    if (!courseData || error) return <div>Some thing went wrong...</div>;
 
     return (
         <div className={cx('wrapper')}>
@@ -87,14 +97,12 @@ function ViewCourseSidebar({ course }: ViewCourseSidebar) {
                         </div>
                     </div>
 
-                    <Suspense fallback={<SkeletonNoAnimation />}>
-                        <CourseDescription lightTheme className={cx('course-des')} course={course} />
-                    </Suspense>
+                    <CourseDescription lightTheme className={cx('course-des')} course={courseData} />
 
                     <div className={cx('purchase-section')}>
                         <div className={cx('purchase-price')}>
                             <span>đ</span>
-                            {`${courseData.price.toLocaleString('en-US')}`}
+                            {`${courseData?.price.toLocaleString('en-US')}`}
                             <span>82% off</span>
                         </div>
 
@@ -175,4 +183,4 @@ function ViewCourseSidebar({ course }: ViewCourseSidebar) {
     );
 }
 
-export default ViewCourseSidebar;
+export default MultiPurposeSidebar;

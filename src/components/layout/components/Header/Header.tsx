@@ -31,22 +31,165 @@ const exploreMenuData: MenuItem[] = [
                             {
                                 title: 'AI Fundamentals',
                                 to: '',
-                                children: [],
+                                children: [
+                                    {
+                                        title: 'Popular topics',
+                                        to: '',
+                                        children: [
+                                            {
+                                                title: 'Prompt Engineering',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Large Language Models (LLM)',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Generative AI (GenAI)',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'AI Agents & Agentic AI',
+                                                to: '',
+                                                children: [],
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             {
                                 title: 'AI For Professionals',
                                 to: '',
-                                children: [],
+                                children: [
+                                    {
+                                        title: 'Popular topics',
+                                        to: '',
+                                        children: [
+                                            {
+                                                title: 'ChatGPT',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Microsoft Copilot',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Google Gemini (Bard)',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Claude AI',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'AI Content Generation',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Perplexity AI',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Agentforce',
+                                                to: '',
+                                                children: [],
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             {
                                 title: 'AI For Developers',
                                 to: '',
-                                children: [],
+                                children: [
+                                    {
+                                        title: 'Popular topics',
+                                        to: '',
+                                        children: [
+                                            {
+                                                title: 'OpenAI API',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'GitHub Copilot',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Azure Machine Learning',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Retrieval Augmented Generation (RAG)',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'LangChain',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'MLOps',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'TensorFlow',
+                                                to: '',
+                                                children: [],
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                             {
                                 title: 'AI For Creatives',
                                 to: '',
-                                children: [],
+                                children: [
+                                    {
+                                        title: 'Popular topics',
+                                        to: '',
+                                        children: [
+                                            {
+                                                title: 'DALL·E',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Midjourney',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Stable Diffusion',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'Leonardo.Ai',
+                                                to: '',
+                                                children: [],
+                                            },
+                                            {
+                                                title: 'AI Art Generation',
+                                                to: '',
+                                                children: [],
+                                            },
+                                        ],
+                                    },
+                                ],
                             },
                         ],
                     },
@@ -55,7 +198,54 @@ const exploreMenuData: MenuItem[] = [
             {
                 title: 'Launch a new career',
                 to: '',
-                children: [],
+                children: [
+                    {
+                        title: 'In-demand Careers',
+                        to: '',
+                        children: [
+                            {
+                                title: 'Cloud Engineer',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Data Scientist',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Digital Marketer',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Full Stack Web Developer',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Game Developer',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Project Manager',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Machine Learning Engineer',
+                                to: '',
+                                children: [],
+                            },
+                            {
+                                title: 'Cybersecurity Analyst',
+                                to: '',
+                                children: [],
+                            },
+                        ],
+                    },
+                ],
             },
             {
                 title: 'Prepare for a certification',
@@ -184,9 +374,17 @@ const exploreMenuData: MenuItem[] = [
     },
 ];
 
-function Header() {
+interface HeaderProps {
+    showShadow?: boolean;
+}
+
+function Header({ showShadow = false }: HeaderProps) {
     return (
-        <div className={cx('header-wrapper')}>
+        <div
+            className={cx('header-wrapper', {
+                ['header-box-shadow']: showShadow,
+            })}
+        >
             <Link href="/" className={cx('header-logo')}>
                 <Image width={128} height={128} src={images.logo} alt="Logo image" loading="lazy" />
             </Link>
@@ -209,7 +407,7 @@ function Header() {
                 <PopperWrapper className={cx('nav-business-wrapper')}>
                     <div className={cx('nav-business-content')}>
                         <div className={cx('nav-business-text')}>
-                            Get your team access to over 30,000 top Udemy courses, anytime, anywhere.
+                            Get your team access to over 30,000 top courses, anytime, anywhere.
                         </div>
                         <FlexibleButton primary>Try Academy Business</FlexibleButton>
                     </div>
@@ -239,7 +437,9 @@ function Header() {
                 <PopperWrapper className={cx('nav-learning-wrapper')}>
                     <div className={cx('nav-learning-content')}>
                         <div className={cx('nav-learning-text')}>Start learning today.</div>
-                        <FlexibleButton outline>Browser now</FlexibleButton>
+                        <FlexibleButton href="/" outline>
+                            Browser now
+                        </FlexibleButton>
                     </div>
                 </PopperWrapper>
             </div>

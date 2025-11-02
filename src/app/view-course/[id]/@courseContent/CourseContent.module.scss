@@ -1,45 +1,5 @@
-.wrapper {
-    --max-inline: 118.4rem;
-
-    position: relative;
-}
-
-// Top layer
-.top-container {
-    background-color: var(--black-color);
-    padding-block: 3.2rem;
-    padding-inline: 0;
-}
-
-.top-content {
-    max-inline-size: var(--max-inline);
-    margin: 0 auto;
-}
-
-.link-title {
-    display: flex;
-    align-items: center;
-    max-inline-size: 70rem;
-    margin-inline: 4.8rem;
-    margin-block: 0 1.6rem;
-    padding: 0.4rem;
-    color: var(--purple-color-100);
-    font-size: 1.4rem;
-    font-weight: 600;
-
-    a {
-        padding-block: 0.4rem;
-    }
-}
-
-.introduction-content {
-    max-inline-size: 70rem;
-    margin-inline: 4.8rem;
-    color: var(--white-color);
-}
-
 // Bottom, course content
-.bot-container {
+.wrapper {
     padding-block-start: 3.2rem;
     max-inline-size: var(--max-inline);
     margin: 0 auto;
@@ -168,10 +128,6 @@
 
 @media (max-width: 43.75rem) {
     .wrapper {
-        .top-container {
-            display: none;
-        }
-
         .bot-content {
             margin-inline: 2.4rem;
         }
@@ -183,10 +139,6 @@
 }
 
 @media (max-width: 67.44em) {
-    .top-container {
-        display: none;
-    }
-
     .bot-content {
         max-inline-size: 60rem;
         margin-inline: auto;
@@ -194,7 +146,7 @@
 }
 
 @media (min-width: 67.5em) {
-    .bot-container {
+    .wrapper {
         max-inline-size: 108.4rem;
     }
 
@@ -204,7 +156,7 @@
 }
 
 @media screen and (min-width: 73.75em) {
-    .bot-container {
+    .wrapper {
         max-inline-size: var(--max-inline);
     }
 

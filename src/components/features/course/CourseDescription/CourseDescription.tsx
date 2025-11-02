@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation, faEarth, faStar } from '@fortawesome/free-solid-svg-icons';
-import { use } from 'react';
+import { memo } from 'react';
 
 import StarRating from '~/components/ui/StarRating';
 import Badge from '~/components/ui/Badge';
@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 interface CourseDescriptionProps {
     className?: string;
-    course: Promise<Course>;
+    course: Course;
     lightTheme?: boolean;
 }
 
@@ -24,19 +24,17 @@ interface CourseDescriptionProps {
 // }
 
 function CourseDescription({ course, className, lightTheme }: CourseDescriptionProps) {
-    const courseData = use(course);
-
     return (
         <div className={cx('wrapper', className)}>
-            <h1 className={cx('intro-heading')}>{courseData.title}</h1>
+            <h1 className={cx('intro-heading')}>{course.title}</h1>
             <div className={cx('intro-detail')}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, fugit corrupti magnam omnis molestiae
                 ad quae assumenda consequuntur.
             </div>
             <div className={cx('tag-groups')}>
-                {courseData.bestSeller && <Badge />}
+                {course.bestSeller && <Badge />}
                 <div className={cx('tag-rating-group')}>
-                    <div className={cx('intro-rate')}>{courseData.rating.toFixed(1)}</div>
+                    <div className={cx('intro-rate')}>{course.rating.toFixed(1)}</div>
                     <StarRating
                         className={cx('rating-star')}
                         rating={4.6}
@@ -51,7 +49,7 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
                         className={cx('rate-count', {
                             ['light-theme']: lightTheme,
                         })}
-                    >{`(${courseData.ratingCount.toLocaleString('en-US')} ratings)`}</div>
+                    >{`(${course.ratingCount.toLocaleString('en-US')} ratings)`}</div>
 
                     <div className={cx('student-count')}>{`${Number(1676840).toLocaleString('en-US')} students`}</div>
                 </div>
@@ -59,7 +57,7 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
             <div className={cx('intro-instructor')}>
                 Created by{' '}
                 <Link href={''} className={cx({ ['light-theme']: lightTheme })}>
-                    {courseData.instructor}
+                    {course.instructor}
                 </Link>
             </div>
             <div className={cx('intro-date')}>
@@ -72,4 +70,4 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
     );
 }
 
-export default CourseDescription;
+export default memo(CourseDescription);

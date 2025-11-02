@@ -1,0 +1,51 @@
+// Top layer
+.wrapper {
+    background-color: var(--black-color);
+    padding-block: 3.2rem;
+    padding-inline: 0;
+}
+
+.top-content {
+    max-inline-size: var(--max-inline);
+    margin: 0 auto;
+}
+
+.link-title {
+    display: flex;
+    align-items: center;
+    max-inline-size: 70rem;
+    margin-inline: 4.8rem;
+    margin-block: 0 1.6rem;
+    padding: 0.4rem;
+    color: var(--purple-color-100);
+    font-size: 1.4rem;
+    font-weight: 600;
+
+    a {
+        padding-block: 0.4rem;
+    }
+}
+
+.introduction-content {
+    max-inline-size: 70rem;
+    margin-inline: 4.8rem;
+    color: var(--white-color);
+}
+
+@media (max-width: 43.75rem) {
+    .wrapper {
+        display: none;
+    }
+}
+
+@media (max-width: 67.44em) {
+    .wrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 67.5em) {
+}
+
+@media screen and (min-width: 73.75em) {
+}
