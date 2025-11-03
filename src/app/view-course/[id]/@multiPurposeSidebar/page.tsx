@@ -13,7 +13,6 @@ import {
     faDownload,
     faInfinity,
     faMobileScreen,
-    faPlay,
     faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
@@ -23,7 +22,7 @@ import { Skeleton, Alert } from 'antd';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
 import CourseDescription from '~/components/features/course/CourseDescription';
-import OverlayModalButton from '~/components/features/course/OverlayModalButton';
+import PreviewModalButton from '~/components/features/course/PreviewModalButton';
 import styles from './MultiPurposeSidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -51,6 +50,8 @@ function MultiPurposeSidebar() {
                 setIsSidebarFixed(false);
             }
         };
+
+        handleScroll(); // gọi lần đầu khi mounted để cập nhật đúng logic, khi hydration chưa xong mà người dùng đã scroll
 
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleScroll);
@@ -135,7 +136,7 @@ function MultiPurposeSidebar() {
                                 priority
                             />
                         </div>
-                        <OverlayModalButton />
+                        <PreviewModalButton isOverlayButton />
                     </div>
 
                     <CourseDescription lightTheme className={cx('course-des')} course={courseData} />

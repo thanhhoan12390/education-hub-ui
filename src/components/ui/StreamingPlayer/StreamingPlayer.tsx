@@ -12,6 +12,7 @@ interface StreamingPlayerProps {
 function StreamingPlayer({ src }: StreamingPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const playerRef = useRef<ReturnType<typeof videojs> | null>(null);
+    const hlsRef = useRef<Hls | null>(null);
 
     useEffect(() => {
         const videoElement = videoRef.current;
@@ -23,9 +24,11 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
             // Khởi tạo HLS
             if (Hls.isSupported()) {
                 const hls = new Hls();
+                hlsRef.current = hls;
 
                 hls.loadSource(src);
                 hls.attachMedia(videoElement);
+
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
                     // console.log('HLS manifest loaded');
                 });
@@ -43,15 +46,36 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
                 fluid: true,
                 playbackRates: [0.75, 1, 1.25, 1.5, 2],
                 responsive: true,
-                html5: { hls: { overrideNative: true } },
+                controlBar: {
+                    children: [
+                        'playToggle',
+                        {
+                            name: 'volumePanel',
+                            inline: false,
+                        },
+                        'currentTimeDisplay',
+                        'timeDivider',
+                        'durationDisplay',
+                        'progressControl',
+                        'fullscreenToggle',
+                    ],
+                },
             });
         };
 
-        // Trì hoãn 1 frame (fix warning + hiển thị UI ổn định)
         requestAnimationFrame(initPlayer);
 
         return () => {
-            playerRef.current?.dispose();
+            // hủy Hls.js trước khi dispose Video.js
+            if (hlsRef.current) {
+                hlsRef.current.destroy();
+                hlsRef.current = null;
+            }
+
+            if (playerRef.current) {
+                playerRef.current.dispose();
+                playerRef.current = null;
+            }
         };
     }, [src]);
 

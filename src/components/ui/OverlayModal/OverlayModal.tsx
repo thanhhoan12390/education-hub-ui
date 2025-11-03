@@ -33,11 +33,7 @@ function OverlayModal({ open = false, onClose, children }: OverlayModalProps) {
                 })}
                 onClick={onClose}
             >
-                <div className={cx('container')}>
-                    <div className={cx('content')} onClick={(e) => e.stopPropagation()}>
-                        {children}
-                    </div>
-                </div>
+                <div className={cx('container')}>{children}</div>
             </div>
         ),
         document.body,

@@ -3,12 +3,12 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import AccordionPanel from '~/components/ui/AccordionPanel';
+import PreviewModalButton from '../PreviewModalButton';
 import styles from './ViewCourseContent.module.scss';
 
 const cx = classNames.bind(styles);
@@ -35,14 +35,7 @@ function ViewCourseContent() {
                                 <div className={cx('lecture-field')}>
                                     <h4 className={cx('lecture-name')}>Introduction to the Course</h4>
                                     <span style={{ flex: '1 1 0%' }} />
-                                    <FlexibleButton
-                                        leftIcon={
-                                            <FontAwesomeIcon fontSize="1.6rem" color="#333" icon={faCirclePlay} />
-                                        }
-                                        className={cx('preview-btn')}
-                                    >
-                                        Preview
-                                    </FlexibleButton>
+                                    <PreviewModalButton />
                                     <span className={cx('lecture-minute')}>03:33</span>
                                 </div>
                             </div>
@@ -57,14 +50,7 @@ function ViewCourseContent() {
                                 <div className={cx('lecture-field')}>
                                     <h4 className={cx('lecture-name')}>Course Help and Welcome</h4>
                                     <span style={{ flex: '1 1 0%' }} />
-                                    <FlexibleButton
-                                        leftIcon={
-                                            <FontAwesomeIcon fontSize="1.6rem" color="#333" icon={faCirclePlay} />
-                                        }
-                                        className={cx('preview-btn')}
-                                    >
-                                        Preview
-                                    </FlexibleButton>
+                                    <PreviewModalButton />
                                     <span className={cx('lecture-minute')}>00:36</span>
                                 </div>
                             </div>
@@ -93,14 +79,7 @@ function ViewCourseContent() {
                                 <div className={cx('lecture-field')}>
                                     <h4 className={cx('lecture-name')}>Python Environment Setup</h4>
                                     <span style={{ flex: '1 1 0%' }} />
-                                    <FlexibleButton
-                                        leftIcon={
-                                            <FontAwesomeIcon fontSize="1.6rem" color="#333" icon={faCirclePlay} />
-                                        }
-                                        className={cx('preview-btn')}
-                                    >
-                                        Preview
-                                    </FlexibleButton>
+                                    <PreviewModalButton />
                                     <span className={cx('lecture-minute')}>11:14</span>
                                 </div>
                             </div>

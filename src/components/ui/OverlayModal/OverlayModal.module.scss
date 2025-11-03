@@ -11,7 +11,7 @@
     -webkit-backdrop-filter: blur(0.8rem); /* để hỗ trợ Safari */
     background: var(--overlay-color);
     cursor: pointer;
-    z-index: 99;
+    z-index: 9999;
 }
 
 .modal-open {
@@ -24,8 +24,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.content {
-    flex: 1;
 }

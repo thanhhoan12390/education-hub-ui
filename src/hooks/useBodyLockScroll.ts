@@ -4,23 +4,34 @@ import { useEffect } from 'react';
 
 export function useBodyLockScroll(locked: boolean) {
     useEffect(() => {
+        const html = document.documentElement;
+        const body = document.body;
+
+        const preventTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+        };
+
         if (locked) {
-            const scrollY = window.scrollY;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.width = '100%'; // tránh “layout shift” khi ẩn thanh cuộn
+            const scrollbarWidth = window.innerWidth - html.clientWidth;
+
+            html.style.overflow = 'hidden';
+            body.style.overflow = 'hidden';
+            body.style.paddingRight = `${scrollbarWidth}px`;
+
+            // chặn cuộn bằng tay (mobile)
+            document.addEventListener('touchmove', preventTouchMove, { passive: false });
         } else {
-            const top = document.body.style.top;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            window.scrollTo(0, parseInt(top || '0') * -1);
+            html.style.overflow = '';
+            body.style.overflow = '';
+            body.style.paddingRight = '';
+            document.removeEventListener('touchmove', preventTouchMove);
         }
 
         return () => {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
+            html.style.overflow = '';
+            body.style.overflow = '';
+            body.style.paddingRight = '';
+            document.removeEventListener('touchmove', preventTouchMove);
         };
     }, [locked]);
 }
