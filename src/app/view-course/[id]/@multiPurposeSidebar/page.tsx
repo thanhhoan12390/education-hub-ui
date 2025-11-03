@@ -23,6 +23,7 @@ import { Skeleton, Alert } from 'antd';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
 import CourseDescription from '~/components/features/course/CourseDescription';
+import OverlayModalButton from '~/components/features/course/OverlayModalButton';
 import styles from './MultiPurposeSidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -134,11 +135,7 @@ function MultiPurposeSidebar() {
                                 priority
                             />
                         </div>
-                        <div className={cx('play-btn-overlay')}>
-                            <div className={cx('play-btn')}>
-                                <FontAwesomeIcon fontSize="2.4rem" icon={faPlay} />
-                            </div>
-                        </div>
+                        <OverlayModalButton />
                     </div>
 
                     <CourseDescription lightTheme className={cx('course-des')} course={courseData} />

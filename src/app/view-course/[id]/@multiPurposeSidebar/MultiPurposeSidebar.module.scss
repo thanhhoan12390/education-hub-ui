@@ -71,29 +71,6 @@
     }
 }
 
-.play-btn-overlay {
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--border-color);
-}
-
-.play-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    block-size: 6.4rem;
-    inline-size: 6.4rem;
-    border-radius: 100rem;
-    background-color: var(--white-color);
-    color: var(--gray-color);
-}
-
 .course-des {
     display: none;
 }
