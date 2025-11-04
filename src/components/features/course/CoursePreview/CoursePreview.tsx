@@ -1,31 +1,73 @@
 import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
+import useSWR from 'swr';
+import { useState } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Skeleton } from 'antd';
+
 const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'), {
     ssr: false, // tránh SSR load video.js
-    loading: () => <p>Loading player...</p>,
+    loading: () => (
+        <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />
+    ),
 });
-
+import PreviewSample from '../PreviewSample';
+import { Preview } from '~/types';
 import styles from './CoursePreview.module.scss';
 
 const cx = classNames.bind(styles);
 
 function CoursePreview() {
+    const [selectedId, setSelectedId] = useState(1);
+
+    const url = `/api/previews/${selectedId}`;
+
+    const { data, error, isLoading } = useSWR<Preview>(url, {
+        revalidateOnFocus: false,
+    });
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('preview-container')} onClick={(e) => e.stopPropagation()}>
                 <h2 className={cx('preview-heading')}>
                     <span>Course Preview</span>
-                    <span>The Data Science Course: Complete Data Science Bootcamp 2025</span>
+                    {isLoading ? (
+                        <Skeleton.Button
+                            style={{ backgroundColor: 'var(--gray-color)', inlineSize: '100%' }}
+                            active
+                            size="default"
+                            block
+                        />
+                    ) : (
+                        <span>{data?.title}</span>
+                    )}
                 </h2>
                 <div className={cx('preview-content')}>
                     <div className={cx('preview-video-container')}>
-                        <StreamingPlayer src="https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8" />
+                        {isLoading ? (
+                            <Spin
+                                style={{ color: 'var(--gray-color-100)' }}
+                                indicator={<LoadingOutlined spin />}
+                                size="large"
+                            />
+                        ) : (
+                            // "key trick" thay vì reusing cùng <StreamingPlayer> instance,
+                            // thêm key={src} để React tạo mới hẳn component mỗi khi đổi preview:
+                            <StreamingPlayer key={data?.previewId} src={data?.previewSrc ?? ''} />
+                        )}
                     </div>
-                    <div className={cx('free-sample')}>Free Sample Videos</div>
+
+                    <div className={cx('free-sample')}>Free Sample Videos:</div>
+
                     <div className={cx('samples-container')}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet debitis sit sequi vero eaque,
-                        impedit magni adipisci? Aspernatur, quia ut ratione maiores quisquam quo perspiciatis optio
-                        delectus deleniti, inventore eos!
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <PreviewSample
+                                key={index}
+                                previewId={index + 1}
+                                isCurrent={index + 1 === selectedId}
+                                onClick={() => setSelectedId(index + 1)}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

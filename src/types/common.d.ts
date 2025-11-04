@@ -1,11 +1,5 @@
 import type { StaticImageData } from 'next/image';
 
-export interface RouteInformation {
-    path: string;
-    component: () => React.ReactElement;
-    layout?: (({ children }: { children: React.ReactElement }) => React.ReactElement) | null;
-}
-
 export interface MenuItem {
     title: string | null;
     to: string;
@@ -26,4 +20,12 @@ export interface Course {
 export interface ListParams {
     offset?: number;
     limit?: number;
+}
+
+export interface Preview {
+    previewSrc: string;
+    previewId: number;
+    thumbNail: string;
+    title: string;
+    previewMin: string;
 }

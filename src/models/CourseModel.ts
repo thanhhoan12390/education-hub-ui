@@ -1,5 +1,5 @@
 import mongoose, { Schema, models } from 'mongoose';
-import type { Course } from '~/types';
+import type { Course, Preview } from '~/types';
 import { getNextSequence } from '~/lib/getNextSequence';
 
 const CourseSchema = new Schema<Course>({
@@ -21,4 +21,13 @@ CourseSchema.pre('save', async function (next) {
     next();
 });
 
+const PreviewSchema = new Schema<Preview>({
+    previewId: { type: Number, required: true, unique: true },
+    previewSrc: { type: String, required: true },
+    thumbNail: { type: String, required: true },
+    title: { type: String, required: true },
+    previewMin: { type: String, required: true },
+});
+
 export const CourseModel = models.Course || mongoose.model<Course>('Course', CourseSchema);
+export const PreviewModel = models.Preview || mongoose.model<Preview>('Preview', PreviewSchema);

@@ -1,0 +1,59 @@
+.current-preview.preview-sample {
+    background-color: var(--heading-color);
+}
+
+.preview-sample {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+    padding-block: 1.6rem;
+    padding-inline: 2.4rem;
+    border-block-end: 1px solid #33364a;
+}
+
+.preview-thumbnail {
+    inline-size: 6.4rem;
+    margin-inline-end: 1.6rem;
+
+    img {
+        max-inline-size: 100%;
+        block-size: auto;
+        vertical-align: middle;
+    }
+}
+
+.play-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 1.6rem;
+    inline-size: 1.6rem;
+    margin-inline-end: 0.8rem;
+    border-radius: 100rem;
+    color: var(--gray-color);
+    background-color: var(--white-color);
+}
+
+.thumb-title {
+    flex: 1; // một flex item có flex: 1 thì các phần tử item còn lại ko bị flex-shrink: 1; mặc định co lại khi ko đủ chỗ cho tất cả
+    text-align: start;
+    margin-inline-end: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.preview-min {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}

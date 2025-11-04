@@ -1,6 +1,7 @@
 .wrapper {
     position: relative;
     background-color: var(--black-color);
+    inline-size: 60rem;
     max-inline-size: 60rem;
     min-block-size: 0;
     margin-block: 10vb;
@@ -30,6 +31,7 @@
 
     span:first-child {
         padding-block-end: 0.8rem;
+        color: var(--border-color);
     }
 
     span:last-child {
