@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import Hls from 'hls.js';
+import '@videojs/themes/dist/fantasy/index.css';
+
+import './streaming-player.scss';
 
 interface StreamingPlayerProps {
     src: string;
@@ -20,6 +23,15 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
 
         const initPlayer = () => {
             if (playerRef.current) return;
+
+            // Khởi tạo Video.js
+            playerRef.current = videojs(videoElement, {
+                controls: true,
+                preload: 'auto',
+                fluid: true,
+                playbackRates: [0.75, 1, 1.25, 1.5, 2],
+                responsive: true,
+            });
 
             // Khởi tạo HLS
             if (Hls.isSupported()) {
@@ -38,29 +50,6 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
             } else {
                 console.warn('HLS not supported');
             }
-
-            // Khởi tạo Video.js UI
-            playerRef.current = videojs(videoElement, {
-                controls: true,
-                preload: 'auto',
-                fluid: true,
-                playbackRates: [0.75, 1, 1.25, 1.5, 2],
-                responsive: true,
-                controlBar: {
-                    children: [
-                        'playToggle',
-                        {
-                            name: 'volumePanel',
-                            inline: false,
-                        },
-                        'currentTimeDisplay',
-                        'timeDivider',
-                        'durationDisplay',
-                        'progressControl',
-                        'fullscreenToggle',
-                    ],
-                },
-            });
         };
 
         requestAnimationFrame(initPlayer);
@@ -81,7 +70,7 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
 
     return (
         <div data-vjs-player>
-            <video ref={videoRef} className="video-js vjs-big-play-centered" />
+            <video ref={videoRef} className="video-js vjs-theme-fantasy vjs-big-play-centered " />
         </div>
     );
 }

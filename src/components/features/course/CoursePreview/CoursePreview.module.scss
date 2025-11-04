@@ -65,3 +65,23 @@
     margin-block: 0;
     margin-inline: -2.4rem;
 }
+
+.close-btn {
+    position: absolute;
+    inset-block-start: 1.6rem;
+    inset-inline-end: 1.6rem;
+    color: var(--white-color);
+    min-inline-size: unset;
+    inline-size: unset;
+}
+
+@media (max-width: 37.5rem) {
+    .wrapper {
+        min-block-size: 100vb;
+        margin-block: 0;
+    }
+
+    .preview-video-container {
+        block-size: 20rem;
+    }
+}

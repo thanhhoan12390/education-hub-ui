@@ -14,10 +14,17 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
 import PreviewSample from '../PreviewSample';
 import { Preview } from '~/types';
 import styles from './CoursePreview.module.scss';
+import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function CoursePreview() {
+interface CoursePreviewProps {
+    onClose?: () => void;
+}
+
+function CoursePreview({ onClose }: CoursePreviewProps) {
     const [selectedId, setSelectedId] = useState(1);
 
     const url = `/api/previews/${selectedId}`;
@@ -27,8 +34,8 @@ function CoursePreview() {
     });
 
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('preview-container')} onClick={(e) => e.stopPropagation()}>
+        <div className={cx('wrapper')} onClick={(e) => e.stopPropagation()}>
+            <div className={cx('preview-container')}>
                 <h2 className={cx('preview-heading')}>
                     <span>Course Preview</span>
                     {isLoading ? (
@@ -71,6 +78,10 @@ function CoursePreview() {
                     </div>
                 </div>
             </div>
+
+            <FlexibleButton onClick={onClose} hover className={cx('close-btn')}>
+                <FontAwesomeIcon icon={faXmark} />
+            </FlexibleButton>
         </div>
     );
 }

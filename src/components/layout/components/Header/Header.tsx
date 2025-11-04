@@ -464,7 +464,7 @@ function Header({ showShadow = false }: HeaderProps) {
 
                 <PopperWrapper className={cx('nav-cart-wrapper')}>
                     <div className={cx('nav-cart-content')}>
-                        <div className={cx('nav-cart-text')}>Your wishlist is empty.</div>
+                        <div className={cx('nav-cart-text')}>Your cart is empty.</div>
                         <FlexibleButton text>Keep shopping</FlexibleButton>
                     </div>
                 </PopperWrapper>
