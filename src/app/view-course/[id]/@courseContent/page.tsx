@@ -4,12 +4,11 @@ import { faCheck, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import ViewCourseContent from '~/components/features/course/ViewCourseContent';
-
 import styles from './CourseContent.module.scss';
 
 const cx = classNames.bind(styles);
 
-async function CourseContent() {
+function CourseContent() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('bot-content')}>

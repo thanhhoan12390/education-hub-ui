@@ -23,6 +23,7 @@ import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
 import CourseDescription from '~/components/features/course/CourseDescription';
 import PreviewModalButton from '~/components/features/course/PreviewModalButton';
+import AddToCartButton from '~/components/features/cart/AddToCartButton';
 import styles from './MultiPurposeSidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -154,9 +155,7 @@ function MultiPurposeSidebar() {
                         </div>
 
                         <div className={cx('cart-wishlist-btn')}>
-                            <FlexibleButton large primary>
-                                Add to cart
-                            </FlexibleButton>
+                            <AddToCartButton courseId={+id} />
 
                             <FlexibleButton style={{ inlineSize: '4.8rem', minInlineSize: 'unset' }} large outline>
                                 <FontAwesomeIcon fontSize="2rem" icon={faHeart} />

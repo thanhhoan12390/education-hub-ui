@@ -15,11 +15,11 @@ function SWRProvider({ children }: SWRProviderProps) {
                     // Nếu key là mảng -> giải mảng
                     if (Array.isArray(key)) {
                         const [url, params] = key;
-                        return axiosClient.get(url, { params });
+                        return axiosClient.get(url, { params }).then((res) => res.data);
                     }
 
                     // Nếu key là chuỗi -> xử lý bình thường
-                    return axiosClient.get(key);
+                    return axiosClient.get(key).then((res) => res.data);
                 },
                 shouldRetryOnError: false,
             }}

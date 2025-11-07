@@ -140,7 +140,7 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
                 autoSlideInterval = null;
             }
 
-            // sau 5s không tương tác thì bắt đầu auto slide mỗi 8s
+            // sau 5s không tương tác thì bắt đầu auto slide mỗi 5s
             inactivityTimer = setTimeout(() => {
                 autoSlideInterval = setInterval(() => {
                     handleNextSlide();

@@ -1,4 +1,4 @@
-import { Course } from '~/types';
+import { Cart, Course } from '~/types';
 import { getBaseUrl } from './getBaseUrl';
 
 export async function getCourses(): Promise<Course[]> {
@@ -11,6 +11,20 @@ export async function getCourses(): Promise<Course[]> {
 export async function getCourseById(id: number): Promise<Course> {
     const url = `${getBaseUrl()}/api/courses/${id}`;
     const res = await fetch(url, { next: { revalidate: 3600 } });
+
+    return res.json();
+}
+
+export async function getCart(): Promise<Cart> {
+    const url = `${getBaseUrl()}/api/cart`;
+    const res = await fetch(url, { next: { revalidate: 3600, tags: ['cart'] } });
+
+    return res.json();
+}
+
+export async function getCartDetail(): Promise<Course[]> {
+    const url = `${getBaseUrl()}/api/cart-detail`;
+    const res = await fetch(url, { next: { revalidate: 3600, tags: ['cart-detail'] } });
 
     return res.json();
 }

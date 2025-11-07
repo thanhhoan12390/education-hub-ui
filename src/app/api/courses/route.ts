@@ -7,7 +7,7 @@ export async function GET() {
     await connectDB();
 
     const courses = await CourseModel.find();
-    return NextResponse.json(courses);
+    return NextResponse.json(courses, { status: 200 });
 }
 
 // POST /api/courses

@@ -29,3 +29,8 @@ export interface Preview {
     title: string;
     previewMin: string;
 }
+
+export interface Cart {
+    // userId: string;
+    courseIds: number[];
+}

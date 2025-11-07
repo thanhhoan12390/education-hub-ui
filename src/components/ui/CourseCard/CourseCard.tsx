@@ -11,6 +11,7 @@ import StarRating from '../StarRating';
 import FlexibleButton from '../FlexibleButton';
 import type { Course } from '~/types';
 import Badge from '../Badge';
+import AddToCartButton from '~/components/features/cart/AddToCartButton';
 import styles from './CourseCard.module.scss';
 
 const cx = classNames.bind(styles);
@@ -100,9 +101,7 @@ function CourseCard({ course }: CourseCardProps) {
                         </ul>
 
                         <div className={cx('popover-buttons')}>
-                            <FlexibleButton primary large>
-                                Add to cart
-                            </FlexibleButton>
+                            <AddToCartButton courseId={course.courseId} />
                             <div>
                                 <FlexibleButton rounded large className={cx('popover-whist')}>
                                     <FontAwesomeIcon className={cx('popover-whist-icon')} icon={faHeart} />
