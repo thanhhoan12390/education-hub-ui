@@ -37,6 +37,11 @@
     }
 }
 
+.title {
+    display: flex;
+    align-items: center;
+}
+
 .icon + .title,
 .title + .icon {
     margin-left: 0.8rem;
@@ -72,6 +77,10 @@
     text-decoration: underline;
     text-underline-offset: 0.4rem;
     text-decoration-color: oklch(67.76% 0.2011 301.5deg);
+}
+
+.light {
+    font-weight: 400;
 }
 
 .hover {

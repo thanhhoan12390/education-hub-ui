@@ -31,7 +31,10 @@ function AddToCartButton({ courseId }: AddToCartButtonProps) {
         <FlexibleButton
             large
             primary
-            onClick={() =>
+            onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+
                 startTransition(async () => {
                     // Optimistic UI update, Cập nhật UI ngay lập tức, không đợi response
                     mutate(
@@ -47,8 +50,8 @@ function AddToCartButton({ courseId }: AddToCartButtonProps) {
 
                     //	Sau khi server xử lý xong, fetch lại dữ liệu thật để đồng bộ
                     mutate();
-                })
-            }
+                });
+            }}
         >
             {isPending || isLoading ? (
                 <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />

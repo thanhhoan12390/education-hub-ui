@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         } else {
             // chỉ thêm nếu chưa tồn tại
             if (!cart.courseIds.some((id: number) => id.toString() == courseId)) {
-                cart.courseIds.push(courseId);
+                cart.courseIds.unshift(courseId);
                 await cart.save();
             }
         }

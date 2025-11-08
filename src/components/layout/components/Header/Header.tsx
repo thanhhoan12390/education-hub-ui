@@ -458,14 +458,16 @@ function Header({ showShadow = false }: HeaderProps) {
             </div>
 
             <div className={cx('nav-item', 'nav-cart')}>
-                <Link className={cx('nav-link')} href="">
+                <Link className={cx('nav-link')} href="/cart">
                     <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />
                 </Link>
 
                 <PopperWrapper className={cx('nav-cart-wrapper')}>
                     <div className={cx('nav-cart-content')}>
                         <div className={cx('nav-cart-text')}>Your cart is empty.</div>
-                        <FlexibleButton text>Keep shopping</FlexibleButton>
+                        <FlexibleButton href="/" text>
+                            Keep shopping
+                        </FlexibleButton>
                     </div>
                 </PopperWrapper>
             </div>

@@ -15,9 +15,24 @@ export async function GET() {
         }
 
         // Lấy danh sách khóa học theo mảng id
-        const courses = await CourseModel.find({
-            courseId: { $in: cart.courseIds },
-        }).select('courseId imageUrl title instructor rating ratingCount price bestSeller');
+        const courses = await CourseModel.aggregate([
+            { $match: { courseId: { $in: cart.courseIds } } },
+            { $addFields: { order: { $indexOfArray: [cart.courseIds, '$courseId'] } } },
+            { $sort: { order: 1 } },
+            {
+                $project: {
+                    _id: 1, // 0 nếu không muốn _id
+                    courseId: 1,
+                    imageUrl: 1,
+                    title: 1,
+                    instructor: 1,
+                    rating: 1,
+                    ratingCount: 1,
+                    price: 1,
+                    bestSeller: 1,
+                },
+            },
+        ]);
 
         return NextResponse.json(courses, { status: 200 });
     } catch (err) {

@@ -14,6 +14,7 @@ interface FlexibleButtonBaseProps {
     text?: boolean;
     rounded?: boolean;
     underlined?: boolean;
+    light?: boolean;
     hover?: boolean;
     disabled?: boolean;
     small?: boolean;
@@ -22,7 +23,7 @@ interface FlexibleButtonBaseProps {
     className?: string;
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
 type ButtonProps = FlexibleButtonBaseProps &
@@ -42,6 +43,7 @@ function FlexibleButton({
     text = false,
     rounded = false,
     underlined = false,
+    light = false,
     hover = false,
     disabled = false,
     small = false,
@@ -80,6 +82,7 @@ function FlexibleButton({
         text,
         rounded,
         underlined,
+        light,
         hover,
         disabled,
         small,
