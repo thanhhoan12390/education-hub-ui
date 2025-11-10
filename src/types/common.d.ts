@@ -34,3 +34,13 @@ export interface Cart {
     // userId: string;
     courseIds: number[];
 }
+
+export interface PurchasedList {
+    // userId: string;
+    purchasedIds: number[];
+}
+
+export interface Wishlist {
+    // userId: string;
+    wishedIds: number[];
+}

@@ -1,5 +1,5 @@
 import mongoose, { Schema, models } from 'mongoose';
-import type { Course, Preview } from '~/types';
+import type { Course, Preview, PurchasedList, Wishlist } from '~/types';
 import { getNextSequence } from '~/lib/getNextSequence';
 
 const CourseSchema = new Schema<Course>({
@@ -29,5 +29,18 @@ const PreviewSchema = new Schema<Preview>({
     previewMin: { type: String, required: true },
 });
 
+const PurchasedListSchema = new Schema<PurchasedList>({
+    // userId: {type: String, require: true}, // nếu làm auth mỗi người có giỏ hàng riêng
+    purchasedIds: [{ type: Number, ref: 'Course' }],
+});
+
+const WishlistSchema = new Schema<Wishlist>({
+    // userId: {type: String, require: true}, // nếu làm auth mỗi người có giỏ hàng riêng
+    wishedIds: [{ type: Number, ref: 'Course' }],
+});
+
 export const CourseModel = models.Course || mongoose.model<Course>('Course', CourseSchema);
 export const PreviewModel = models.Preview || mongoose.model<Preview>('Preview', PreviewSchema);
+export const PurchasedListModel =
+    models.PurchasedList || mongoose.model<PurchasedList>('PurchasedList', PurchasedListSchema);
+export const WishlistModel = models.Wishlist || mongoose.model<Wishlist>('Wishlist', WishlistSchema);
