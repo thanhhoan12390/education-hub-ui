@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBell } from '@fortawesome/free-regular-svg-icons';
 
 import images from '~/assets/images';
-import { CartIcon } from '~/components/ui/Icons';
 import MultiSubNavigationMenu from '~/components/ui/MultiSubNavigationMenu';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import PopperWrapper from '~/components/ui/PopperWrapper';
@@ -453,13 +452,7 @@ function Header() {
                 </PopperWrapper>
             </div>
 
-            <div className={cx('nav-item', 'nav-cart')}>
-                <Link className={cx('nav-link')} href="/cart">
-                    <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />
-                </Link>
-
-                <HeaderCart cartPromise={cartPromise} className={cx('nav-cart-wrapper')} />
-            </div>
+            <HeaderCart cartPromise={cartPromise} className={cx('nav-cart-wrapper')} />
 
             <div className={cx('nav-item', 'nav-notify')}>
                 <Link className={cx('nav-link')} href="">
