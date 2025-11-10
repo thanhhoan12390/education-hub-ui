@@ -3,7 +3,7 @@
 import { useTransition } from 'react';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import useSWR from 'swr';
+import useSWR, { mutate as mutateGlobal } from 'swr';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { addToCart } from '~/lib/actions';
@@ -50,6 +50,7 @@ function AddToCartButton({ courseId }: AddToCartButtonProps) {
 
                     //	Sau khi server xử lý xong, fetch lại dữ liệu thật để đồng bộ
                     mutate();
+                    mutateGlobal('/api/cart-detail');
                 });
             }}
         >

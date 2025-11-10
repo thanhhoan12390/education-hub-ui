@@ -4,3 +4,12 @@
     padding-inline: 0.4rem;
     margin-inline: -0.4rem;
 }
+
+.loading-button {
+    min-inline-size: 6.4rem;
+    inline-size: unset;
+    padding-inline: 0.4rem;
+    margin-inline: -0.4rem;
+    background-color: var(--btn-focus-background-color);
+    color: var(--purple-color);
+}

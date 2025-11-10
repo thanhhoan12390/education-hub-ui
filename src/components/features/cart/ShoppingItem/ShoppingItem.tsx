@@ -60,7 +60,6 @@ function ShoppingItem({ course }: ShoppingItemProps) {
                                 style={{
                                     fontSize: '1.4rem',
                                     marginBlockStart: '0.2rem',
-                                    color: 'var(--purple-color)',
                                 }}
                                 icon={faTag}
                             />

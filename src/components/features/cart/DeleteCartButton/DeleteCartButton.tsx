@@ -1,7 +1,10 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { startTransition } from 'react';
+import { useTransition } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+import { mutate as mutateGlobal } from 'swr';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { removeCartItem } from '~/lib/actions';
@@ -14,14 +17,31 @@ interface DeleteCartButtonProps {
 }
 
 function DeleteCartButton({ courseId }: DeleteCartButtonProps) {
-    return (
+    const [isPending, startTransition] = useTransition();
+
+    return isPending ? (
         <FlexibleButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+            onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+            }}
+            className={cx('loading-button')}
+            light
+            small
+        >
+            <Spin indicator={<LoadingOutlined style={{ color: 'var(--purple-color)' }} spin />} size="default" />
+        </FlexibleButton>
+    ) : (
+        <FlexibleButton
+            onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
 
                 startTransition(async () => {
                     await removeCartItem(courseId);
+
+                    mutateGlobal('/api/cart');
+                    mutateGlobal('/api/cart-detail');
                 });
             }}
             light

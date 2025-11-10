@@ -26,9 +26,12 @@
     border: 1px solid var(--border-color);
 
     img {
-        max-inline-size: 100%;
-        block-size: auto;
-        vertical-align: middle;
+        display: block;
+        inline-size: 12rem;
+        block-size: 6.8rem;
+        transition: opacity 0.1s linear;
+        -o-object-fit: cover;
+        object-fit: cover;
     }
 }
 
@@ -140,6 +143,7 @@
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0;
+    color: #a435f0;
 
     span {
         text-decoration: underline;

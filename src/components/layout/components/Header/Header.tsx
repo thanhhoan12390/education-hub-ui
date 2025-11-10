@@ -11,6 +11,8 @@ import FlexibleButton from '~/components/ui/FlexibleButton';
 import PopperWrapper from '~/components/ui/PopperWrapper';
 import SearchBar from '../SearchBar';
 import type { MenuItem } from '~/types';
+import HeaderCart from '../HeaderCart';
+import { getCartDetail } from '~/lib/data';
 import styles from './Header.module.scss'; // luôn để import styles ở vị trí cuối cùng để ghi đè CSS của các component ở trên
 
 const cx = classNames.bind(styles);
@@ -374,17 +376,11 @@ const exploreMenuData: MenuItem[] = [
     },
 ];
 
-interface HeaderProps {
-    showShadow?: boolean;
-}
+function Header() {
+    const cartPromise = getCartDetail();
 
-function Header({ showShadow = false }: HeaderProps) {
     return (
-        <div
-            className={cx('header-wrapper', {
-                ['header-box-shadow']: showShadow,
-            })}
-        >
+        <div className={cx('header-wrapper')}>
             <Link href="/" className={cx('header-logo')}>
                 <Image width={128} height={128} src={images.logo} alt="Logo image" loading="lazy" />
             </Link>
@@ -462,14 +458,7 @@ function Header({ showShadow = false }: HeaderProps) {
                     <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />
                 </Link>
 
-                <PopperWrapper className={cx('nav-cart-wrapper')}>
-                    <div className={cx('nav-cart-content')}>
-                        <div className={cx('nav-cart-text')}>Your cart is empty.</div>
-                        <FlexibleButton href="/" text>
-                            Keep shopping
-                        </FlexibleButton>
-                    </div>
-                </PopperWrapper>
+                <HeaderCart cartPromise={cartPromise} className={cx('nav-cart-wrapper')} />
             </div>
 
             <div className={cx('nav-item', 'nav-notify')}>

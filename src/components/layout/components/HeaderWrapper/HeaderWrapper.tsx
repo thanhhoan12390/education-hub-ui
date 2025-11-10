@@ -20,14 +20,33 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Header from '../Header';
 
-function HeaderWrapper() {
+function HeaderWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
     const isHome = pathname === '/';
 
-    return <Header showShadow={!isHome} />;
+    return (
+        <div
+            style={
+                isHome
+                    ? {
+                          position: 'relative',
+                          zIndex: '99',
+                          inlineSize: '100%',
+                      }
+                    : {
+                          position: 'relative',
+                          zIndex: '99',
+                          boxShadow:
+                              '0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent), 0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent)',
+                          inlineSize: '100%',
+                      }
+            }
+        >
+            {children}
+        </div>
+    );
 }
 
 export default HeaderWrapper;
