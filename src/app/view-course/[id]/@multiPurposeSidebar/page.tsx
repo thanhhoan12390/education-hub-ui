@@ -15,7 +15,7 @@ import {
     faMobileScreen,
     faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { faClock, faHeart, faNewspaper } from '@fortawesome/free-regular-svg-icons';
+import { faClock, faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
 import { Skeleton, Alert } from 'antd';
 
@@ -24,6 +24,7 @@ import { Course } from '~/types';
 import CourseDescription from '~/components/features/course/CourseDescription';
 import PreviewModalButton from '~/components/features/course/PreviewModalButton';
 import AddToCartButton from '~/components/features/cart/AddToCartButton';
+import WishlistButton from '~/components/features/wishlist/WishlistButton';
 import styles from './MultiPurposeSidebar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -156,10 +157,7 @@ function MultiPurposeSidebar() {
 
                         <div className={cx('cart-wishlist-btn')}>
                             <AddToCartButton courseId={+id} />
-
-                            <FlexibleButton style={{ inlineSize: '4.8rem', minInlineSize: 'unset' }} large outline>
-                                <FontAwesomeIcon fontSize="2rem" icon={faHeart} />
-                            </FlexibleButton>
+                            <WishlistButton courseId={+id} />
                         </div>
 
                         <FlexibleButton style={{ fontSize: '1.6rem' }} outline large>

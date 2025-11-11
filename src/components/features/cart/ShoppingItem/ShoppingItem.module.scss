@@ -117,17 +117,6 @@
     align-items: flex-end;
 }
 
-.action-button + .action-button {
-    margin-inline-start: 0;
-}
-
-.action-button {
-    inline-size: unset;
-    min-inline-size: unset;
-    padding-inline: 0.4rem;
-    margin-inline: -0.4rem;
-}
-
 .item-price {
     grid-area: price;
     padding-inline-start: 4.8rem;

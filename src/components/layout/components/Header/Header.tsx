@@ -11,7 +11,8 @@ import PopperWrapper from '~/components/ui/PopperWrapper';
 import SearchBar from '../SearchBar';
 import type { MenuItem } from '~/types';
 import HeaderCart from '../HeaderCart';
-import { getCartDetail } from '~/lib/data';
+import { getCartDetail, getWishlistDetail } from '~/lib/data';
+import HeaderWishlist from '../HeaderWishlist';
 import styles from './Header.module.scss'; // luôn để import styles ở vị trí cuối cùng để ghi đè CSS của các component ở trên
 
 const cx = classNames.bind(styles);
@@ -377,6 +378,7 @@ const exploreMenuData: MenuItem[] = [
 
 function Header() {
     const cartPromise = getCartDetail();
+    const wishlistPromise = getWishlistDetail();
 
     return (
         <div className={cx('header-wrapper')}>
@@ -439,20 +441,9 @@ function Header() {
                 </PopperWrapper>
             </div>
 
-            <div className={cx('nav-item', 'nav-wishlist')}>
-                <Link className={cx('nav-link')} href="">
-                    <FontAwesomeIcon icon={faHeart} className={cx('nav-icon')} />
-                </Link>
+            <HeaderWishlist wishlistPromise={wishlistPromise} />
 
-                <PopperWrapper className={cx('nav-wishlist-wrapper')}>
-                    <div className={cx('nav-wishlist-content')}>
-                        <div className={cx('nav-wishlist-text')}>Your wishlist is empty.</div>
-                        <FlexibleButton text>Explore courses</FlexibleButton>
-                    </div>
-                </PopperWrapper>
-            </div>
-
-            <HeaderCart cartPromise={cartPromise} className={cx('nav-cart-wrapper')} />
+            <HeaderCart cartPromise={cartPromise} />
 
             <div className={cx('nav-item', 'nav-notify')}>
                 <Link className={cx('nav-link')} href="">

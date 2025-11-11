@@ -48,9 +48,6 @@ function ShoppingItem({ course }: ShoppingItemProps) {
                     <div className={cx('item-meta')}>27 sections • 165 lectures • All Levels</div>
                     <div className={cx('item-actions')}>
                         <DeleteCartButton courseId={course.courseId} />
-                        <FlexibleButton light small hover className={cx('action-button')}>
-                            Move to Wishlist
-                        </FlexibleButton>
                     </div>
                     <div className={cx('item-price')}>
                         <div className={cx('price-wrapper')}>

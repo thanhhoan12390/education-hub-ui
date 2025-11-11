@@ -23,7 +23,7 @@ function HeaderCart({ className, cartPromise }: HeaderCartProps) {
     const totalPrice = cartData.reduce((total, item) => total + item.price, 0);
 
     return (
-        <div className={cx('nav-item', 'nav-cart')}>
+        <div className={cx('nav-item', className)}>
             <Link className={cx('nav-link')} href="/cart">
                 <Badge
                     className={cx('cart-badge')}
@@ -35,7 +35,7 @@ function HeaderCart({ className, cartPromise }: HeaderCartProps) {
                 </Badge>
             </Link>
             {/* Popper */}
-            <PopperWrapper className={cx('nav-cart-wrapper', className)}>
+            <PopperWrapper className={cx('nav-cart-wrapper')}>
                 <div className={cx('cart-container')}>
                     {cartData.length > 0 ? (
                         <Fragment>
@@ -67,7 +67,7 @@ function HeaderCart({ className, cartPromise }: HeaderCartProps) {
                         </div>
                     )}
                 </div>
-            </PopperWrapper>{' '}
+            </PopperWrapper>
         </div>
     );
 }

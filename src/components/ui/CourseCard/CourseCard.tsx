@@ -3,12 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import Popover from '../Popover/';
 import StarRating from '../StarRating';
-import FlexibleButton from '../FlexibleButton';
+import WishlistButton from '~/components/features/wishlist/WishlistButton';
 import type { Course } from '~/types';
 import Badge from '../Badge';
 import AddToCartButton from '~/components/features/cart/AddToCartButton';
@@ -102,11 +101,7 @@ function CourseCard({ course }: CourseCardProps) {
 
                         <div className={cx('popover-buttons')}>
                             <AddToCartButton courseId={course.courseId} />
-                            <div>
-                                <FlexibleButton rounded large className={cx('popover-whist')}>
-                                    <FontAwesomeIcon className={cx('popover-whist-icon')} icon={faHeart} />
-                                </FlexibleButton>
-                            </div>
+                            <WishlistButton courseId={course.courseId} />
                         </div>
                     </div>
                 </Popover>

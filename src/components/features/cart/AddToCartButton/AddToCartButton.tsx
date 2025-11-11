@@ -10,10 +10,12 @@ import { addToCart } from '~/lib/actions';
 import { Cart } from '~/types';
 
 interface AddToCartButtonProps {
+    medium?: boolean;
+    noPrimary?: boolean;
     courseId: number;
 }
 
-function AddToCartButton({ courseId }: AddToCartButtonProps) {
+function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToCartButtonProps) {
     const [isPending, startTransition] = useTransition();
 
     const url = '/api/cart';
@@ -29,8 +31,9 @@ function AddToCartButton({ courseId }: AddToCartButtonProps) {
 
     return !cart?.courseIds.includes(courseId) ? (
         <FlexibleButton
-            large
-            primary
+            outline={noPrimary}
+            large={!medium}
+            primary={!noPrimary}
             onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -55,15 +58,23 @@ function AddToCartButton({ courseId }: AddToCartButtonProps) {
             }}
         >
             {isPending || isLoading ? (
-                <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />
+                <Spin
+                    style={noPrimary ? { color: 'var(--purple-color)' } : { color: 'var(--gray-color-100)' }}
+                    indicator={<LoadingOutlined spin />}
+                    size={noPrimary ? 'default' : 'large'}
+                />
             ) : (
                 'Add to cart'
             )}
         </FlexibleButton>
     ) : (
-        <FlexibleButton href="/cart" large primary>
+        <FlexibleButton href="/cart" outline={noPrimary} large={!medium} primary={!noPrimary}>
             {isPending || isLoading ? (
-                <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />
+                <Spin
+                    style={noPrimary ? { color: 'var(--purple-color)' } : { color: 'var(--gray-color-100)' }}
+                    indicator={<LoadingOutlined spin />}
+                    size={noPrimary ? 'default' : 'large'}
+                />
             ) : (
                 'Go to cart'
             )}
