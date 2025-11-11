@@ -7,7 +7,7 @@ import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
 import CardCarousel from '~/components/ui/CardCarousel/CardCarousel';
 import images from '~/assets/images';
 import { getCourses } from '~/lib/data';
-import styles from './page.module.scss';
+import styles from './Home.module.scss';
 
 const cx = classNames.bind(styles);
 

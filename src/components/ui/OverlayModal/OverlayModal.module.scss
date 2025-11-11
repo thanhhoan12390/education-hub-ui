@@ -8,7 +8,6 @@
     opacity: 0;
     transform: scale(0);
     backdrop-filter: blur(0.8rem);
-    -webkit-backdrop-filter: blur(0.8rem); /* để hỗ trợ Safari */
     background: var(--overlay-color);
     cursor: pointer;
     z-index: 9999;

@@ -5,7 +5,6 @@ import { faTag } from '@fortawesome/free-solid-svg-icons';
 
 import Badge from '~/components/ui/Badge/Badge';
 import StarRating from '~/components/ui/StarRating';
-import FlexibleButton from '~/components/ui/FlexibleButton';
 import { Course } from '~/types';
 import DeleteCartButton from '../DeleteCartButton';
 import styles from './ShoppingItem.module.scss';
