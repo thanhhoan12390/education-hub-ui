@@ -1,0 +1,17 @@
+.checkout-button-wrapper {
+    margin-block-end: 0.8rem;
+}
+
+.checkout-price {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.44;
+    letter-spacing: 0;
+
+    span {
+        text-decoration: underline;
+    }
+}

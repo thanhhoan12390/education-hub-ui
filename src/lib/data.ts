@@ -1,9 +1,9 @@
-import { Cart, Course, Wishlist } from '~/types';
+import { Cart, Course, PurchasedList, Wishlist } from '~/types';
 import { getBaseUrl } from './getBaseUrl';
 
 export async function getCourses(): Promise<Course[]> {
     const url = `${getBaseUrl()}/api/courses`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url, { next: { revalidate: 3600, tags: ['courses'] } });
 
     return res.json();
 }
@@ -39,6 +39,20 @@ export async function getWishlist(): Promise<Wishlist> {
 export async function getWishlistDetail(): Promise<Course[]> {
     const url = `${getBaseUrl()}/api/wishlist/detail`;
     const res = await fetch(url, { next: { revalidate: 3600, tags: ['wishlist-detail'] } });
+
+    return res.json();
+}
+
+export async function getPurchasedList(): Promise<PurchasedList> {
+    const url = `${getBaseUrl()}/api/purchased-list`;
+    const res = await fetch(url, { next: { revalidate: 3600, tags: ['purchased-list'] } });
+
+    return res.json();
+}
+
+export async function getPurchasedListDetail(): Promise<Course[]> {
+    const url = `${getBaseUrl()}/api/api/purchased-list/detail`;
+    const res = await fetch(url, { next: { revalidate: 3600, tags: ['purchased-list-detail'] } });
 
     return res.json();
 }

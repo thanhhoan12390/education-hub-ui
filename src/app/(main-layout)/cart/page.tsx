@@ -57,7 +57,7 @@ async function Cart() {
                             </span>
                         </div>
                         <div className={cx('checkout-buttons')}>
-                            <FlexibleButton primary large>
+                            <FlexibleButton href="/checkout" primary large>
                                 Proceed to Checkout
                                 <FontAwesomeIcon
                                     style={{ fontSize: '1.8rem', marginInlineStart: '0.4rem' }}

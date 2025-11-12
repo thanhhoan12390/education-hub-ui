@@ -160,7 +160,7 @@ function MultiPurposeSidebar() {
                             <WishlistButton courseId={+id} />
                         </div>
 
-                        <FlexibleButton style={{ fontSize: '1.6rem' }} outline large>
+                        <FlexibleButton href={`/checkout/${id}`} style={{ fontSize: '1.6rem' }} outline large>
                             Buy now
                         </FlexibleButton>
 

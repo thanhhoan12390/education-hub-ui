@@ -1,12 +1,23 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '~/lib/mongodb';
-import { CourseModel } from '~/models/CourseModel';
+import { CourseModel, PurchasedListModel } from '~/models/CourseModel';
 
 // GET /api/courses
 export async function GET() {
     await connectDB();
 
-    const courses = await CourseModel.find();
+    // 1️-Lấy danh sách khóa học đã mua
+    const purchasedList = await PurchasedListModel.findOne();
+
+    // 2️-Nếu có, loại bỏ các course đã mua
+    let filter: Record<string, { $nin: number[] }> = {};
+    if (purchasedList && purchasedList.purchasedIds.length > 0) {
+        filter = { courseId: { $nin: purchasedList.purchasedIds } };
+    }
+
+    // 3️-Lấy danh sách khóa học chưa mua
+    const courses = await CourseModel.find(filter);
+
     return NextResponse.json(courses, { status: 200 });
 }
 

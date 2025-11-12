@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '~/lib/mongodb';
-import { PurchasedListModel } from '~/models/CourseModel';
+import { PurchasedListModel, WishlistModel } from '~/models/CourseModel';
+import { CartModel } from '~/models/CartModel';
 
 // GET /api/purchased-list
 export async function GET() {
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Missing or invalid courseIds' }, { status: 400 });
         }
 
+        // 1-Cập nhật PurchasedList
         let purchasedList = await PurchasedListModel.findOne();
 
         if (!purchasedList) {
@@ -44,6 +46,13 @@ export async function POST(request: Request) {
             }
         }
 
+        // 2-Xóa các ID đã mua khỏi Cart và Wishlist
+        await Promise.all([
+            CartModel.updateMany({}, { $pull: { courseIds: { $in: courseIds } } }),
+            WishlistModel.updateMany({}, { $pull: { wishedIds: { $in: courseIds } } }),
+        ]);
+
+        // 3-Trả về kết quả
         return NextResponse.json(purchasedList, { status: 201 });
     } catch (err) {
         console.error(err);
