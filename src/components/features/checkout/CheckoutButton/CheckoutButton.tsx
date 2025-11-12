@@ -6,6 +6,7 @@ import { faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { useTransition } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { useRouter } from 'next/navigation';
 
 import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
 import { checkoutCourses } from '~/lib/actions';
@@ -21,13 +22,15 @@ interface CheckoutButtonProps {
 function CheckoutButton({ totalPrice, cart }: CheckoutButtonProps) {
     const [isPending, startTransition] = useTransition();
 
+    const router = useRouter();
+
     const handleCheckout = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         e.stopPropagation();
         e.preventDefault();
 
         startTransition(async () => {
             await checkoutCourses(cart);
-            window.location.href = '/'; // sẽ reload hoàn toàn CSS và layout.
+            router.push('/');
         });
     };
 

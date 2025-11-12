@@ -51,7 +51,7 @@ export async function getPurchasedList(): Promise<PurchasedList> {
 }
 
 export async function getPurchasedListDetail(): Promise<Course[]> {
-    const url = `${getBaseUrl()}/api/api/purchased-list/detail`;
+    const url = `${getBaseUrl()}/api/purchased-list/detail`;
     const res = await fetch(url, { next: { revalidate: 3600, tags: ['purchased-list-detail'] } });
 
     return res.json();

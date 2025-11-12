@@ -8,11 +8,12 @@ import images from '~/assets/images';
 import MultiSubNavigationMenu from '~/components/ui/MultiSubNavigationMenu';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import PopperWrapper from '~/components/ui/PopperWrapper';
-import SearchBar from '../SearchBar';
+import SearchBar from '~/components/layout/components/SearchBar';
 import type { MenuItem } from '~/types';
-import HeaderCart from '../HeaderCart';
-import { getCartDetail, getWishlistDetail } from '~/lib/data';
-import HeaderWishlist from '../HeaderWishlist';
+import HeaderCart from '~/components/layout/components/HeaderCart';
+import { getCartDetail, getPurchasedListDetail, getWishlistDetail } from '~/lib/data';
+import HeaderWishlist from '~/components/layout/components/HeaderWishlist';
+import HeaderLearn from '~/components/layout/components/HeaderLearn/HeaderLearn';
 import styles from './Header.module.scss'; // luôn để import styles ở vị trí cuối cùng để ghi đè CSS của các component ở trên
 
 const cx = classNames.bind(styles);
@@ -379,6 +380,7 @@ const exploreMenuData: MenuItem[] = [
 function Header() {
     const cartPromise = getCartDetail();
     const wishlistPromise = getWishlistDetail();
+    const purchasedListPromise = getPurchasedListDetail();
 
     return (
         <div className={cx('header-wrapper')}>
@@ -406,7 +408,9 @@ function Header() {
                         <div className={cx('nav-business-text')}>
                             Get your team access to over 30,000 top courses, anytime, anywhere.
                         </div>
-                        <FlexibleButton primary>Try Academy Business</FlexibleButton>
+                        <FlexibleButton disabled primary>
+                            Try Business
+                        </FlexibleButton>
                     </div>
                 </PopperWrapper>
             </div>
@@ -421,12 +425,14 @@ function Header() {
                         <div className={cx('nav-teaching-text')}>
                             Turn what you know into an opportunity and reach millions around the world.
                         </div>
-                        <FlexibleButton primary>Learn more</FlexibleButton>
+                        <FlexibleButton disabled primary>
+                            Learn more
+                        </FlexibleButton>
                     </div>
                 </PopperWrapper>
             </div>
 
-            <div className={cx('nav-item', 'nav-learning')}>
+            {/* <div className={cx('nav-item', 'nav-learning')}>
                 <Link className={cx('nav-link')} href="">
                     My learning
                 </Link>
@@ -439,7 +445,8 @@ function Header() {
                         </FlexibleButton>
                     </div>
                 </PopperWrapper>
-            </div>
+            </div> */}
+            <HeaderLearn purchasedListPromise={purchasedListPromise} />
 
             <HeaderWishlist wishlistPromise={wishlistPromise} />
 

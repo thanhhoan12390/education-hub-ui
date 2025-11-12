@@ -1,20 +1,15 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 
 function CancelButton() {
-    const pathName = usePathname();
-
-    const isBackToCart = pathName === '/checkout'; //cách tạm thời
-    const backUrl = isBackToCart ? '/cart' : `/view-course/${pathName.split('/').pop()}`;
+    const router = useRouter();
 
     return (
         <FlexibleButton
-            onClick={
-                () => (window.location.href = backUrl) // sẽ reload hoàn toàn CSS và layout.
-            }
+            onClick={() => router.back()}
             style={{
                 inlineSize: 'unset',
                 minInlineSize: 'unset',
