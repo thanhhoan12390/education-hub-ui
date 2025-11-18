@@ -17,7 +17,7 @@ import styles from './Checkout.module.scss';
 const cx = classNames.bind(styles);
 
 function Checkout() {
-    const [country, setCountry] = useState('VN');
+    const [country, setCountry] = useState();
 
     const url = `/api/cart-detail`;
 
