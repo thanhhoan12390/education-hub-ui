@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
@@ -18,6 +18,8 @@ const cx = classNames.bind(styles);
 
 function SearchBar() {
     const [searchValue, setSearchValue] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const searchBarRef = useRef<HTMLDivElement>(null);
 
     const debouncedValue = useDebounce(searchValue, 500);
 
@@ -47,15 +49,26 @@ function SearchBar() {
         [debouncedValue, data],
     );
 
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (searchBarRef.current && !searchBarRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper')} ref={searchBarRef}>
             <div className={cx('search')}>
                 <input
                     value={searchValue}
                     placeholder="Search for anything"
                     spellCheck={false}
                     onChange={handleChange}
-                    onFocus={() => {}}
+                    onFocus={() => setIsOpen(true)}
                     className={cx('search-input')}
                     name="search input"
                 />
@@ -71,7 +84,7 @@ function SearchBar() {
                 </button>
             </div>
 
-            {filteredList.length > 0 && !isLoading && (
+            {filteredList.length > 0 && !isLoading && isOpen && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     {filteredList.slice(0, 5).map((data, index) => (
                         <SearchAutoComplete key={index} searchText={data.name} />
@@ -83,7 +96,7 @@ function SearchBar() {
                 </div>
             )}
 
-            {isLoading && (
+            {isLoading && isOpen && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     <Flex align="center" gap="middle" justify="center" style={{ paddingBlock: '1rem' }}>
                         <Spin indicator={<LoadingOutlined style={{ fontSize: '3.2rem' }} spin />} />
@@ -91,7 +104,7 @@ function SearchBar() {
                 </div>
             )}
 
-            {error && (
+            {error && isOpen && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     <Alert
                         type="error"
