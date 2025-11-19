@@ -3,3 +3,20 @@
     background-color: var(--white-color);
     color: var(--text-color);
 }
+
+.container {
+    max-inline-size: 134rem;
+    padding-block-start: 1.6rem;
+    padding-block-end: 4.8rem;
+    min-block-size: 32.4rem;
+    inline-size: 100%;
+    margin-inline: auto;
+    padding-inline: 2.4rem 2.4rem;
+}
+
+.my-course-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline: -0.8rem;
+    gap: 2.4rem 0;
+}

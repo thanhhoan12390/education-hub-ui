@@ -20,7 +20,7 @@ function HeaderLearn({ className, purchasedListPromise }: HeaderLearnProps) {
 
     return (
         <div className={cx('nav-item', className)}>
-            <Link className={cx('nav-link')} href="">
+            <Link className={cx('nav-link')} href="/my-courses">
                 My learning
             </Link>
             {/* Popper */}

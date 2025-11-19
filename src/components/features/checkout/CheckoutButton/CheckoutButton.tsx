@@ -8,7 +8,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { useRouter } from 'next/navigation';
 
-import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
+import FlexibleButton from '~/components/ui/FlexibleButton';
 import { checkoutCourses } from '~/lib/actions';
 import styles from './CheckoutButton.module.scss';
 
@@ -30,7 +30,7 @@ function CheckoutButton({ totalPrice, cart }: CheckoutButtonProps) {
 
         startTransition(async () => {
             await checkoutCourses(cart);
-            router.push('/');
+            router.push('/my-courses');
         });
     };
 
