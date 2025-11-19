@@ -1,0 +1,120 @@
+.wrapper {
+    display: flex;
+    min-block-size: 100vb;
+    flex-direction: column;
+    background-color: var(--white-color);
+}
+
+.header {
+    block-size: 5.6rem;
+    padding-block: 0;
+    padding-inline: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
+
+.header-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 4rem;
+    padding-block: 0;
+    padding-inline: 1.2rem;
+    margin-block: 1.2rem;
+    margin-inline: 0;
+
+    img {
+        inline-size: 100%;
+        max-inline-size: 100%;
+        block-size: 100%;
+        vertical-align: middle;
+        object-fit: contain;
+        transition: opacity linear 100ms;
+    }
+}
+
+.header-title {
+    max-inline-size: 60rem;
+    margin: 0;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0;
+
+    &:hover {
+        color: var(--border-color);
+    }
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0.1rem;
+        height: 2.4rem;
+        left: 10rem;
+        top: 1.6rem;
+        background-color: var(--heading-color);
+    }
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+}
+
+.main-content {
+    inline-size: calc(100% - 41.6rem);
+}
+
+.video-container {
+    display: flex;
+    padding-block-end: 0;
+    inline-size: 100%;
+    background-color: var(--black-color);
+}
+
+.video-content {
+    min-block-size: 40rem;
+    block-size: 100%;
+    inline-size: 100%;
+    overflow: hidden;
+    max-block-size: calc(100vh - 29rem);
+    position: relative;
+}
+
+.video-aspect-ratio {
+    padding-block-start: 65%;
+    overflow: hidden;
+}
+
+.video-wrapper {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    inset-block-start: 5.6rem;
+    inset-inline-end: 0;
+    inline-size: 41.6rem;
+    block-size: calc(100% - 5.6rem);
+    z-index: 1;
+    background: var(--white-color);
+}
+
+.dashboard {
+    display: flex;
+    justify-content: center;
+}

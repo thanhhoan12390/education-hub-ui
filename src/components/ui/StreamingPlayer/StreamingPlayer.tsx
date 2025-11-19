@@ -10,9 +10,10 @@ import './streaming-player.scss';
 
 interface StreamingPlayerProps {
     src: string;
+    style?: React.CSSProperties;
 }
 
-function StreamingPlayer({ src }: StreamingPlayerProps) {
+function StreamingPlayer({ src, style }: StreamingPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const playerRef = useRef<ReturnType<typeof videojs> | null>(null);
     const hlsRef = useRef<Hls | null>(null);
@@ -69,7 +70,7 @@ function StreamingPlayer({ src }: StreamingPlayerProps) {
     }, [src]);
 
     return (
-        <div data-vjs-player>
+        <div data-vjs-player style={style}>
             <video ref={videoRef} className="video-js vjs-theme-fantasy vjs-big-play-centered " />
         </div>
     );

@@ -14,7 +14,7 @@ interface HeaderLearnItemProps {
 
 function HeaderLearnItem({ className, learnItemData }: HeaderLearnItemProps) {
     return (
-        <Link href={``} className={cx('wrapper', className)}>
+        <Link href={`/video-studying/${learnItemData.courseId}`} className={cx('wrapper', className)}>
             <div className={cx('image-wrapper')}>
                 <Image src={learnItemData.imageUrl} alt="learning item" width={64} height={64} />
             </div>

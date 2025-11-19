@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +16,7 @@ interface MyCourseItemProps {
 
 function MyCourseItem({ course }: MyCourseItemProps) {
     return (
-        <div className={cx('wrapper')}>
+        <Link href={`/video-studying/${course.courseId}`} className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('img-container')}>
                     <Image src={course.imageUrl} alt="my course img" width={480} height={270} />
@@ -32,7 +33,7 @@ function MyCourseItem({ course }: MyCourseItemProps) {
                     <div className={cx('footer-text')}>START COURSE</div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 
