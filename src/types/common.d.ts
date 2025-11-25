@@ -44,3 +44,9 @@ export interface Wishlist {
     // userId: string;
     wishedIds: number[];
 }
+
+export interface StreamingPlayerHandle {
+    // getCurrentTime: () => number | undefined;
+    play: () => Promise<void> | undefined;
+    pause: () => void | undefined;
+}

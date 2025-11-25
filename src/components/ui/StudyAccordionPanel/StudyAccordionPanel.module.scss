@@ -80,6 +80,10 @@
     }
 }
 
+.content-item-active {
+    background-color: var(--border-color);
+}
+
 .checkbox-container {
     display: inline-flex;
     align-items: center;

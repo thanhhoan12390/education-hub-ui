@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import CourseDescription from '~/components/features/course/CourseDescription';
-import FixedSubHeader from '~/components/features/course/FixedSubHeader/FixedSubHeader';
+import FixedSubHeader from '~/components/features/course/FixedSubHeader';
 import { getCourseById } from '~/lib/data';
 import styles from './TopDescription.module.scss';
 

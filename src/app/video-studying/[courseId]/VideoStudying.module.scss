@@ -1,3 +1,4 @@
+// layout.tsx
 .wrapper {
     display: flex;
     min-block-size: 100vb;
@@ -71,6 +72,7 @@
     display: flex;
 }
 
+// page.tsx
 .main-content {
     inline-size: calc(100% - 41.6rem);
 }
@@ -131,6 +133,7 @@
     padding-block-end: 0.8rem;
     padding-inline-start: 1.6rem;
     border: 1px solid var(--border-color);
+    border-right: none;
     background-color: var(--white-color);
 }
 
@@ -160,12 +163,30 @@
     flex: 1;
     block-size: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     border-color: var(--white-color);
     border: 1px solid var(--gray-color-100);
 }
 
+.accordion-panel {
+    &:first-child {
+        border-top: none;
+    }
+}
+
 // dashboard
 .dashboard {
-    // width: 100%;
+    display: flex;
+    justify-content: center;
+    min-block-size: 200rem;
+}
+
+.dashboard-container {
+    inline-size: 100%;
+    padding-block: 0;
+    padding-inline: 1.6rem;
+}
+
+.dashboard-content {
+    margin-block-end: 9.6rem;
 }

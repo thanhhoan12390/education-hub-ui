@@ -1,4 +1,4 @@
-import { getCourses, getCourseById } from '~/lib/data';
+import { getCourses, getCourseById, getPurchasedList } from '~/lib/data';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -10,8 +10,9 @@ export async function generateStaticParams() {
 async function ViewCourse({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const course = await getCourseById(+id);
+    const purchasedList = await getPurchasedList();
 
-    if (!course.courseId) {
+    if (!course.courseId || purchasedList.purchasedIds.includes(+id)) {
         notFound();
     }
 

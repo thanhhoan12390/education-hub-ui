@@ -6,7 +6,7 @@ export default function NotFound() {
         <Result
             status="404"
             title="404"
-            subTitle="Sorry, the page you visited does not exist."
+            subTitle="Sorry, the page you visited does not exist or you purchased the course."
             extra={
                 <Link href="/">
                     <Button type="primary" style={{ backgroundColor: 'var(--purple-color)' }}>

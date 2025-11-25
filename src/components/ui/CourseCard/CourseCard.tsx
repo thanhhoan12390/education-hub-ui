@@ -28,7 +28,7 @@ function CourseCard({ course }: CourseCardProps) {
             <Link target="_blank" href={`/view-course/${course.courseId}`}>
                 <div ref={cardRef} className={cx('course-card-wrapper')}>
                     <div className={cx('course-img')}>
-                        <Image src={course.imageUrl} width={480} height={270} priority alt="course image" />
+                        <Image src={course.imageUrl} width={480} height={270} loading="lazy" alt="course image" />
                     </div>
                     <div className={cx('course-content')}>
                         <h3 className={cx('course-heading')}>{course.title}</h3>

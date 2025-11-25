@@ -1,22 +1,32 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useImperativeHandle } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import Hls from 'hls.js';
 import '@videojs/themes/dist/fantasy/index.css';
 
+import type { StreamingPlayerHandle } from '~/types';
 import './streaming-player.scss';
 
 interface StreamingPlayerProps {
     src: string;
     style?: React.CSSProperties;
+    ref?: React.Ref<StreamingPlayerHandle>;
+    onTimeUpdate?: (time: number) => void;
 }
 
-function StreamingPlayer({ src, style }: StreamingPlayerProps) {
+function StreamingPlayer({ src, style, ref, onTimeUpdate }: StreamingPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const playerRef = useRef<ReturnType<typeof videojs> | null>(null);
     const hlsRef = useRef<Hls | null>(null);
+
+    useImperativeHandle(ref, () => {
+        return {
+            play: () => videoRef.current?.play(),
+            pause: () => videoRef.current?.pause(),
+        };
+    });
 
     useEffect(() => {
         const videoElement = videoRef.current;
@@ -68,6 +78,18 @@ function StreamingPlayer({ src, style }: StreamingPlayerProps) {
             }
         };
     }, [src]);
+
+    useEffect(() => {
+        const videoElement = videoRef.current;
+        if (!videoElement) return;
+
+        const handleTimeUpdate = () => {
+            onTimeUpdate?.(videoElement.currentTime);
+        };
+
+        videoElement.addEventListener('timeupdate', handleTimeUpdate);
+        return () => videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+    }, [onTimeUpdate]);
 
     return (
         <div data-vjs-player style={style}>

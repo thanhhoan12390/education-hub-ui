@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, memo } from 'react';
 
 import styles from './StudyAccordionPanel.module.scss';
 
@@ -13,22 +13,26 @@ const cx = classNames.bind(styles);
 interface StudyAccordionPanelProps {
     className?: string;
     defaultExpand?: boolean;
-    panelTitle?: string;
     panelIndex?: number;
+    panelTitle?: string;
     panelContent?: {
         lectureHeading: string;
         lectureMin: number;
     }[];
     contentStartIndex?: number;
+    activeItemIndex?: number;
+    onActiveChange?: (idx: number) => void;
 }
 
 function StudyAccordionPanel({
     defaultExpand,
     className,
-    panelTitle,
     panelIndex,
+    panelTitle,
     panelContent,
     contentStartIndex = 0,
+    activeItemIndex,
+    onActiveChange,
 }: StudyAccordionPanelProps) {
     const [isContentOpen, setIsContentOpen] = useState(defaultExpand || false);
     const [checkedList, setCheckedList] = useState<number[]>([]);
@@ -78,10 +82,17 @@ function StudyAccordionPanel({
                 <div className={cx('panel-content')}>
                     {panelContent?.map((item, index) => {
                         const panelItemIndex = index + 1;
+                        const panelOrderNum = panelItemIndex + contentStartIndex;
 
                         return (
-                            <div key={index} className={cx('content-item')}>
-                                <label className={cx('checkbox-container')}>
+                            <div
+                                key={index}
+                                className={cx('content-item', {
+                                    ['content-item-active']: panelOrderNum === activeItemIndex,
+                                })}
+                                onClick={() => onActiveChange && onActiveChange(panelOrderNum)}
+                            >
+                                <label className={cx('checkbox-container')} onClick={(e) => e.stopPropagation()}>
                                     <input
                                         type="checkbox"
                                         name="checkbox"
@@ -93,7 +104,7 @@ function StudyAccordionPanel({
 
                                 <div className={cx('des-group')}>
                                     <div className={cx('des-title')}>
-                                        {panelItemIndex + contentStartIndex}.&nbsp;{item.lectureHeading}
+                                        {panelOrderNum}.&nbsp;{item.lectureHeading}
                                     </div>
                                     <div className={cx('des-min')}>
                                         <FontAwesomeIcon fontSize="1.4rem" icon={faYoutubeSquare} />
@@ -109,4 +120,4 @@ function StudyAccordionPanel({
     );
 }
 
-export default StudyAccordionPanel;
+export default memo(StudyAccordionPanel);

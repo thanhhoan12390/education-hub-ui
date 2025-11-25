@@ -170,9 +170,9 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
                     <Image
                         width={1340}
                         height={400}
-                        priority
                         src={carouselData[carouselData.length - 1].img}
                         alt="slider img"
+                        loading="lazy"
                     />
                     {carouselData[carouselData.length - 1].floatContent && (
                         <div className={cx('float-content')}>{carouselData[carouselData.length - 1].floatContent}</div>
