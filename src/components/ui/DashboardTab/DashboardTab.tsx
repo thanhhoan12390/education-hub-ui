@@ -1,33 +1,48 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useImperativeHandle, memo } from 'react';
 
 import styles from './DashboardTab.module.scss';
 
 const cx = classNames.bind(styles);
 
 interface DashboardTabProps {
+    defaultIndex?: number;
     tabTitles: React.ReactNode[];
     children: React.ReactNode[];
+    ref?: React.Ref<{ onTabIndexChange: React.Dispatch<React.SetStateAction<number>> }>;
 }
 
-function DashboardTab({ children, tabTitles }: DashboardTabProps) {
-    const [tabIndex, setTabIndex] = useState(0);
+function DashboardTab({ defaultIndex, children, tabTitles, ref }: DashboardTabProps) {
+    const [tabIndex, setTabIndex] = useState(defaultIndex || 0);
+
+    useImperativeHandle(ref, () => {
+        return {
+            onTabIndexChange: setTabIndex,
+        };
+    });
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header-container')}>
-                {tabTitles.map((item, index) => (
-                    <div
-                        key={index}
-                        className={cx('tab-title', {
-                            ['tab-active']: tabIndex === index,
-                        })}
-                        onClick={() => setTabIndex(index)}
-                    >
-                        <h2 className={cx('tab-heading')}>{item}</h2>
-                    </div>
-                ))}
+                {tabTitles.map((item, index) => {
+                    if (!item) {
+                        return;
+                    }
+
+                    return (
+                        <div
+                            key={index}
+                            className={cx('tab-title', {
+                                ['tab-active']: tabIndex === index,
+                            })}
+                            onClick={() => setTabIndex(index)}
+                        >
+                            <h2 className={cx('tab-heading')}>{item}</h2>
+                        </div>
+                    );
+                })}
             </div>
             <div className={cx('tab-container')}>
                 <div className={cx('tab-content')}>{children[tabIndex]}</div>
@@ -36,4 +51,4 @@ function DashboardTab({ children, tabTitles }: DashboardTabProps) {
     );
 }
 
-export default DashboardTab;
+export default memo(DashboardTab);

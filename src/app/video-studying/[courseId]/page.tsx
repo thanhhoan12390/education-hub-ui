@@ -2,11 +2,12 @@
 
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { faArrowLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { LoadingOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
+import { useParams } from 'next/navigation';
 import { Spin, Flex } from 'antd';
 
 const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'), {
@@ -19,7 +20,9 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
 });
 import StudyAccordionPanel from '~/components/ui/StudyAccordionPanel';
 import DashboardTab from '~/components/ui/DashboardTab';
-import { Preview } from '~/types';
+import { Course, Preview } from '~/types';
+import FlexibleButton from '~/components/ui/FlexibleButton';
+import CourseDescription from '~/components/features/course/CourseDescription';
 import styles from './VideoStudying.module.scss';
 
 const cx = classNames.bind(styles);
@@ -89,14 +92,31 @@ const studyPanelData = [
 function VideoStudying() {
     const [curStreamingTime, setCurStreamingTime] = useState<number>();
     const [activePanelIndex, setActivePanelIndex] = useState<number>(1);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isBlockSidebar, setIsBlockSidebar] = useState(true);
     const [sidebarStyle, setSidebarStyle] = useState<React.CSSProperties>();
+    const [checkedList, setCheckedList] = useState<number[]>([]);
+
+    const tabRef = useRef<{ onTabIndexChange: React.Dispatch<React.SetStateAction<number>> }>(null);
+
+    const { courseId } = useParams<{ courseId: string }>();
 
     // vì api chỉ có 5 sample để ví dụ
-    const url = `/api/previews/${activePanelIndex % 5 || 5}`;
+    const previewUrl = `/api/previews/${activePanelIndex % 5 || 5}`;
+    const courseUrl = `/api/courses/${courseId}`;
 
-    const { data, error, isLoading } = useSWR<Preview>(url, {
+    const { data, error, isLoading } = useSWR<Preview>(previewUrl, {
         revalidateOnFocus: false,
     });
+
+    const { data: courseData } = useSWR<Course>(courseUrl, {
+        revalidateOnFocus: false,
+    });
+
+    const handleOpenCourseContent = () => {
+        setIsSidebarOpen(true);
+        tabRef.current?.onTabIndexChange((pre) => pre || 1);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -109,16 +129,63 @@ function VideoStudying() {
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        const handleResize = () => {
+            if (window.innerWidth <= 980) {
+                setIsBlockSidebar(true);
+            } else {
+                setIsBlockSidebar(false);
+            }
+        };
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        handleScroll();
+        handleResize();
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
+    const PanelContainer = (
+        <div className={cx('panel-scroll-container')}>
+            {studyPanelData.map((data, index, originalArr) => {
+                const panelIndex = index + 1;
+                return (
+                    <StudyAccordionPanel
+                        className={cx({ ['no-border-top']: isSidebarOpen && !isBlockSidebar })}
+                        key={index}
+                        panelIndex={panelIndex}
+                        panelTitle={data.panelTitle}
+                        panelContent={data.panelContent}
+                        contentStartIndex={originalArr
+                            .slice(0, index)
+                            .reduce((total, item) => total + item.panelContent.length, 0)}
+                        activeItemIndex={activePanelIndex}
+                        onActiveChange={setActivePanelIndex}
+                        checkedList={checkedList}
+                        onCheckedListChange={setCheckedList}
+                    />
+                );
+            })}
+        </div>
+    );
+
     return (
-        <div className={cx('main-content')}>
+        <div
+            className={cx('main-content', {
+                ['main-content-no-sidebar']: isBlockSidebar || !isSidebarOpen,
+            })}
+        >
             {/* video container */}
             <div className={cx('video-container')}>
-                <div className={cx('video-content')}>
+                <div
+                    className={cx('video-content', {
+                        ['no-sidebar-video-content']: !isSidebarOpen,
+                    })}
+                >
                     <div className={cx('video-aspect-ratio')}>
                         <div className={cx('video-wrapper')}>
                             {isLoading ? (
@@ -141,47 +208,87 @@ function VideoStudying() {
                             )}
                         </div>
                     </div>
+                    {!isSidebarOpen && !isBlockSidebar && (
+                        <FlexibleButton
+                            onClick={handleOpenCourseContent}
+                            primary
+                            className={cx('view-course-content-btn')}
+                        >
+                            <FontAwesomeIcon
+                                style={{ fontSize: '1.8rem', marginInlineEnd: '1.2rem' }}
+                                icon={faArrowLeft}
+                            />
+                            Course content
+                        </FlexibleButton>
+                    )}
                 </div>
             </div>
             {/* sidebar */}
-            <div style={sidebarStyle} className={cx('sidebar')}>
-                <div className={cx('sidebar-container')}>
-                    <div className={cx('sidebar-header')}>
-                        <h2 className={cx('sidebar-heading')}>Course content</h2>
-                        <div className={cx('sidebar-icon-wrapper')}>
-                            <FontAwesomeIcon fontSize="1rem" icon={faXmark} />
+            {isSidebarOpen && !isBlockSidebar && (
+                <div style={sidebarStyle} className={cx('sidebar')}>
+                    <div className={cx('sidebar-container')}>
+                        <div className={cx('sidebar-header')}>
+                            <h2 className={cx('sidebar-heading')}>Course content</h2>
+                            <div className={cx('sidebar-close-btn-wrapper')}>
+                                <div onClick={() => setIsSidebarOpen(false)} className={cx('sidebar-icon-btn')}>
+                                    <FontAwesomeIcon fontSize="1rem" icon={faXmark} />
+                                </div>
+                                <div className={cx('sidebar-close-popper')}>Close panel</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx('panel-scroll-container')}>
-                        {studyPanelData.map((data, index, originalArr) => {
-                            const panelIndex = index + 1;
-                            return (
-                                <StudyAccordionPanel
-                                    className={cx('accordion-panel')}
-                                    key={index}
-                                    defaultExpand={panelIndex === 1}
-                                    panelIndex={panelIndex}
-                                    panelTitle={data.panelTitle}
-                                    panelContent={data.panelContent}
-                                    contentStartIndex={originalArr
-                                        .slice(0, index)
-                                        .reduce((total, item) => total + item.panelContent.length, 0)}
-                                    activeItemIndex={activePanelIndex}
-                                    onActiveChange={setActivePanelIndex}
-                                />
-                            );
-                        })}
+                        {/* panel content container */}
+                        {PanelContainer}
                     </div>
                 </div>
-            </div>
+            )}
             {/* dashboard */}
             <div className={cx('dashboard')}>
                 <div className={cx('dashboard-container')}>
                     <section className={cx('dashboard-content')}>
-                        <DashboardTab tabTitles={['Overview', 'Notes', 'Announcements']}>
+                        <DashboardTab
+                            ref={tabRef}
+                            defaultIndex={1}
+                            tabTitles={[(isBlockSidebar || !isSidebarOpen) && 'Course content', 'Overview', 'Notes']}
+                        >
                             {[
-                                <div key="content-1">content 1 </div>,
-                                <div key="content-2">note at: {Math.floor(curStreamingTime ?? 0)}</div>,
+                                (isBlockSidebar || !isSidebarOpen) && PanelContainer,
+                                <div key="content-1">
+                                    <CourseDescription lightTheme course={courseData} />
+                                    <div className={cx('des-content')}>
+                                        <h2 className={cx('related-heading')}>Description</h2>
+                                        <div>
+                                            <p>
+                                                *Update 2025: Intro to Data Science module updated for recent AI
+                                                developments*
+                                            </p>
+                                            <p>The Problem</p>
+                                            <p>
+                                                Data scientist is one of the best suited professions to thrive this
+                                                century. It is digital, programming-oriented, and analytical. Therefore,
+                                                it comes as no surprise that the demand for data scientists has been
+                                                surging in the job marketplace.
+                                            </p>
+                                            <p>
+                                                However, supply has been very limited. It is difficult to acquire the
+                                                skills necessary to be hired as a data scientist.
+                                            </p>
+                                            <p>And how can you do that?</p>
+                                            <p>
+                                                Universities have been slow at creating specialized data science
+                                                programs. (not to mention that the ones that exist are very expensive
+                                                and time consuming)
+                                            </p>
+                                            <p>
+                                                Most online courses focus on a specific topic and it is difficult to
+                                                understand how the skill they teach fit in the complete picture
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>,
+                                <div key="content-2">
+                                    <h2>This feature will be completed in the coming time.</h2>
+                                    <span>note at: {Math.floor(curStreamingTime ?? 0)}</span>
+                                </div>,
                             ]}
                         </DashboardTab>
                     </section>

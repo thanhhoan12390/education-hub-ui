@@ -50,3 +50,11 @@
     padding-inline: 2.4rem;
     margin-inline: auto;
 }
+
+@media (max-width: 37.5rem) {
+    .tab-content {
+        padding-block-start: 0.8rem;
+        padding-block-end: 0;
+        padding-inline-end: 1.6rem;
+    }
+}

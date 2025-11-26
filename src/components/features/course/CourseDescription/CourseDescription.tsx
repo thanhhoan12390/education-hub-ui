@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 interface CourseDescriptionProps {
     className?: string;
-    course: Course;
+    course?: Course;
     lightTheme?: boolean;
 }
 
@@ -26,15 +26,15 @@ interface CourseDescriptionProps {
 function CourseDescription({ course, className, lightTheme }: CourseDescriptionProps) {
     return (
         <div className={cx('wrapper', className)}>
-            <h1 className={cx('intro-heading')}>{course.title}</h1>
+            <h1 className={cx('intro-heading')}>{course?.title}</h1>
             <div className={cx('intro-detail')}>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, fugit corrupti magnam omnis molestiae
                 ad quae assumenda consequuntur.
             </div>
             <div className={cx('tag-groups')}>
-                {course.bestSeller && <Badge />}
+                {course?.bestSeller && <Badge />}
                 <div className={cx('tag-rating-group')}>
-                    <div className={cx('intro-rate')}>{course.rating?.toFixed(1)}</div>
+                    <div className={cx('intro-rate')}>{course?.rating?.toFixed(1)}</div>
                     <StarRating
                         className={cx('rating-star')}
                         rating={4.6}
@@ -49,7 +49,7 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
                         className={cx('rate-count', {
                             ['light-theme']: lightTheme,
                         })}
-                    >{`(${course.ratingCount?.toLocaleString('en-US')} ratings)`}</div>
+                    >{`(${course?.ratingCount?.toLocaleString('en-US')} ratings)`}</div>
 
                     <div className={cx('student-count')}>{`${Number(1676840)?.toLocaleString('en-US')} students`}</div>
                 </div>
@@ -57,7 +57,7 @@ function CourseDescription({ course, className, lightTheme }: CourseDescriptionP
             <div className={cx('intro-instructor')}>
                 Created by{' '}
                 <Link href={''} className={cx({ ['light-theme']: lightTheme })}>
-                    {course.instructor}
+                    {course?.instructor}
                 </Link>
             </div>
             <div className={cx('intro-date')}>

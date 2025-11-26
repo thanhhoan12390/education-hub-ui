@@ -1,10 +1,10 @@
 'use client';
 
 import classNames from 'classnames/bind';
+import { useState, useMemo, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
-import { useState, useMemo, memo } from 'react';
 
 import styles from './StudyAccordionPanel.module.scss';
 
@@ -12,30 +12,36 @@ const cx = classNames.bind(styles);
 
 interface StudyAccordionPanelProps {
     className?: string;
-    defaultExpand?: boolean;
     panelIndex?: number;
     panelTitle?: string;
-    panelContent?: {
+    panelContent: {
         lectureHeading: string;
         lectureMin: number;
     }[];
     contentStartIndex?: number;
     activeItemIndex?: number;
     onActiveChange?: (idx: number) => void;
+    checkedList?: number[];
+    onCheckedListChange?: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 function StudyAccordionPanel({
-    defaultExpand,
     className,
     panelIndex,
     panelTitle,
     panelContent,
     contentStartIndex = 0,
-    activeItemIndex,
+    activeItemIndex = 1,
     onActiveChange,
+    checkedList,
+    onCheckedListChange,
 }: StudyAccordionPanelProps) {
-    const [isContentOpen, setIsContentOpen] = useState(defaultExpand || false);
-    const [checkedList, setCheckedList] = useState<number[]>([]);
+    const [isContentOpen, setIsContentOpen] = useState(() => {
+        const isDefaultExpand =
+            activeItemIndex > contentStartIndex && activeItemIndex <= contentStartIndex + panelContent.length;
+
+        return isDefaultExpand || false;
+    });
 
     const totalMin = useMemo(
         () => panelContent?.reduce((totalMin, currItem) => totalMin + currItem.lectureMin, 0),
@@ -43,16 +49,31 @@ function StudyAccordionPanel({
     );
 
     const handleCheck = (id: number) => {
-        setCheckedList((pre) => {
-            const isChecked = pre.includes(id);
+        if (onCheckedListChange) {
+            onCheckedListChange((pre) => {
+                const isChecked = pre.includes(id);
 
-            if (isChecked) {
-                return pre.filter((item) => item !== id);
-            } else {
-                return [...pre, id];
+                if (isChecked) {
+                    return pre.filter((item) => item !== id);
+                } else {
+                    return [...pre, id];
+                }
+            });
+        }
+    };
+
+    const checkedCount = useMemo(() => {
+        let totalChecked = 0;
+
+        checkedList?.forEach((item) => {
+            if (item > contentStartIndex && item <= contentStartIndex + panelContent.length) {
+                totalChecked += 1;
             }
         });
-    };
+
+        return totalChecked;
+    }, [checkedList, contentStartIndex, panelContent.length]);
+
     return (
         <div className={cx('wrapper', className)}>
             <div onClick={() => setIsContentOpen(!isContentOpen)} className={cx('panel-title')}>
@@ -62,7 +83,7 @@ function StudyAccordionPanel({
                     </h3>
                     <div className={cx('total-lecture')}>
                         <span>
-                            {checkedList.length} / {panelContent?.length}
+                            {checkedCount} / {panelContent?.length}
                         </span>
                         &nbsp;|&nbsp;<span>{totalMin}min</span>
                     </div>
@@ -96,8 +117,8 @@ function StudyAccordionPanel({
                                     <input
                                         type="checkbox"
                                         name="checkbox"
-                                        checked={checkedList.includes(panelItemIndex)}
-                                        onChange={() => handleCheck(panelItemIndex)}
+                                        checked={checkedList?.includes(panelOrderNum)}
+                                        onChange={() => handleCheck(panelOrderNum)}
                                     />
                                     <span className={cx('checkmark')} />
                                 </label>

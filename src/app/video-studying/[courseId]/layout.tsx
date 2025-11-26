@@ -30,6 +30,7 @@ async function VideoStudyingLayout({ children, params }: VideoStudyingLayoutProp
                 <Link href="/" className={cx('header-logo')}>
                     <Image width={128} height={128} src={images.logo} alt="Logo image" loading="lazy" />
                 </Link>
+                <div className={cx('vertical-divider')} />
                 <h1 className={cx('header-title')}>{course.title}</h1>
             </header>
             <main className={cx('main-container')}>{children}</main>
