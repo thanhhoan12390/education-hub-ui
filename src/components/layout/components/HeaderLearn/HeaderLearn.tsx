@@ -35,7 +35,7 @@ function HeaderLearn({ className, purchasedListPromise }: HeaderLearnProps) {
                             </div>
 
                             <div className={cx('button-wrapper')}>
-                                <FlexibleButton href="" primary>
+                                <FlexibleButton href="/my-courses" primary>
                                     Go to My learning
                                 </FlexibleButton>
                             </div>

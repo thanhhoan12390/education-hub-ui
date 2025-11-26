@@ -181,13 +181,13 @@ function ImageSlider({ carouselData }: ImageSliderProps) {
 
                 {carouselData.map((data, index) => (
                     <div className={cx('slide-container')} key={index}>
-                        <Image width={1340} height={400} priority src={data.img} alt="slider img" />
+                        <Image width={1340} height={400} loading="lazy" src={data.img} alt="slider img" />
                         {data.floatContent && <div className={cx('float-content')}>{data.floatContent}</div>}
                     </div>
                 ))}
 
                 <div className={cx('slide-container')}>
-                    <Image width={1340} height={400} priority src={carouselData[0].img} alt="slider img" />
+                    <Image width={1340} height={400} loading="lazy" src={carouselData[0].img} alt="slider img" />
                     {carouselData[0].floatContent && (
                         <div className={cx('float-content')}>{carouselData[0].floatContent}</div>
                     )}
