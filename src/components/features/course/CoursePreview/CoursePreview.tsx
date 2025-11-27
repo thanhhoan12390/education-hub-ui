@@ -34,54 +34,56 @@ function CoursePreview({ onClose }: CoursePreviewProps) {
     });
 
     return (
-        <div className={cx('wrapper')} onClick={(e) => e.stopPropagation()}>
-            <div className={cx('preview-container')}>
-                <h2 className={cx('preview-heading')}>
-                    <span>Course Preview</span>
-                    {isLoading ? (
-                        <Skeleton.Button
-                            style={{ backgroundColor: 'var(--gray-color)', inlineSize: '100%' }}
-                            active
-                            size="default"
-                            block
-                        />
-                    ) : (
-                        <span>{data?.title}</span>
-                    )}
-                </h2>
-                <div className={cx('preview-content')}>
-                    <div className={cx('preview-video-container')}>
+        <div className={cx('wrapper')}>
+            <div className={cx('container')} onClick={(e) => e.stopPropagation()}>
+                <div className={cx('preview-container')}>
+                    <h2 className={cx('preview-heading')}>
+                        <span>Course Preview</span>
                         {isLoading ? (
-                            <Spin
-                                style={{ color: 'var(--gray-color-100)' }}
-                                indicator={<LoadingOutlined spin />}
-                                size="large"
+                            <Skeleton.Button
+                                style={{ backgroundColor: 'var(--gray-color)', inlineSize: '100%' }}
+                                active
+                                size="default"
+                                block
                             />
                         ) : (
-                            // "key trick" thay vì reusing cùng <StreamingPlayer> instance,
-                            // thêm key={src} để React tạo mới hẳn component mỗi khi đổi preview:
-                            <StreamingPlayer key={data?.previewId} src={data?.previewSrc ?? ''} />
+                            <span>{data?.title}</span>
                         )}
-                    </div>
+                    </h2>
+                    <div className={cx('preview-content')}>
+                        <div className={cx('preview-video-container')}>
+                            {isLoading ? (
+                                <Spin
+                                    style={{ color: 'var(--gray-color-100)' }}
+                                    indicator={<LoadingOutlined spin />}
+                                    size="large"
+                                />
+                            ) : (
+                                // "key trick" thay vì reusing cùng <StreamingPlayer> instance,
+                                // thêm key={src} để React tạo mới hẳn component mỗi khi đổi preview:
+                                <StreamingPlayer key={data?.previewId} src={data?.previewSrc ?? ''} />
+                            )}
+                        </div>
 
-                    <div className={cx('free-sample')}>Free Sample Videos:</div>
+                        <div className={cx('free-sample')}>Free Sample Videos:</div>
 
-                    <div className={cx('samples-container')}>
-                        {Array.from({ length: 5 }).map((_, index) => (
-                            <PreviewSample
-                                key={index}
-                                previewId={index + 1}
-                                isCurrent={index + 1 === selectedId}
-                                onClick={() => setSelectedId(index + 1)}
-                            />
-                        ))}
+                        <div className={cx('samples-container')}>
+                            {Array.from({ length: 5 }).map((_, index) => (
+                                <PreviewSample
+                                    key={index}
+                                    previewId={index + 1}
+                                    isCurrent={index + 1 === selectedId}
+                                    onClick={() => setSelectedId(index + 1)}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <FlexibleButton onClick={onClose} hover className={cx('close-btn')}>
-                <FontAwesomeIcon icon={faXmark} />
-            </FlexibleButton>
+                <FlexibleButton onClick={onClose} hover className={cx('close-btn')}>
+                    <FontAwesomeIcon icon={faXmark} />
+                </FlexibleButton>
+            </div>
         </div>
     );
 }

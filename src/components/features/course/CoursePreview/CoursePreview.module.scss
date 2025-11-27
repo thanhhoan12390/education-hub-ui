@@ -1,4 +1,10 @@
 .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
     position: relative;
     background-color: var(--black-color);
     inline-size: 60rem;

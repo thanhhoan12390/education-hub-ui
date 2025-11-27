@@ -14,13 +14,14 @@ const cx = classNames.bind(styles);
 
 interface HeaderWishlistProps {
     wishlistPromise: Promise<Course[]>;
+    className?: string;
 }
 
-function HeaderWishlist({ wishlistPromise }: HeaderWishlistProps) {
+function HeaderWishlist({ wishlistPromise, className }: HeaderWishlistProps) {
     const wishlistData = use(wishlistPromise);
 
     return (
-        <div className={cx('nav-item')}>
+        <div className={cx('nav-item', className)}>
             <Link className={cx('nav-link')} href="">
                 <FontAwesomeIcon icon={faHeart} className={cx('nav-icon')} />
             </Link>

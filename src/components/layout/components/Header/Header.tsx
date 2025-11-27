@@ -14,6 +14,8 @@ import HeaderCart from '~/components/layout/components/HeaderCart';
 import { getCartDetail, getPurchasedListDetail, getWishlistDetail } from '~/lib/data';
 import HeaderWishlist from '~/components/layout/components/HeaderWishlist';
 import HeaderLearn from '~/components/layout/components/HeaderLearn/HeaderLearn';
+import Divider from '~/components/ui/Divider/Divider';
+import { faEarth } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.scss'; // luôn để import styles ở vị trí cuối cùng để ghi đè CSS của các component ở trên
 
 const cx = classNames.bind(styles);
@@ -432,23 +434,9 @@ function Header() {
                 </PopperWrapper>
             </div>
 
-            {/* <div className={cx('nav-item', 'nav-learning')}>
-                <Link className={cx('nav-link')} href="">
-                    My learning
-                </Link>
-
-                <PopperWrapper className={cx('nav-learning-wrapper')}>
-                    <div className={cx('nav-learning-content')}>
-                        <div className={cx('nav-learning-text')}>Start learning today.</div>
-                        <FlexibleButton href="/" outline>
-                            Browser now
-                        </FlexibleButton>
-                    </div>
-                </PopperWrapper>
-            </div> */}
             <HeaderLearn purchasedListPromise={purchasedListPromise} />
 
-            <HeaderWishlist wishlistPromise={wishlistPromise} />
+            <HeaderWishlist className={cx('nav-wishlist')} wishlistPromise={wishlistPromise} />
 
             <HeaderCart cartPromise={cartPromise} />
 
@@ -470,10 +458,58 @@ function Header() {
                 </PopperWrapper>
             </div>
 
-            <div className={cx('nav-item')}>
+            <div className={cx('nav-item', 'nav-avatar')}>
                 <Link className={cx('nav-link')} href="">
                     <div className={cx('avatar')}>HT</div>
                 </Link>
+
+                <PopperWrapper className={cx('nav-avatar-wrapper')}>
+                    <div className={cx('nav-avatar-content')}>
+                        <div className={cx('nav-avatar-header')}>
+                            <div className={cx('avatar', 'popper-avatar')}>HT</div>
+
+                            <div className={cx('avatar-name-group')}>
+                                <div className={cx('avatar-name')}>Phan Thanh Hoan</div>
+                                <div className={cx('avatar-email')}>hoanphantcgpocket@gmail.com</div>
+                            </div>
+                        </div>
+                        <Divider />
+                        <ul className={cx('nav-avatar-links')}>
+                            <li>
+                                <Link className={cx('nav-avatar-link')} href="/my-courses">
+                                    My Learning
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link className={cx('nav-avatar-link')} href="/cart">
+                                    My Cart
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className={cx('nav-avatar-link')} href="/wishlist">
+                                    Wishlist
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className={cx('nav-avatar-link')} href="">
+                                    Notifications
+                                </Link>
+                            </li>
+                        </ul>
+                        <Divider />
+
+                        <div className={cx('nav-avatar-language')}>
+                            <div className={cx('nav-language-group')}>
+                                <div className={cx('language-heading')}>Language</div>
+                                <div className={cx('language-group')}>
+                                    <span>English</span>
+                                    <FontAwesomeIcon icon={faEarth} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </PopperWrapper>
             </div>
         </div>
     );

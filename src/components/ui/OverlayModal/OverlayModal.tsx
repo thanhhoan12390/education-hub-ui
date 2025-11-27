@@ -33,7 +33,7 @@ function OverlayModal({ open = false, onClose, children }: OverlayModalProps) {
                 })}
                 onClick={onClose}
             >
-                <div className={cx('container')}>{children}</div>
+                {children}
             </div>
         ),
         document.body,
