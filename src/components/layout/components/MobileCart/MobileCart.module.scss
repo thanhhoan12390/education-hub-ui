@@ -1,0 +1,18 @@
+.wrapper {
+    block-size: 4rem;
+    inline-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--btn-focus-background-color);
+        border-radius: var(--btn-border-radius);
+    }
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+}

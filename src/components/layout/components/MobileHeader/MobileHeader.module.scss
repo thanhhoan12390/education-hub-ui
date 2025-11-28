@@ -1,0 +1,47 @@
+.wrapper {
+    block-size: 5.6rem;
+    inline-size: 100%;
+    padding: 0.4rem;
+    box-shadow: 0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent),
+        0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent);
+    background: var(--white-color);
+    position: relative;
+}
+
+.header-container {
+    block-size: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.spacer {
+    inline-size: 4.8rem;
+    block-size: 4.8rem;
+    visibility: hidden;
+}
+
+.header-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.header-logo-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 4rem;
+    padding-block: 0;
+    padding-inline: 1.2rem;
+    margin-inline: 0;
+
+    img {
+        inline-size: 100%;
+        max-inline-size: 100%;
+        block-size: 100%;
+        vertical-align: middle;
+        object-fit: contain;
+        transition: opacity linear 100ms;
+    }
+}

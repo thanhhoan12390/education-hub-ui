@@ -148,3 +148,9 @@
     font-weight: 600;
     line-height: 1.1;
 }
+
+@media (max-width: 50rem) {
+    .navbar {
+        display: none;
+    }
+}

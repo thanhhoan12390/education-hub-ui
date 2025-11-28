@@ -24,7 +24,7 @@ function Home() {
     return (
         <div className={cx('wrapper')}>
             <Divider />
-            <NavBar />
+            <NavBar className={cx('navbar')} />
 
             <div className={cx('home-container')}>
                 <div className={cx('home-content')}>

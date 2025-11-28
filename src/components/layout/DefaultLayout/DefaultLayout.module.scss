@@ -11,3 +11,22 @@
     width: 100%;
     flex: 1;
 }
+
+// responsive
+.header {
+    display: block;
+}
+
+.mobile-header {
+    display: none;
+}
+
+@media (max-width: 50rem) {
+    .header {
+        display: none;
+    }
+
+    .mobile-header {
+        display: block;
+    }
+}

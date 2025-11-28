@@ -31,7 +31,7 @@ function HeaderCart({ className, cartPromise }: HeaderCartProps) {
                     style={{ fontSize: '1.2rem', fontWeight: '600' }}
                     count={cartData.length}
                 >
-                    <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />{' '}
+                    <CartIcon width="2rem" height="2rem" className={cx('nav-icon')} />
                 </Badge>
             </Link>
             {/* Popper */}

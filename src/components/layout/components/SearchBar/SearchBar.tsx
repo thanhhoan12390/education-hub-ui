@@ -16,7 +16,11 @@ import styles from './SearchBar.module.scss';
 
 const cx = classNames.bind(styles);
 
-function SearchBar() {
+interface SearchBarProps {
+    overlaySearch?: boolean;
+}
+
+function SearchBar({ overlaySearch = false }: SearchBarProps) {
     const [searchValue, setSearchValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const searchBarRef = useRef<HTMLDivElement>(null);
@@ -61,7 +65,12 @@ function SearchBar() {
     }, []);
 
     return (
-        <div className={cx('wrapper')} ref={searchBarRef}>
+        <div
+            className={cx('wrapper', {
+                ['overlay-search-wrapper']: overlaySearch,
+            })}
+            ref={searchBarRef}
+        >
             <div className={cx('search')}>
                 <input
                     value={searchValue}

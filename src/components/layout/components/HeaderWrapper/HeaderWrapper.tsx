@@ -21,13 +21,14 @@
 
 import { usePathname } from 'next/navigation';
 
-function HeaderWrapper({ children }: { children: React.ReactNode }) {
+function HeaderWrapper({ children, className }: { children: React.ReactNode; className?: string }) {
     const pathname = usePathname();
 
     const isHome = pathname === '/';
 
     return (
         <div
+            className={className}
             style={
                 isHome
                     ? {

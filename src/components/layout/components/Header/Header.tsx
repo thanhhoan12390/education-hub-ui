@@ -20,7 +20,7 @@ import styles from './Header.module.scss'; // luôn để import styles ở vị
 
 const cx = classNames.bind(styles);
 
-const exploreMenuData: MenuItem[] = [
+export const exploreMenuData: MenuItem[] = [
     {
         title: 'Explore by Goal',
         to: '',
@@ -504,7 +504,13 @@ function Header() {
                                 <div className={cx('language-heading')}>Language</div>
                                 <div className={cx('language-group')}>
                                     <span>English</span>
-                                    <FontAwesomeIcon icon={faEarth} />
+                                    <FontAwesomeIcon
+                                        style={{
+                                            fontSize: '1.4rem',
+                                            marginInlineStart: '0.4rem',
+                                        }}
+                                        icon={faEarth}
+                                    />
                                 </div>
                             </div>
                         </div>

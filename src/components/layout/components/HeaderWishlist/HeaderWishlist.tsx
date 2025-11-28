@@ -6,9 +6,9 @@ import { use, Fragment } from 'react';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import PopperWrapper from '~/components/ui/PopperWrapper';
-import styles from './HeaderWishlist.module.scss';
 import HeaderWishlistItem from '~/components/features/wishlist/HeaderWishlistItem';
 import { Course } from '~/types';
+import styles from './HeaderWishlist.module.scss';
 
 const cx = classNames.bind(styles);
 

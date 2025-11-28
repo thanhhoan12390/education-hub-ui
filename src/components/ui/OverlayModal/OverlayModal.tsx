@@ -13,9 +13,10 @@ interface OverlayModalProps {
     open: boolean;
     onClose?: () => void;
     children: React.ReactNode;
+    className?: string;
 }
 
-function OverlayModal({ open = false, onClose, children }: OverlayModalProps) {
+function OverlayModal({ open = false, onClose, children, className }: OverlayModalProps) {
     const [mounted, setMounted] = useState(false);
 
     // useEffect chỉ chạy sau khi component đã mount trên client, lúc đó document mới tồn tại.
@@ -28,7 +29,7 @@ function OverlayModal({ open = false, onClose, children }: OverlayModalProps) {
     return ReactDOM.createPortal(
         open && (
             <div
-                className={cx('wrapper', {
+                className={cx('wrapper', className, {
                     ['modal-open']: open,
                 })}
                 onClick={onClose}
