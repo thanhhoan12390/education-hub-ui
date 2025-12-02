@@ -50,7 +50,7 @@ function Checkout() {
                         <div className={cx('select-group')}>
                             <div className={cx('select-label')}>Country</div>
                             <Select
-                                style={{ blockSize: '4rem', inlineSize: '100%', maxInlineSize: '50%' }}
+                                style={{ blockSize: '4rem', inlineSize: '100%', minInlineSize: '100%' }}
                                 className={cx('country-select')}
                                 suffixIcon={<FontAwesomeIcon fontSize={'1.6rem'} icon={faEarth} />}
                                 showSearch

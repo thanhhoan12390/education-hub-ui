@@ -18,7 +18,7 @@ function LearningLayout({ children }: LearningLayoutProps) {
                     <NavigationTab
                         navigationTabData={[
                             { title: 'All courses', pathUrl: '/my-courses' },
-                            { title: 'Wishlist', pathUrl: '/wishlist' },
+                            // { title: 'Wishlist', pathUrl: '/wishlist' },
                         ]}
                     />
                 </div>

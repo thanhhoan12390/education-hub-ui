@@ -20,3 +20,15 @@
     margin-inline: -0.8rem;
     gap: 2.4rem 0;
 }
+
+@media (max-width: 63.5em) {
+    .container {
+        max-inline-size: 77rem;
+    }
+}
+
+@media (max-width: 48.13em) {
+    .my-course-list {
+        justify-content: center;
+    }
+}

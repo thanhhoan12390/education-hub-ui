@@ -116,3 +116,18 @@
     line-height: 1.4;
     letter-spacing: 0;
 }
+
+@media (max-width: 63.5em) {
+    .wrapper {
+        min-inline-size: 33.33%;
+        inline-size: 33.33%;
+    }
+}
+
+@media (max-width: 48.13em) {
+    .wrapper {
+        min-inline-size: 0;
+        inline-size: 24.6rem;
+        max-inline-size: 100%;
+    }
+}

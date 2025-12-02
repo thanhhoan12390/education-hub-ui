@@ -1,7 +1,7 @@
 .slider-wrapper {
     position: relative;
     overflow: hidden;
-    min-inline-size: 60rem;
+    min-inline-size: 32rem;
     margin-block: 0;
     margin-inline: auto;
     max-inline-size: 134rem;
@@ -70,16 +70,12 @@
 }
 
 @media (max-width: 37.5rem) {
-    .slider-wrapper {
-        min-inline-size: unset;
-    }
-
-    .float-content {
-        display: none;
-    }
-
     .btn {
         display: none;
+    }
+
+    .slide-container {
+        margin-block: 0 2.4rem;
     }
 }
 
@@ -94,7 +90,17 @@
     }
 
     .btn {
-        inset-block-start: 10rem;
+        inset-block-start: 12.5rem;
+    }
+
+    .slide-container {
+        margin-block: 0 2.4rem;
+
+        img {
+            block-size: 25rem;
+            object-fit: cover;
+            object-position: right;
+        }
     }
 }
 
@@ -119,6 +125,10 @@
 @media (min-width: 61.3125rem) {
     .btn {
         inset-block-start: 17.5rem;
+    }
+
+    .slide-container {
+        margin-block: 0 4.8rem;
     }
 }
 
