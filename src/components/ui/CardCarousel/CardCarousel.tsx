@@ -14,9 +14,10 @@ const cx = classNames.bind(styles);
 interface CardCarouselProps {
     carouselHeading: string;
     courses: Promise<Course[]>;
+    className?: string;
 }
 
-function CardCarousel({ carouselHeading, courses }: CardCarouselProps) {
+function CardCarousel({ carouselHeading, courses, className }: CardCarouselProps) {
     const courseList = use(courses);
 
     const [visiblePrevBtn, setVisiblePrevBtn] = useState(false);
@@ -60,7 +61,7 @@ function CardCarousel({ carouselHeading, courses }: CardCarouselProps) {
     }, []);
 
     return (
-        <div className={cx('carousel-wrapper')}>
+        <div className={cx('carousel-wrapper', className)}>
             <h2 className={cx('carousel-heading')}>{carouselHeading}</h2>
             <section className={cx('carousel-container')}>
                 <div ref={trackRef} className={cx('carousel-track')}>

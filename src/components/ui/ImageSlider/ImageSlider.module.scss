@@ -68,3 +68,68 @@
 .previous-btn {
     inset-inline-start: 1.6rem;
 }
+
+@media (max-width: 37.5rem) {
+    .slider-wrapper {
+        min-inline-size: unset;
+    }
+
+    .float-content {
+        display: none;
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@media (max-width: 43.75rem) {
+    .float-content {
+        position: relative;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        max-inline-size: unset;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .btn {
+        inset-block-start: 10rem;
+    }
+}
+
+@media (min-width: 43.8125rem) {
+    .float-content {
+        max-inline-size: 40rem;
+        inset-inline-start: 4.8rem;
+        inset-block-start: 2.4rem;
+    }
+
+    .btn {
+        inset-block-start: 12.5rem;
+    }
+}
+
+@media (min-width: 52.56em) {
+    .btn {
+        inset-block-start: 15rem;
+    }
+}
+
+@media (min-width: 61.3125rem) {
+    .btn {
+        inset-block-start: 17.5rem;
+    }
+}
+
+@media (min-width: 75.0625rem) {
+    .float-content {
+        inset-inline-start: 7.2rem;
+        inset-block-start: 6.4rem;
+        max-inline-size: 44rem;
+    }
+
+    .btn {
+        inset-block-start: 20rem;
+    }
+}

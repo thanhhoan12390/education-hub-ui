@@ -92,8 +92,16 @@ function Home() {
                         <div className={cx('courses-section')}>
                             <h2 className={cx('courses-heading')}>What to learn next</h2>
                             <CardCarousel carouselHeading="Recommended for you" courses={coursesPromise} />
-                            <CardCarousel carouselHeading="Short and sweet courses for you" courses={coursesPromise} />
-                            <CardCarousel carouselHeading="Newest courses in Data Science" courses={coursesPromise} />
+                            <CardCarousel
+                                className={cx('hidden-on-mobile')}
+                                carouselHeading="Short and sweet courses for you"
+                                courses={coursesPromise}
+                            />
+                            <CardCarousel
+                                className={cx('hidden-on-mobile')}
+                                carouselHeading="Newest courses in Data Science"
+                                courses={coursesPromise}
+                            />
                         </div>
                     </div>
                 </div>
