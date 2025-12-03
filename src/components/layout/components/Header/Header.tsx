@@ -13,9 +13,8 @@ import type { MenuItem } from '~/types';
 import HeaderCart from '~/components/layout/components/HeaderCart';
 import { getCartDetail, getPurchasedListDetail, getWishlistDetail } from '~/lib/data';
 import HeaderWishlist from '~/components/layout/components/HeaderWishlist';
-import HeaderLearn from '~/components/layout/components/HeaderLearn/HeaderLearn';
-import Divider from '~/components/ui/Divider/Divider';
-import { faEarth } from '@fortawesome/free-solid-svg-icons';
+import HeaderLearn from '~/components/layout/components/HeaderLearn';
+import HeaderNavAvatar from '~/components/layout/components/HeaderNavAvatar';
 import styles from './Header.module.scss'; // luôn để import styles ở vị trí cuối cùng để ghi đè CSS của các component ở trên
 
 const cx = classNames.bind(styles);
@@ -449,7 +448,7 @@ function Header() {
                     <div className={cx('nav-notify-content')}>
                         <div className={cx('nav-notify-header')}>
                             <div className={cx('nav-notify-heading')}>Notifications</div>
-                            <FlexibleButton text className={cx('nav-notify-setting')}>
+                            <FlexibleButton disabled text className={cx('nav-notify-setting')}>
                                 Settings
                             </FlexibleButton>
                         </div>
@@ -458,65 +457,8 @@ function Header() {
                 </PopperWrapper>
             </div>
 
-            <div className={cx('nav-item', 'nav-avatar')}>
-                <Link className={cx('nav-link')} href="">
-                    <div className={cx('avatar')}>HT</div>
-                </Link>
-
-                <PopperWrapper className={cx('nav-avatar-wrapper')}>
-                    <div className={cx('nav-avatar-content')}>
-                        <div className={cx('nav-avatar-header')}>
-                            <div className={cx('avatar', 'popper-avatar')}>HT</div>
-
-                            <div className={cx('avatar-name-group')}>
-                                <div className={cx('avatar-name')}>Phan Thanh Hoan</div>
-                                <div className={cx('avatar-email')}>hoanphantcgpocket@gmail.com</div>
-                            </div>
-                        </div>
-                        <Divider />
-                        <ul className={cx('nav-avatar-links')}>
-                            <li>
-                                <Link className={cx('nav-avatar-link')} href="/my-courses">
-                                    My Learning
-                                </Link>
-                            </li>
-
-                            <li>
-                                <Link className={cx('nav-avatar-link')} href="/cart">
-                                    My Cart
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={cx('nav-avatar-link')} href="/wishlist">
-                                    Wishlist
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={cx('nav-avatar-link')} href="">
-                                    Notifications
-                                </Link>
-                            </li>
-                        </ul>
-                        <Divider />
-
-                        <div className={cx('nav-avatar-language')}>
-                            <div className={cx('nav-language-group')}>
-                                <div className={cx('language-heading')}>Language</div>
-                                <div className={cx('language-group')}>
-                                    <span>English</span>
-                                    <FontAwesomeIcon
-                                        style={{
-                                            fontSize: '1.4rem',
-                                            marginInlineStart: '0.4rem',
-                                        }}
-                                        icon={faEarth}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </PopperWrapper>
-            </div>
+            {/* nav avatar */}
+            <HeaderNavAvatar />
         </div>
     );
 }

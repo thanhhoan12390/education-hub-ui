@@ -1,0 +1,173 @@
+.nav-item {
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        block-size: 4rem;
+        padding-block: 0;
+        padding-inline: 1.2rem;
+        margin-block: 1.2rem;
+        margin-inline: 0;
+
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        text-decoration: none;
+        color: var(--text-color);
+        white-space: nowrap;
+
+        &:hover {
+            color: var(--btn-focus-color);
+            background-color: var(--btn-focus-background-color);
+            border-radius: var(--btn-border-radius);
+        }
+    }
+
+    .nav-icon {
+        font-size: 1.8rem;
+    }
+
+    // avatar
+    .avatar {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 3.2rem;
+        height: 3.2rem;
+        background-color: #333;
+        color: var(--white-color);
+        margin: 0.8rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0;
+        border-radius: 50%;
+    }
+
+    &:last-child .nav-link {
+        padding-inline: 0.4rem;
+    }
+    //-------------------------
+
+    &:hover .nav-link {
+        color: var(--btn-focus-color);
+    }
+}
+
+.nav-avatar {
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 20px;
+        left: 0;
+        top: calc(100% - 1rem);
+    }
+
+    .nav-avatar-wrapper {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-block-start: 0.4rem;
+        z-index: 9;
+    }
+
+    .nav-avatar-content {
+        min-inline-size: 26rem;
+    }
+
+    .nav-avatar-header {
+        display: flex;
+        padding: 1.6rem;
+    }
+
+    .popper-avatar {
+        block-size: 4.8rem;
+        inline-size: 4.8rem;
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .avatar-name-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-inline-start: 0.8rem;
+    }
+
+    .avatar-name {
+        font-family: var(--tiktok-display-font);
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: 0;
+    }
+
+    .avatar-email {
+        margin-block-start: 0.4rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-inline-size: 15.4rem;
+        color: var(--gray-color);
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.4;
+        letter-spacing: 0;
+    }
+
+    .nav-avatar-links {
+        list-style: none;
+        padding-block: 0.8rem;
+    }
+
+    .nav-avatar-link {
+        display: block;
+        padding-block: 0.8rem;
+        padding-inline: 1.6rem;
+        margin-inline: 0;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0;
+
+        &:hover {
+            color: var(--btn-focus-color);
+            background-color: var(--btn-focus-background-color);
+        }
+    }
+
+    .nav-avatar-language {
+        padding-block: 0.8rem;
+    }
+
+    .nav-language-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 0.8rem;
+        padding-inline: 1.6rem;
+        margin-inline: 0;
+    }
+
+    .language-heading {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0;
+    }
+
+    .language-group {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0;
+        color: var(--text-color);
+    }
+}
