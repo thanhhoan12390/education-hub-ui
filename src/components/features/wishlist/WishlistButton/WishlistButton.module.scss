@@ -1,5 +1,9 @@
-.popover-whist {
+.wrapper {
+    display: block;
     margin-inline-start: 0.8rem;
+}
+
+.popover-whist {
     min-inline-size: auto;
     block-size: 4.8rem;
     inline-size: 4.8rem;
@@ -10,4 +14,19 @@
 
 .popover-whist-icon {
     font-size: 2rem;
+}
+
+// white theme
+.white-theme {
+    .popover-whist {
+        block-size: 4rem;
+        inline-size: 4rem;
+        border-radius: 0.4rem;
+        border: none;
+        color: var(--white-color);
+    }
+
+    .popover-whist-icon {
+        font-size: 1.8rem;
+    }
 }

@@ -1,7 +1,10 @@
+'use client';
+
 import classNames from 'classnames/bind';
-import { Fragment, use } from 'react';
+import { Fragment, use, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Badge } from 'antd';
+import { usePathname } from 'next/navigation';
 
 import { CartIcon } from '~/components/ui/Icons';
 import PopperWrapper from '~/components/ui/PopperWrapper';
@@ -18,12 +21,23 @@ interface HeaderCartProps {
 }
 
 function HeaderCart({ className, cartPromise }: HeaderCartProps) {
+    const [open, setOpen] = useState(false);
+    const pathName = usePathname();
+
     const cartData = use(cartPromise);
 
     const totalPrice = cartData.reduce((total, item) => total + item.price, 0);
 
+    useEffect(() => {
+        setOpen(false);
+    }, [pathName]);
+
     return (
-        <div className={cx('nav-item', className)}>
+        <div
+            onMouseOver={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+            className={cx('nav-item', className)}
+        >
             <Link className={cx('nav-link')} href="/cart">
                 <Badge
                     className={cx('cart-badge')}
@@ -35,39 +49,41 @@ function HeaderCart({ className, cartPromise }: HeaderCartProps) {
                 </Badge>
             </Link>
             {/* Popper */}
-            <PopperWrapper className={cx('nav-cart-wrapper')}>
-                <div className={cx('cart-container')}>
-                    {cartData.length > 0 ? (
-                        <Fragment>
-                            <div className={cx('cart-content')}>
-                                {cartData.map((item) => (
-                                    <HeaderCartItem key={item.courseId} cartItemData={item} />
-                                ))}
-                            </div>
-
-                            <div className={cx('total-group')}>
-                                <div className={cx('cart-price')}>
-                                    <span>Total:&nbsp;</span>
-                                    <div className={cx('total-price')}>
-                                        <span>đ</span>
-                                        {`${totalPrice.toLocaleString('en-US')}`}
-                                    </div>
+            {open && (
+                <PopperWrapper className={cx('nav-cart-wrapper')}>
+                    <div className={cx('cart-container')}>
+                        {cartData.length > 0 ? (
+                            <Fragment>
+                                <div className={cx('cart-content')}>
+                                    {cartData.map((item) => (
+                                        <HeaderCartItem key={item.courseId} cartItemData={item} />
+                                    ))}
                                 </div>
-                                <FlexibleButton href="/cart" primary>
-                                    Go to cart
+
+                                <div className={cx('total-group')}>
+                                    <div className={cx('cart-price')}>
+                                        <span>Total:&nbsp;</span>
+                                        <div className={cx('total-price')}>
+                                            <span>đ</span>
+                                            {`${totalPrice.toLocaleString('en-US')}`}
+                                        </div>
+                                    </div>
+                                    <FlexibleButton href="/cart" primary>
+                                        Go to cart
+                                    </FlexibleButton>
+                                </div>
+                            </Fragment>
+                        ) : (
+                            <div className={cx('no-cart-content')}>
+                                <div className={cx('nav-cart-text')}>Your cart is empty.</div>
+                                <FlexibleButton href="/" text>
+                                    Keep shopping
                                 </FlexibleButton>
                             </div>
-                        </Fragment>
-                    ) : (
-                        <div className={cx('no-cart-content')}>
-                            <div className={cx('nav-cart-text')}>Your cart is empty.</div>
-                            <FlexibleButton href="/" text>
-                                Keep shopping
-                            </FlexibleButton>
-                        </div>
-                    )}
-                </div>
-            </PopperWrapper>
+                        )}
+                    </div>
+                </PopperWrapper>
+            )}
         </div>
     );
 }

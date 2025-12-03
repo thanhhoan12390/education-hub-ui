@@ -18,9 +18,11 @@ const cx = classNames.bind(styles);
 
 interface WishlistButtonProps {
     courseId: number;
+    whiteTheme?: boolean;
+    className?: string;
 }
 
-function WishlistButton({ courseId }: WishlistButtonProps) {
+function WishlistButton({ courseId, className, whiteTheme = false }: WishlistButtonProps) {
     const [isPending, startTransition] = useTransition();
 
     const url = `/api/wishlist`;
@@ -78,19 +80,41 @@ function WishlistButton({ courseId }: WishlistButtonProps) {
 
     if (isLoading || isPending)
         return (
-            <FlexibleButton rounded large className={cx('popover-whist')}>
-                <Spin style={{ color: 'var(--purple-color)' }} indicator={<LoadingOutlined spin />} size="default" />
-            </FlexibleButton>
+            <div
+                className={cx('wrapper', className, {
+                    ['white-theme']: whiteTheme,
+                })}
+            >
+                <FlexibleButton rounded large className={cx('popover-whist')}>
+                    <Spin
+                        style={{ color: whiteTheme ? 'var(--white-color)' : 'var(--purple-color)' }}
+                        indicator={<LoadingOutlined spin />}
+                        size="default"
+                    />
+                </FlexibleButton>
+            </div>
         );
 
     return wishlist?.wishedIds.includes(courseId) ? (
-        <FlexibleButton rounded large className={cx('popover-whist')} onClick={handleRemoveFromWishlist}>
-            <FontAwesomeIcon className={cx('popover-whist-icon')} icon={solidFaHeart} />
-        </FlexibleButton>
+        <div
+            className={cx('wrapper', className, {
+                ['white-theme']: whiteTheme,
+            })}
+        >
+            <FlexibleButton rounded large className={cx('popover-whist')} onClick={handleRemoveFromWishlist}>
+                <FontAwesomeIcon className={cx('popover-whist-icon')} icon={solidFaHeart} />
+            </FlexibleButton>
+        </div>
     ) : (
-        <FlexibleButton rounded large className={cx('popover-whist')} onClick={handleAddToWishlist}>
-            <FontAwesomeIcon className={cx('popover-whist-icon')} icon={faHeart} />
-        </FlexibleButton>
+        <div
+            className={cx('wrapper', className, {
+                ['white-theme']: whiteTheme,
+            })}
+        >
+            <FlexibleButton rounded large className={cx('popover-whist')} onClick={handleAddToWishlist}>
+                <FontAwesomeIcon className={cx('popover-whist-icon')} icon={faHeart} />
+            </FlexibleButton>
+        </div>
     );
 }
 

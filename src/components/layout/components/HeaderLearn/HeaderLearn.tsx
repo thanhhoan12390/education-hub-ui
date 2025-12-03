@@ -1,6 +1,9 @@
+'use client';
+
 import classNames from 'classnames/bind';
-import { Fragment, use } from 'react';
+import { Fragment, use, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import PopperWrapper from '~/components/ui/PopperWrapper';
 import FlexibleButton from '~/components/ui/FlexibleButton';
@@ -16,40 +19,53 @@ interface HeaderLearnProps {
 }
 
 function HeaderLearn({ className, purchasedListPromise }: HeaderLearnProps) {
+    const [open, setOpen] = useState(false);
+    const pathName = usePathname();
+
     const purchasedListData = use(purchasedListPromise);
 
+    useEffect(() => {
+        setOpen(false);
+    }, [pathName]);
+
     return (
-        <div className={cx('nav-item', className)}>
+        <div
+            onMouseOver={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+            className={cx('nav-item', className)}
+        >
             <Link className={cx('nav-link')} href="/my-courses">
                 My learning
             </Link>
             {/* Popper */}
-            <PopperWrapper className={cx('nav-learn-wrapper')}>
-                <div className={cx('learn-container')}>
-                    {purchasedListData.length > 0 ? (
-                        <Fragment>
-                            <div className={cx('learn-content')}>
-                                {purchasedListData.map((item) => (
-                                    <HeaderLearnItem key={item.courseId} learnItemData={item} />
-                                ))}
-                            </div>
+            {open && (
+                <PopperWrapper className={cx('nav-learn-wrapper')}>
+                    <div className={cx('learn-container')}>
+                        {purchasedListData.length > 0 ? (
+                            <Fragment>
+                                <div className={cx('learn-content')}>
+                                    {purchasedListData.map((item) => (
+                                        <HeaderLearnItem key={item.courseId} learnItemData={item} />
+                                    ))}
+                                </div>
 
-                            <div className={cx('button-wrapper')}>
-                                <FlexibleButton href="/my-courses" primary>
-                                    Go to My learning
+                                <div className={cx('button-wrapper')}>
+                                    <FlexibleButton href="/my-courses" primary>
+                                        Go to My learning
+                                    </FlexibleButton>
+                                </div>
+                            </Fragment>
+                        ) : (
+                            <div className={cx('no-learning-content')}>
+                                <div className={cx('nav-learning-text')}>Start learning today.</div>
+                                <FlexibleButton href="/" outline>
+                                    Browser now
                                 </FlexibleButton>
                             </div>
-                        </Fragment>
-                    ) : (
-                        <div className={cx('no-learning-content')}>
-                            <div className={cx('nav-learning-text')}>Start learning today.</div>
-                            <FlexibleButton href="/" outline>
-                                Browser now
-                            </FlexibleButton>
-                        </div>
-                    )}
-                </div>
-            </PopperWrapper>
+                        )}
+                    </div>
+                </PopperWrapper>
+            )}
         </div>
     );
 }

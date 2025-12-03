@@ -8,6 +8,13 @@
     }
 }
 
+.wishlist-page-course {
+    &:hover .course-img img {
+        transition: opacity linear 100ms;
+        opacity: 0.3;
+    }
+}
+
 .course-card-wrapper {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -17,6 +24,7 @@
     max-inline-size: 37.5rem;
     min-inline-size: 17.3rem;
     scroll-snap-align: start;
+    position: relative;
 }
 
 .course-img {
@@ -112,6 +120,13 @@
 .card-badge {
     display: flex;
     margin-block: 0.8rem 0.4rem;
+}
+
+.wishlist-btn {
+    position: absolute;
+    inset-inline-end: -0.4rem;
+    inset-block-start: -0.4rem;
+    margin-inline-start: 0;
 }
 
 // popover content

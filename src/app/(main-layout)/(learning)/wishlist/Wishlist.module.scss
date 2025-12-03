@@ -3,3 +3,63 @@
     background-color: var(--white-color);
     color: var(--text-color);
 }
+
+.container {
+    inline-size: 100%;
+    max-inline-size: 134rem;
+    min-block-size: 32.4rem;
+    padding-block: 1.6rem 4.8rem;
+    padding-inline: 2.4rem;
+    margin-inline: auto;
+}
+
+.no-item-content {
+    display: flex;
+    justify-content: center;
+    padding-inline: 0;
+    padding-block: 6.4rem 4.8rem;
+}
+
+.no-item-btn {
+    inline-size: unset;
+}
+
+.content {
+    inline-size: 100%;
+}
+
+.wishlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.4rem 0;
+    margin-inline: -0.8rem;
+}
+
+.item-wrapper {
+    min-inline-size: 25%;
+    inline-size: 25%;
+    padding-inline: 0.8rem;
+}
+
+@media (max-width: 63.5em) {
+    .container {
+        max-inline-size: 77rem;
+    }
+
+    .item-wrapper {
+        min-inline-size: 33.33%;
+        inline-size: 33.33%;
+    }
+}
+
+@media (max-width: 48.13em) {
+    .wishlist {
+        justify-content: center;
+    }
+
+    .item-wrapper {
+        min-inline-size: 0;
+        inline-size: 24.6rem;
+        max-inline-size: 100%;
+    }
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,14 +19,22 @@ const cx = classNames.bind(styles);
 
 interface CourseCardProps {
     course: Course;
+    isPopover?: boolean;
+    absoluteWishlistButton?: boolean;
 }
 
-function CourseCard({ course }: CourseCardProps) {
+function CourseCard({ course, isPopover = true, absoluteWishlistButton = false }: CourseCardProps) {
     const [open, setOpen] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div className={cx('wrapper')} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+        <div
+            className={cx('wrapper', {
+                ['wishlist-page-course']: absoluteWishlistButton,
+            })}
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+        >
             <Link target="_blank" href={`/view-course/${course.courseId}`}>
                 <div ref={cardRef} className={cx('course-card-wrapper')}>
                     <div className={cx('course-img')}>
@@ -44,10 +54,14 @@ function CourseCard({ course }: CourseCardProps) {
                         </div>
                         <div className={cx('card-badge')}>{course.bestSeller && <Badge />}</div>
                     </div>
+
+                    {absoluteWishlistButton && (
+                        <WishlistButton whiteTheme className={cx('wishlist-btn')} courseId={course.courseId} />
+                    )}
                 </div>
             </Link>
 
-            {open && (
+            {open && isPopover && (
                 <Popover targetRef={cardRef}>
                     <div className={cx('popover-content')}>
                         <Link
