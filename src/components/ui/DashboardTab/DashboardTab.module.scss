@@ -49,10 +49,16 @@
     padding-block: 3.2rem 0;
     padding-inline: 2.4rem;
     margin-inline: auto;
+    display: none;
+}
+
+.tab-content-active {
+    display: block;
 }
 
 @media (max-width: 37.5rem) {
-    .tab-content {
+    .tab-content,
+    .tab-content-active {
         padding-block-start: 0.8rem;
         padding-block-end: 0;
         padding-inline-end: 1.6rem;

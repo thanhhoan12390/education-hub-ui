@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faPlusCircle, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -20,12 +20,10 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
 });
 import StudyAccordionPanel from '~/components/ui/StudyAccordionPanel';
 import DashboardTab from '~/components/ui/DashboardTab';
-import { Course, Note, Preview } from '~/types';
+import { Preview } from '~/types';
 import FlexibleButton from '~/components/ui/FlexibleButton';
-import CourseDescription from '~/components/features/course/CourseDescription';
-import { formatTime } from '~/utils/formatTime';
-import TextAreaModal from '~/components/features/video-studying/TextAreaModal';
-import { addNote } from '~/lib/actions';
+import DashboardDescription from '~/components/features/video-studying/DashboardDescription';
+import DashboardNotes from '~/components/features/video-studying/DashboardNotes';
 import styles from './VideoStudying.module.scss';
 
 const cx = classNames.bind(styles);
@@ -104,8 +102,6 @@ function VideoStudying() {
     const [isBlockSidebar, setIsBlockSidebar] = useState(true);
     const [sidebarStyle, setSidebarStyle] = useState<React.CSSProperties>();
     const [checkedList, setCheckedList] = useState<number[]>([]);
-    const [isOpenNote, setIsOpenNote] = useState(false);
-    const [note, setNote] = useState('');
 
     const tabRef = useRef<{ onTabIndexChange: React.Dispatch<React.SetStateAction<number>> }>(null);
 
@@ -113,18 +109,8 @@ function VideoStudying() {
 
     // vì api chỉ có 5 sample để ví dụ
     const previewUrl = `/api/previews/${(activePanelData?.activePanelIndex ?? 1) % 5 || 5}`;
-    const courseUrl = `/api/courses/${courseId}`;
-    const noteUrl = '/api/notes';
 
     const { data, error, isLoading } = useSWR<Preview>(previewUrl, {
-        revalidateOnFocus: false,
-    });
-
-    const { data: courseData } = useSWR<Course>(courseUrl, {
-        revalidateOnFocus: false,
-    });
-
-    const { data: allNotes, mutate: mutateNotes } = useSWR<Note[]>(noteUrl, {
         revalidateOnFocus: false,
     });
 
@@ -132,8 +118,6 @@ function VideoStudying() {
         setIsSidebarOpen(true);
         tabRef.current?.onTabIndexChange((pre) => pre || 1);
     };
-
-    console.log('notes: ', allNotes);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -270,79 +254,14 @@ function VideoStudying() {
                         >
                             {[
                                 (isBlockSidebar || !isSidebarOpen) && PanelContainer,
-                                <div key="content-1">
-                                    <CourseDescription lightTheme course={courseData} />
-                                    <div className={cx('des-content')}>
-                                        <h2 className={cx('related-heading')}>Description</h2>
-                                        <div>
-                                            <p>
-                                                *Update 2025: Intro to Data Science module updated for recent AI
-                                                developments*
-                                            </p>
-                                            <p>The Problem</p>
-                                            <p>
-                                                Data scientist is one of the best suited professions to thrive this
-                                                century. It is digital, programming-oriented, and analytical. Therefore,
-                                                it comes as no surprise that the demand for data scientists has been
-                                                surging in the job marketplace.
-                                            </p>
-                                            <p>
-                                                However, supply has been very limited. It is difficult to acquire the
-                                                skills necessary to be hired as a data scientist.
-                                            </p>
-                                            <p>And how can you do that?</p>
-                                            <p>
-                                                Universities have been slow at creating specialized data science
-                                                programs. (not to mention that the ones that exist are very expensive
-                                                and time consuming)
-                                            </p>
-                                            <p>
-                                                Most online courses focus on a specific topic and it is difficult to
-                                                understand how the skill they teach fit in the complete picture
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>,
                                 <div key="content-2">
-                                    {!isOpenNote && (
-                                        <div className={cx('note-create')} onClick={() => setIsOpenNote(true)}>
-                                            <div className={cx('create-note-text')}>
-                                                Create a new note at {formatTime(curStreamingTime ?? 0)}
-                                            </div>
-                                            <FontAwesomeIcon fontSize="1.2rem" icon={faPlusCircle} />
-                                        </div>
-                                    )}
-
-                                    <TextAreaModal
-                                        time={curStreamingTime}
-                                        note={note}
-                                        onNoteChange={setNote}
-                                        open={isOpenNote}
-                                        onClose={() => setIsOpenNote(false)}
-                                        modalAction={async () => {
-                                            await addNote({
-                                                noteData: note,
-                                                panelOrder: activePanelData.activePanelIndex,
-                                                panelTitle: activePanelData.activePanelTitle,
-                                                sectionOrder: activePanelData.sectionIndex,
-                                                sectionTitle: activePanelData.sectionTitle,
-                                                time: curStreamingTime ?? 0,
-                                            });
-
-                                            mutateNotes();
-                                            setNote('');
-                                        }}
+                                    <DashboardDescription courseId={+courseId} />
+                                </div>,
+                                <div key="content-3">
+                                    <DashboardNotes
+                                        activePanelData={activePanelData}
+                                        curStreamingTime={curStreamingTime}
                                     />
-
-                                    {allNotes?.map((item, index) => {
-                                        console.log(item);
-                                        return (
-                                            <div key={index}>
-                                                {item.time}
-                                                <pre>{item.noteData}</pre>
-                                            </div>
-                                        );
-                                    })}
                                 </div>,
                             ]}
                         </DashboardTab>

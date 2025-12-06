@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useImperativeHandle } from 'react';
+import { useEffect, useRef, useImperativeHandle, memo } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import Hls from 'hls.js';
@@ -98,4 +98,4 @@ function StreamingPlayer({ src, style, ref, onTimeUpdate }: StreamingPlayerProps
     );
 }
 
-export default StreamingPlayer;
+export default memo(StreamingPlayer);

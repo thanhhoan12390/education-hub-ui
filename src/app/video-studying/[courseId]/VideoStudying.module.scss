@@ -233,53 +233,6 @@
     margin-block-end: 9.6rem;
 }
 
-.des-content {
-    margin-block-end: 3.2rem;
-
-    p {
-        margin-block-start: 0.8rem;
-        font-size: 1.4rem;
-        line-height: 1.6;
-    }
-
-    p:first-child {
-        margin-block-start: 0;
-        font-style: italic;
-    }
-}
-
-.related-heading {
-    margin-block: 0 1.6rem;
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: 0;
-}
-
-.note-create {
-    block-size: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: 1.6rem;
-    border: 1px solid var(--gray-color);
-    border-radius: 0.4rem;
-    background-color: var(--white-color);
-    cursor: pointer;
-
-    &:hover {
-        background-color: var(--gray-color-100);
-    }
-}
-
-.create-note-text {
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: 0;
-    color: var(--heading-color);
-}
-
 @media (min-width: 43.8125rem) {
     .video-content {
         min-block-size: 40rem;

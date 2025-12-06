@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import { Input } from 'antd';
-import { useState, useRef, useEffect, useTransition } from 'react';
+import { useState, useRef, useEffect, useTransition, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import type { TextAreaRef } from 'antd/es/input/TextArea';
@@ -129,4 +129,4 @@ function TextAreaModal({ time, open = true, onClose, note, onNoteChange, modalAc
     ) : null;
 }
 
-export default TextAreaModal;
+export default memo(TextAreaModal);

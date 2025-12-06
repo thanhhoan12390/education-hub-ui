@@ -45,7 +45,16 @@ function DashboardTab({ defaultIndex, children, tabTitles, ref }: DashboardTabPr
                 })}
             </div>
             <div className={cx('tab-container')}>
-                <div className={cx('tab-content')}>{children[tabIndex]}</div>
+                {children.map((child, index) => (
+                    <div
+                        key={index}
+                        className={cx('tab-content', {
+                            ['tab-content-active']: tabIndex === index,
+                        })}
+                    >
+                        {child}
+                    </div>
+                ))}
             </div>
         </div>
     );
