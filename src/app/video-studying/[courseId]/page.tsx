@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPlusCircle, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -20,9 +20,12 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
 });
 import StudyAccordionPanel from '~/components/ui/StudyAccordionPanel';
 import DashboardTab from '~/components/ui/DashboardTab';
-import { Course, Preview } from '~/types';
+import { Course, Note, Preview } from '~/types';
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import CourseDescription from '~/components/features/course/CourseDescription';
+import { formatTime } from '~/utils/formatTime';
+import TextAreaModal from '~/components/features/video-studying/TextAreaModal';
+import { addNote } from '~/lib/actions';
 import styles from './VideoStudying.module.scss';
 
 const cx = classNames.bind(styles);
@@ -91,19 +94,27 @@ const studyPanelData = [
 
 function VideoStudying() {
     const [curStreamingTime, setCurStreamingTime] = useState<number>();
-    const [activePanelIndex, setActivePanelIndex] = useState<number>(1);
+    const [activePanelData, setActivePanelData] = useState<{
+        activePanelIndex: number;
+        activePanelTitle: string;
+        sectionIndex: number;
+        sectionTitle: string;
+    }>({ activePanelIndex: 1, activePanelTitle: '', sectionIndex: 1, sectionTitle: '' });
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isBlockSidebar, setIsBlockSidebar] = useState(true);
     const [sidebarStyle, setSidebarStyle] = useState<React.CSSProperties>();
     const [checkedList, setCheckedList] = useState<number[]>([]);
+    const [isOpenNote, setIsOpenNote] = useState(false);
+    const [note, setNote] = useState('');
 
     const tabRef = useRef<{ onTabIndexChange: React.Dispatch<React.SetStateAction<number>> }>(null);
 
     const { courseId } = useParams<{ courseId: string }>();
 
     // vì api chỉ có 5 sample để ví dụ
-    const previewUrl = `/api/previews/${activePanelIndex % 5 || 5}`;
+    const previewUrl = `/api/previews/${(activePanelData?.activePanelIndex ?? 1) % 5 || 5}`;
     const courseUrl = `/api/courses/${courseId}`;
+    const noteUrl = '/api/notes';
 
     const { data, error, isLoading } = useSWR<Preview>(previewUrl, {
         revalidateOnFocus: false,
@@ -113,10 +124,16 @@ function VideoStudying() {
         revalidateOnFocus: false,
     });
 
+    const { data: allNotes, mutate: mutateNotes } = useSWR<Note[]>(noteUrl, {
+        revalidateOnFocus: false,
+    });
+
     const handleOpenCourseContent = () => {
         setIsSidebarOpen(true);
         tabRef.current?.onTabIndexChange((pre) => pre || 1);
     };
+
+    console.log('notes: ', allNotes);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -157,16 +174,17 @@ function VideoStudying() {
                     <StudyAccordionPanel
                         className={cx({ ['no-border-top']: isSidebarOpen && !isBlockSidebar })}
                         key={index}
-                        panelIndex={panelIndex}
-                        panelTitle={data.panelTitle}
+                        sectionIndex={panelIndex}
+                        sectionTitle={data.panelTitle}
                         panelContent={data.panelContent}
                         contentStartIndex={originalArr
                             .slice(0, index)
                             .reduce((total, item) => total + item.panelContent.length, 0)}
-                        activeItemIndex={activePanelIndex}
-                        onActiveChange={setActivePanelIndex}
+                        activeItemData={activePanelData}
+                        onActiveChange={setActivePanelData}
                         checkedList={checkedList}
                         onCheckedListChange={setCheckedList}
+                        onResetStreamingTime={() => setCurStreamingTime(0)}
                     />
                 );
             })}
@@ -286,8 +304,45 @@ function VideoStudying() {
                                     </div>
                                 </div>,
                                 <div key="content-2">
-                                    <h2>This feature will be completed in the coming time.</h2>
-                                    <span>note at: {Math.floor(curStreamingTime ?? 0)}</span>
+                                    {!isOpenNote && (
+                                        <div className={cx('note-create')} onClick={() => setIsOpenNote(true)}>
+                                            <div className={cx('create-note-text')}>
+                                                Create a new note at {formatTime(curStreamingTime ?? 0)}
+                                            </div>
+                                            <FontAwesomeIcon fontSize="1.2rem" icon={faPlusCircle} />
+                                        </div>
+                                    )}
+
+                                    <TextAreaModal
+                                        time={curStreamingTime}
+                                        note={note}
+                                        onNoteChange={setNote}
+                                        open={isOpenNote}
+                                        onClose={() => setIsOpenNote(false)}
+                                        modalAction={async () => {
+                                            await addNote({
+                                                noteData: note,
+                                                panelOrder: activePanelData.activePanelIndex,
+                                                panelTitle: activePanelData.activePanelTitle,
+                                                sectionOrder: activePanelData.sectionIndex,
+                                                sectionTitle: activePanelData.sectionTitle,
+                                                time: curStreamingTime ?? 0,
+                                            });
+
+                                            mutateNotes();
+                                            setNote('');
+                                        }}
+                                    />
+
+                                    {allNotes?.map((item, index) => {
+                                        console.log(item);
+                                        return (
+                                            <div key={index}>
+                                                {item.time}
+                                                <pre>{item.noteData}</pre>
+                                            </div>
+                                        );
+                                    })}
                                 </div>,
                             ]}
                         </DashboardTab>

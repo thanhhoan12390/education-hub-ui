@@ -1,7 +1,7 @@
 'use client';
 
 import classNames from 'classnames/bind';
-import { useState, useMemo, memo } from 'react';
+import { useState, useMemo, memo, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
@@ -12,36 +12,53 @@ const cx = classNames.bind(styles);
 
 interface StudyAccordionPanelProps {
     className?: string;
-    panelIndex?: number;
-    panelTitle?: string;
+    sectionIndex?: number;
+    sectionTitle?: string;
     panelContent: {
         lectureHeading: string;
         lectureMin: number;
     }[];
     contentStartIndex?: number;
-    activeItemIndex?: number;
-    onActiveChange?: (idx: number) => void;
+    activeItemData?: {
+        activePanelIndex: number;
+        activePanelTitle: string;
+        sectionIndex: number;
+        sectionTitle: string;
+    };
+    onActiveChange?: React.Dispatch<
+        React.SetStateAction<{
+            activePanelIndex: number;
+            activePanelTitle: string;
+            sectionIndex: number;
+            sectionTitle: string;
+        }>
+    >;
     checkedList?: number[];
     onCheckedListChange?: React.Dispatch<React.SetStateAction<number[]>>;
+    onResetStreamingTime?: () => void;
 }
 
 function StudyAccordionPanel({
     className,
-    panelIndex,
-    panelTitle,
+    sectionIndex = 1,
+    sectionTitle,
     panelContent,
     contentStartIndex = 0,
-    activeItemIndex = 1,
+    activeItemData,
     onActiveChange,
     checkedList,
     onCheckedListChange,
+    onResetStreamingTime,
 }: StudyAccordionPanelProps) {
     const [isContentOpen, setIsContentOpen] = useState(() => {
         const isDefaultExpand =
-            activeItemIndex > contentStartIndex && activeItemIndex <= contentStartIndex + panelContent.length;
+            (activeItemData?.activePanelIndex ?? 1) > contentStartIndex &&
+            (activeItemData?.activePanelIndex ?? 1) <= contentStartIndex + panelContent.length;
 
-        return isDefaultExpand || false;
+        return isDefaultExpand;
     });
+
+    const hasInitialized = useRef(false);
 
     const totalMin = useMemo(
         () => panelContent?.reduce((totalMin, currItem) => totalMin + currItem.lectureMin, 0),
@@ -74,12 +91,31 @@ function StudyAccordionPanel({
         return totalChecked;
     }, [checkedList, contentStartIndex, panelContent.length]);
 
+    useEffect(() => {
+        if (hasInitialized.current) return;
+        hasInitialized.current = true;
+
+        panelContent?.forEach((item, index) => {
+            const panelOrderNum = index + 1 + contentStartIndex;
+
+            if (panelOrderNum === activeItemData?.activePanelIndex) {
+                onActiveChange?.((pre) => ({
+                    ...pre,
+                    activePanelIndex: panelOrderNum,
+                    activePanelTitle: item.lectureHeading,
+                    sectionIndex,
+                    sectionTitle: sectionTitle ?? '',
+                }));
+            }
+        });
+    }, [activeItemData?.activePanelIndex, contentStartIndex, onActiveChange, panelContent, sectionIndex, sectionTitle]);
+
     return (
         <div className={cx('wrapper', className)}>
             <div onClick={() => setIsContentOpen(!isContentOpen)} className={cx('panel-title')}>
                 <div className={cx('panel-heading-group')}>
                     <h3 className={cx('panel-heading')}>
-                        Section {panelIndex}: {panelTitle}
+                        Section {sectionIndex}: {sectionTitle}
                     </h3>
                     <div className={cx('total-lecture')}>
                         <span>
@@ -109,9 +145,19 @@ function StudyAccordionPanel({
                             <div
                                 key={index}
                                 className={cx('content-item', {
-                                    ['content-item-active']: panelOrderNum === activeItemIndex,
+                                    ['content-item-active']: panelOrderNum === activeItemData?.activePanelIndex,
                                 })}
-                                onClick={() => onActiveChange && onActiveChange(panelOrderNum)}
+                                onClick={() => {
+                                    onActiveChange?.((pre) => ({
+                                        ...pre,
+                                        activePanelIndex: panelOrderNum,
+                                        activePanelTitle: item.lectureHeading,
+                                        sectionIndex: sectionIndex,
+                                        sectionTitle: sectionTitle ?? '',
+                                    }));
+
+                                    onResetStreamingTime?.();
+                                }}
                             >
                                 <label className={cx('checkbox-container')} onClick={(e) => e.stopPropagation()}>
                                     <input

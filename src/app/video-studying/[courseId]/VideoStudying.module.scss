@@ -256,6 +256,30 @@
     letter-spacing: 0;
 }
 
+.note-create {
+    block-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1.6rem;
+    border: 1px solid var(--gray-color);
+    border-radius: 0.4rem;
+    background-color: var(--white-color);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--gray-color-100);
+    }
+}
+
+.create-note-text {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    color: var(--heading-color);
+}
+
 @media (min-width: 43.8125rem) {
     .video-content {
         min-block-size: 40rem;

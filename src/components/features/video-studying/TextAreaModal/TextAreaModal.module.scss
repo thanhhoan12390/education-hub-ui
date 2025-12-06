@@ -1,0 +1,106 @@
+.wrapper {
+    background: var(--white-color);
+}
+
+.container {
+    display: flex;
+}
+
+.note-time {
+    display: inline-block;
+    block-size: 2.4rem;
+    min-inline-size: 4.8rem;
+    text-align: center;
+    border-radius: 100rem;
+    padding-block: 0;
+    padding-inline: 0.8rem;
+    background: var(--black-color);
+    color: var(--white-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 2.4rem;
+    letter-spacing: 0;
+}
+
+.textarea-group {
+    flex: 1;
+    margin-block: 0 1.6rem;
+    margin-inline: 1.6rem 0;
+}
+
+.wrapper .antd-custom-textarea {
+    border: 1px solid var(--border-color);
+    font-family: var(--tiktok-font);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    color: var(--text-color);
+
+    &:hover {
+        border-color: var(--border-color);
+    }
+
+    &:focus-within {
+        outline: 2px solid var(--purple-color);
+        transition: outline 0ms linear;
+    }
+}
+
+.btn-group {
+    margin-block-start: 3.2rem;
+    text-align: right;
+}
+
+.cancel-btn {
+    min-inline-size: unset;
+    inline-size: unset;
+    block-size: 3.4rem;
+    margin-inline: -0.4rem;
+    padding-inline: 0.4rem;
+    color: var(--black-color);
+
+    &:hover {
+        background-color: #e5e5e8;
+    }
+}
+
+.save-btn-wrapper {
+    display: inline-flex;
+    margin-inline-start: 1.6rem;
+}
+
+.save-btn-disabled-wrapper {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .save-btn {
+        pointer-events: none;
+    }
+}
+
+.save-btn {
+    min-inline-size: unset;
+    inline-size: unset;
+    block-size: 3.4rem;
+}
+
+.warning-banner {
+    display: flex;
+    align-items: center;
+    margin-block-start: 1.6rem;
+    padding: 1.6rem;
+    border: 1px solid #c4710d;
+    border-radius: 1.6rem;
+    background: var(--white-color);
+
+    span {
+        flex: 1;
+        max-inline-size: 80rem;
+        block-size: 3.2rem;
+        line-height: 3.2rem;
+        margin-inline-start: 1.6rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+}

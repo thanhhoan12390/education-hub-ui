@@ -2,7 +2,7 @@
 
 import { getBaseUrl } from './getBaseUrl';
 import axiosClient from './axiosClient';
-import { Cart, PurchasedList, Wishlist } from '~/types';
+import { Cart, Note, PurchasedList, Wishlist } from '~/types';
 import { revalidateTag } from 'next/cache';
 
 export async function addToCart(courseId: number): Promise<Cart | undefined> {
@@ -77,5 +77,44 @@ export async function checkoutCourses(cart: number[]): Promise<PurchasedList | u
         revalidateTag('purchased-list');
         revalidateTag('purchased-list-detail');
         revalidateTag('courses');
+    }
+}
+
+export async function addNote(noteInfo: Omit<Note, 'noteId'>) {
+    const url = `${getBaseUrl()}/api/notes`;
+
+    try {
+        const res = await axiosClient.post(url, noteInfo);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        revalidateTag('notes');
+    }
+}
+
+export async function updateNote(noteId: number, updateFields: Partial<Omit<Note, 'noteId'>>) {
+    const url = `${getBaseUrl()}/api/notes/${noteId}`;
+
+    try {
+        const res = await axiosClient.patch(url, updateFields);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        revalidateTag('notes');
+    }
+}
+
+export async function deleteNote(noteId: number) {
+    const url = `${getBaseUrl()}/api/notes/${noteId}`;
+
+    try {
+        const res = await axiosClient.delete(url);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    } finally {
+        revalidateTag('notes');
     }
 }

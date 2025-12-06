@@ -50,3 +50,13 @@ export interface StreamingPlayerHandle {
     play: () => Promise<void> | undefined;
     pause: () => void | undefined;
 }
+
+export interface Note {
+    noteId?: number;
+    time: number;
+    sectionOrder: number;
+    sectionTitle: string;
+    panelOrder: number;
+    panelTitle: string;
+    noteData: string;
+}
