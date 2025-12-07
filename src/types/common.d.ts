@@ -52,7 +52,7 @@ export interface StreamingPlayerHandle {
 }
 
 export interface Note {
-    noteId?: number;
+    noteId: number;
     time: number;
     sectionOrder: number;
     sectionTitle: string;

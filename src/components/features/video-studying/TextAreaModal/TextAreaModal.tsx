@@ -20,9 +20,20 @@ interface TextAreaModalProps {
     open?: boolean;
     onClose?: () => void;
     modalAction?: () => void;
+    hideDuration?: boolean;
+    className?: string;
 }
 
-function TextAreaModal({ time, open = true, onClose, note, onNoteChange, modalAction }: TextAreaModalProps) {
+function TextAreaModal({
+    time,
+    open = true,
+    onClose,
+    note,
+    onNoteChange,
+    modalAction,
+    hideDuration = false,
+    className,
+}: TextAreaModalProps) {
     const [isWarning, setIsWarning] = useState(false);
     const [isPending, startTransition] = useTransition();
 
@@ -68,11 +79,15 @@ function TextAreaModal({ time, open = true, onClose, note, onNoteChange, modalAc
     }, [open]);
 
     return open ? (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', className)}>
             <div className={cx('container')}>
-                <div className={cx('note-time')}>{formatTime(time ?? 0)}</div>
+                {!hideDuration && <div className={cx('note-time')}>{formatTime(time ?? 0)}</div>}
 
-                <div className={cx('textarea-group')}>
+                <div
+                    className={cx('textarea-group', {
+                        ['textarea-group-no-duration']: hideDuration,
+                    })}
+                >
                     <Input.TextArea
                         value={note}
                         rows={3}

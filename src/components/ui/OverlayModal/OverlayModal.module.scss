@@ -9,6 +9,7 @@
     transform: scale(0);
     backdrop-filter: blur(0.8rem);
     background: var(--overlay-color);
+    transition: opacity 100ms linear, transform 0ms linear 100ms;
     cursor: pointer;
     z-index: 9999;
 }

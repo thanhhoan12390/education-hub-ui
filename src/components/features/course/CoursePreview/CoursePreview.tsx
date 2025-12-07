@@ -60,7 +60,7 @@ function CoursePreview({ onClose }: CoursePreviewProps) {
                                 />
                             ) : (
                                 // "key trick" thay vì reusing cùng <StreamingPlayer> instance,
-                                // thêm key={src} để React tạo mới hẳn component mỗi khi đổi preview:
+                                // thêm key={data?.previewId} để React tạo mới hẳn component mỗi khi đổi preview
                                 <StreamingPlayer key={data?.previewId} src={data?.previewSrc ?? ''} />
                             )}
                         </div>

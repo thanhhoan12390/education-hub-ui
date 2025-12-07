@@ -27,16 +27,14 @@ function OverlayModal({ open = false, onClose, children, className }: OverlayMod
     if (!mounted) return null; // tránh gọi document khi SSR
 
     return ReactDOM.createPortal(
-        open && (
-            <div
-                className={cx('wrapper', className, {
-                    ['modal-open']: open,
-                })}
-                onClick={onClose}
-            >
-                {children}
-            </div>
-        ),
+        <div
+            className={cx('wrapper', className, {
+                ['modal-open']: open,
+            })}
+            onClick={onClose}
+        >
+            {children}
+        </div>,
         document.body,
     );
 }

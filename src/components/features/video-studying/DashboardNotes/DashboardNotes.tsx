@@ -10,6 +10,7 @@ import { Note } from '~/types';
 import { formatTime } from '~/utils/formatTime';
 import TextAreaModal from '~/components/features/video-studying/TextAreaModal';
 import { addNote } from '~/lib/actions';
+import NoteDisplayItem from '~/components/features/video-studying/NoteDisplayItem';
 import styles from './DashboardNotes.module.scss';
 
 const cx = classNames.bind(styles);
@@ -52,28 +53,41 @@ function DashboardNotes({ curStreamingTime, activePanelData }: DashboardNotesPro
                 open={isOpenNote}
                 onClose={() => setIsOpenNote(false)}
                 modalAction={async () => {
-                    await addNote({
+                    const data = {
                         noteData: note,
                         panelOrder: activePanelData.activePanelIndex,
                         panelTitle: activePanelData.activePanelTitle,
                         sectionOrder: activePanelData.sectionIndex,
                         sectionTitle: activePanelData.sectionTitle,
                         time: curStreamingTime ?? 0,
-                    });
+                    };
+
+                    await addNote(data);
+
+                    // Optimistic UI update, Cập nhật UI ngay lập tức, không đợi response
+                    mutateNotes(
+                        (currentNotes) => {
+                            if (currentNotes) {
+                                // thêm trước một id ngẫu nhiên để Optimistic,
+                                // sau đó sẽ được mutate sau nên không cần chính xác tuyệt đối
+                                const predictedId = (currentNotes[0]?.noteId ?? 0) + 1000000000;
+
+                                return [{ ...data, noteId: predictedId }, ...currentNotes];
+                            }
+                        },
+                        { revalidate: false, rollbackOnError: true },
+                    );
 
                     mutateNotes();
                     setNote('');
                 }}
             />
 
-            {allNotes?.map((item, index) => {
-                return (
-                    <div key={index}>
-                        {item.time}
-                        <pre>{item.noteData}</pre>
-                    </div>
-                );
-            })}
+            <div className={cx('note-bookmarks')}>
+                {allNotes?.map((item, index) => {
+                    return <NoteDisplayItem key={index} noteInfo={item} onMutateNotes={mutateNotes} />;
+                })}
+            </div>
         </div>
     );
 }

@@ -200,9 +200,9 @@ function VideoStudying() {
                                 </Flex>
                             ) : (
                                 // "key trick" thay vì reusing cùng <StreamingPlayer> instance,
-                                // thêm key={src} để React tạo mới hẳn component mỗi khi đổi preview:
+                                // thêm key={activePanelData.activePanelIndex} để React tạo mới hẳn component mỗi khi đổi preview
                                 <StreamingPlayer
-                                    key={data?.previewId}
+                                    key={activePanelData.activePanelIndex}
                                     onTimeUpdate={setCurStreamingTime}
                                     style={{ position: 'unset' }}
                                     src={data?.previewSrc ?? ''}
