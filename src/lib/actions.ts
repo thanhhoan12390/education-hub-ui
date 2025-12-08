@@ -80,7 +80,7 @@ export async function checkoutCourses(cart: number[]): Promise<PurchasedList | u
     }
 }
 
-export async function addNote(noteInfo: Omit<Note, 'noteId'>) {
+export async function addNote(noteInfo: Omit<Note, 'noteId'>): Promise<Note | undefined> {
     const url = `${getBaseUrl()}/api/notes`;
 
     try {
@@ -93,7 +93,10 @@ export async function addNote(noteInfo: Omit<Note, 'noteId'>) {
     }
 }
 
-export async function updateNote(noteId: number, updateFields: Partial<Omit<Note, 'noteId'>>) {
+export async function updateNote(
+    noteId: number,
+    updateFields: Partial<Omit<Note, 'noteId'>>,
+): Promise<Note | undefined> {
     const url = `${getBaseUrl()}/api/notes/${noteId}`;
 
     try {

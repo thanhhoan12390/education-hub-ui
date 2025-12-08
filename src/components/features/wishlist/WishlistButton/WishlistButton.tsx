@@ -7,7 +7,7 @@ import { faHeart as solidFaHeart } from '@fortawesome/free-solid-svg-icons';
 import { MouseEvent, useTransition } from 'react';
 import useSWR, { mutate as mutateGlobal } from 'swr';
 import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 import { addToWishlist, removeFromWishlist } from '~/lib/actions';
 import FlexibleButton from '~/components/ui/FlexibleButton';
@@ -88,7 +88,7 @@ function WishlistButton({ courseId, className, whiteTheme = false }: WishlistBut
                 <FlexibleButton rounded large className={cx('popover-whist')}>
                     <Spin
                         style={{ color: whiteTheme ? 'var(--white-color)' : 'var(--purple-color)' }}
-                        indicator={<LoadingOutlined spin />}
+                        indicator={<Loading3QuartersOutlined spin />}
                         size="default"
                     />
                 </FlexibleButton>

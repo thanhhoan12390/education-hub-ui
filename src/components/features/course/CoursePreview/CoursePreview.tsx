@@ -2,13 +2,13 @@ import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 import { useState } from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { Spin, Skeleton } from 'antd';
 
 const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'), {
     ssr: false, // tránh SSR load video.js
     loading: () => (
-        <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />
+        <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<Loading3QuartersOutlined spin />} size="large" />
     ),
 });
 import PreviewSample from '../PreviewSample';
@@ -55,7 +55,7 @@ function CoursePreview({ onClose }: CoursePreviewProps) {
                             {isLoading ? (
                                 <Spin
                                     style={{ color: 'var(--gray-color-100)' }}
-                                    indicator={<LoadingOutlined spin />}
+                                    indicator={<Loading3QuartersOutlined spin />}
                                     size="large"
                                 />
                             ) : (

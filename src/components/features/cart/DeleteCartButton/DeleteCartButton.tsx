@@ -2,7 +2,7 @@
 
 import classNames from 'classnames/bind';
 import { useTransition } from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { mutate as mutateGlobal } from 'swr';
 
@@ -29,7 +29,10 @@ function DeleteCartButton({ courseId }: DeleteCartButtonProps) {
             light
             small
         >
-            <Spin indicator={<LoadingOutlined style={{ color: 'var(--purple-color)' }} spin />} size="default" />
+            <Spin
+                indicator={<Loading3QuartersOutlined style={{ color: 'var(--purple-color)' }} spin />}
+                size="default"
+            />
         </FlexibleButton>
     ) : (
         <FlexibleButton

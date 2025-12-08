@@ -4,13 +4,18 @@ import styles from './PopperWrapper.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface PopperWrapperProps {
+interface PopperWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactElement;
     className?: string;
+    ref?: React.Ref<HTMLDivElement>;
 }
 
-function PopperWrapper({ children, className }: PopperWrapperProps) {
-    return <div className={cx('wrapper', className)}>{children}</div>;
+function PopperWrapper({ children, className, ref, ...rest }: PopperWrapperProps) {
+    return (
+        <div ref={ref} className={cx('wrapper', className)} {...rest}>
+            {children}
+        </div>
+    );
 }
 
 export default PopperWrapper;

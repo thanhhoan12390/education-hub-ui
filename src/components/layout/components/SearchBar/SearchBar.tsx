@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import useSWR from 'swr';
 import { Alert, Flex, Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 import SearchItem from '../SearchItem';
 import SearchAutoComplete from '../SearchAutoComplete';
@@ -108,7 +108,7 @@ function SearchBar({ overlaySearch = false }: SearchBarProps) {
             {isLoading && isOpen && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     <Flex align="center" gap="middle" justify="center" style={{ paddingBlock: '1rem' }}>
-                        <Spin indicator={<LoadingOutlined style={{ fontSize: '3.2rem' }} spin />} />
+                        <Spin indicator={<Loading3QuartersOutlined style={{ fontSize: '3.2rem' }} spin />} />
                     </Flex>
                 </div>
             )}

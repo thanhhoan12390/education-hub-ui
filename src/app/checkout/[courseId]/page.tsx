@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEarth } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import useSWR from 'swr';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { Flex, Spin } from 'antd';
 import { useParams } from 'next/navigation';
 
@@ -34,7 +34,11 @@ function Checkout() {
                 gap="middle"
                 style={{ inlineSize: '100%', minBlockSize: 'calc(100vb - 12rem)' }}
             >
-                <Spin indicator={<LoadingOutlined style={{ color: 'var(--purple-color)', fontSize: '6rem' }} spin />} />
+                <Spin
+                    indicator={
+                        <Loading3QuartersOutlined style={{ color: 'var(--purple-color)', fontSize: '6rem' }} spin />
+                    }
+                />
             </Flex>
         );
 

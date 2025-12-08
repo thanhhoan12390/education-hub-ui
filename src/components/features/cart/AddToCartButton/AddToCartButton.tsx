@@ -2,7 +2,7 @@
 
 import { useTransition } from 'react';
 import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import useSWR, { mutate as mutateGlobal } from 'swr';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
@@ -60,7 +60,7 @@ function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToC
             {isPending || isLoading ? (
                 <Spin
                     style={noPrimary ? { color: 'var(--purple-color)' } : { color: 'var(--gray-color-100)' }}
-                    indicator={<LoadingOutlined spin />}
+                    indicator={<Loading3QuartersOutlined spin />}
                     size={noPrimary ? 'default' : 'large'}
                 />
             ) : (
@@ -72,7 +72,7 @@ function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToC
             {isPending || isLoading ? (
                 <Spin
                     style={noPrimary ? { color: 'var(--purple-color)' } : { color: 'var(--gray-color-100)' }}
-                    indicator={<LoadingOutlined spin />}
+                    indicator={<Loading3QuartersOutlined spin />}
                     size={noPrimary ? 'default' : 'large'}
                 />
             ) : (

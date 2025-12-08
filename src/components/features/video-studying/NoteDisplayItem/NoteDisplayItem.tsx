@@ -46,7 +46,7 @@ function NoteDisplayItem({ noteInfo, onMutateNotes }: NoteDisplayItemProps) {
             { revalidate: false, rollbackOnError: true },
         );
 
-        onMutateNotes?.();
+        // onMutateNotes?.();
     };
 
     const handleDeleteNote = () =>
@@ -61,7 +61,7 @@ function NoteDisplayItem({ noteInfo, onMutateNotes }: NoteDisplayItemProps) {
 
             setIsOpenDeleteConfirm(false);
 
-            onMutateNotes?.();
+            // onMutateNotes?.();
         });
 
     return (

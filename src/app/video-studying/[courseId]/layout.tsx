@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { getCourseById, getPurchasedList } from '~/lib/data';
 import images from '~/assets/images';
+import Footer from '~/components/layout/components/Footer';
 import styles from './VideoStudying.module.scss';
 
 const cx = classNames.bind(styles);
@@ -34,6 +35,7 @@ async function VideoStudyingLayout({ children, params }: VideoStudyingLayoutProp
                 <h1 className={cx('header-title')}>{course.title}</h1>
             </header>
             <main className={cx('main-container')}>{children}</main>
+            <Footer />
         </div>
     );
 }

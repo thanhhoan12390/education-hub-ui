@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import useSWR from 'swr';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,7 +33,7 @@ function PreviewSample({ previewId, isCurrent, onClick }: PreviewSampleProps) {
         >
             <div className={cx('preview-thumbnail')}>
                 {isLoading ? (
-                    <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} />
+                    <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<Loading3QuartersOutlined spin />} />
                 ) : (
                     <Image
                         src={data?.thumbNail ?? ''}

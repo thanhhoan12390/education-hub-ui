@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { useTransition } from 'react';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { useRouter } from 'next/navigation';
 
@@ -40,7 +40,7 @@ function CheckoutButton({ totalPrice, cart }: CheckoutButtonProps) {
                 <FlexibleButton large primary>
                     <Spin
                         style={{ color: 'var(--gray-color-100)' }}
-                        indicator={<LoadingOutlined spin />}
+                        indicator={<Loading3QuartersOutlined spin />}
                         size="large"
                     />
                 </FlexibleButton>

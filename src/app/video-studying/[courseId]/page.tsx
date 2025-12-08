@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import { useParams } from 'next/navigation';
 import { Spin, Flex } from 'antd';
@@ -14,7 +14,11 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
     ssr: false, // tránh SSR load video.js
     loading: () => (
         <Flex justify="center" align="center" style={{ blockSize: '100%' }}>
-            <Spin style={{ color: 'var(--gray-color-100)' }} indicator={<LoadingOutlined spin />} size="large" />
+            <Spin
+                style={{ color: 'var(--gray-color-100)' }}
+                indicator={<Loading3QuartersOutlined spin />}
+                size="large"
+            />
         </Flex>
     ),
 });
@@ -194,7 +198,7 @@ function VideoStudying() {
                                 <Flex justify="center" align="center" style={{ blockSize: '100%' }}>
                                     <Spin
                                         style={{ color: 'var(--gray-color-100)' }}
-                                        indicator={<LoadingOutlined spin />}
+                                        indicator={<Loading3QuartersOutlined spin />}
                                         size="large"
                                     />
                                 </Flex>
