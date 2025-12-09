@@ -39,7 +39,7 @@ function PreviewModalButton({ isOverlayButton }: PreviewModalButtonProps) {
             )}
 
             <OverlayModal open={isOpenModal} onClose={() => setIsOpenModal(false)}>
-                <CoursePreview onClose={() => setIsOpenModal(false)} />
+                <CoursePreview open={isOpenModal} onClose={() => setIsOpenModal(false)} />
             </OverlayModal>
         </Fragment>
     );

@@ -13,18 +13,19 @@ const StreamingPlayer = dynamic(() => import('~/components/ui/StreamingPlayer'),
 });
 import PreviewSample from '../PreviewSample';
 import { Preview } from '~/types';
-import styles from './CoursePreview.module.scss';
-import FlexibleButton from '~/components/ui/FlexibleButton/FlexibleButton';
+import FlexibleButton from '~/components/ui/FlexibleButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import styles from './CoursePreview.module.scss';
 
 const cx = classNames.bind(styles);
 
 interface CoursePreviewProps {
+    open?: boolean;
     onClose?: () => void;
 }
 
-function CoursePreview({ onClose }: CoursePreviewProps) {
+function CoursePreview({ open = false, onClose }: CoursePreviewProps) {
     const [selectedId, setSelectedId] = useState(1);
 
     const url = `/api/previews/${selectedId}`;
@@ -33,7 +34,7 @@ function CoursePreview({ onClose }: CoursePreviewProps) {
         revalidateOnFocus: false,
     });
 
-    return (
+    return open ? (
         <div className={cx('wrapper')}>
             <div className={cx('container')} onClick={(e) => e.stopPropagation()}>
                 <div className={cx('preview-container')}>
@@ -85,7 +86,7 @@ function CoursePreview({ onClose }: CoursePreviewProps) {
                 </FlexibleButton>
             </div>
         </div>
-    );
+    ) : null;
 }
 
 export default CoursePreview;
