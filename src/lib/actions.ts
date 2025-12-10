@@ -109,7 +109,7 @@ export async function updateNote(
     }
 }
 
-export async function deleteNote(noteId: number) {
+export async function deleteNote(noteId: number): Promise<{ message?: string; error?: string } | undefined> {
     const url = `${getBaseUrl()}/api/notes/${noteId}`;
 
     try {

@@ -27,8 +27,6 @@ function NoteDisplayItem({ noteInfo, onMutateNotes }: NoteDisplayItemProps) {
     const [isOpenDeleteConfirm, setIsOpenDeleteConfirm] = useState(false);
     const [note, setNote] = useState('');
 
-    const [isPending, startTransition] = useTransition();
-
     const handleUpdateNote = async () => {
         await updateNote(noteInfo.noteId, { noteData: note });
         // Optimistic UI update, Cập nhật UI ngay lập tức, không đợi response
@@ -49,20 +47,21 @@ function NoteDisplayItem({ noteInfo, onMutateNotes }: NoteDisplayItemProps) {
         // onMutateNotes?.();
     };
 
-    const handleDeleteNote = () =>
-        startTransition(async () => {
-            await deleteNote(noteInfo.noteId);
-
-            // Optimistic UI update, Cập nhật UI ngay lập tức, không đợi response
-            onMutateNotes?.((currentNotes) => currentNotes?.filter((item) => item.noteId !== noteInfo.noteId), {
-                revalidate: false,
-                rollbackOnError: true,
-            });
-
-            setIsOpenDeleteConfirm(false);
-
-            // onMutateNotes?.();
+    const handleDeleteNote = async () => {
+        onMutateNotes?.((currentNotes) => currentNotes?.filter((item) => item.noteId !== noteInfo.noteId), {
+            revalidate: false,
+            rollbackOnError: true,
         });
+
+        //dùng Optimistic UI update xong đóng, giống hành vi của Udemy, await và validate nếu có lỗi
+        setIsOpenDeleteConfirm(false);
+
+        const res = await deleteNote(noteInfo.noteId);
+
+        if (res?.error) {
+            onMutateNotes?.();
+        }
+    };
 
     return (
         <Fragment>
@@ -134,16 +133,11 @@ function NoteDisplayItem({ noteInfo, onMutateNotes }: NoteDisplayItemProps) {
                             >
                                 Cancel
                             </FlexibleButton>
-                            <div
-                                className={cx('ok-btn-wrapper', {
-                                    ['ok-btn-disabled-wrapper']: isPending,
-                                })}
-                            >
+                            <div className={cx('ok-btn-wrapper')}>
                                 <FlexibleButton
                                     className={cx('delete-modal-ok-btn')}
                                     primary
                                     onClick={handleDeleteNote}
-                                    disabled={isPending}
                                 >
                                     OK
                                 </FlexibleButton>

@@ -107,9 +107,16 @@ function TextAreaModal({
                     />
 
                     <div className={cx('btn-group')}>
-                        <FlexibleButton onClick={onClose} className={cx('cancel-btn')} hover>
-                            Cancel
-                        </FlexibleButton>
+                        <div
+                            className={cx('cancel-btn-wrapper', {
+                                ['cancel-btn-disabled-wrapper']: isPending,
+                            })}
+                        >
+                            <FlexibleButton onClick={onClose} className={cx('cancel-btn')} hover disabled={isPending}>
+                                Cancel
+                            </FlexibleButton>
+                        </div>
+
                         <div
                             className={cx('save-btn-wrapper', {
                                 ['save-btn-disabled-wrapper']: isPending,

@@ -54,14 +54,23 @@
 
 .btn-group {
     margin-block-start: 3.2rem;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel-btn-wrapper {
+    margin-inline: -0.4rem;
+}
+
+.cancel-btn-disabled-wrapper {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .cancel-btn {
     min-inline-size: unset;
     inline-size: unset;
     block-size: 3.4rem;
-    margin-inline: -0.4rem;
     padding-inline: 0.4rem;
     color: var(--black-color);
 
