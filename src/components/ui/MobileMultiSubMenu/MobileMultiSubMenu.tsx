@@ -114,103 +114,101 @@ function MobileMultiSubMenu({ menuFieldData = [], open, onClose }: MobileMultiSu
     };
 
     return (
-        <Fragment>
+        <div
+            className={cx('wrapper', {
+                ['menu-show']: open,
+            })}
+            onClick={(e) => e.stopPropagation()}
+        >
+            {/* first level menu container*/}
             <div
-                className={cx('wrapper', {
-                    ['menu-show']: open,
+                className={cx('menu-container', {
+                    ['menu-container-hidden']: history.length > 1,
                 })}
-                onClick={(e) => e.stopPropagation()}
             >
-                {/* first level menu container*/}
+                <div className={cx('welcome-section')}>
+                    <div className={cx('avatar')}>HT</div>
+
+                    <div className={cx('avatar-name-group')}>
+                        <div className={cx('avatar-name')}>Hi, Phan Thanh Hoan</div>
+                        <div className={cx('avatar-text')}>Welcome back</div>
+                    </div>
+                    <div className={cx('chevron-icon')}>
+                        <FontAwesomeIcon fontSize="1rem" icon={faChevronRight} />
+                    </div>
+                </div>
+
+                <h2 className={cx('section-heading')}>Learn</h2>
+                <ul className={cx('section-list')}>
+                    <li>
+                        <button
+                            className={cx('section-item')}
+                            onClick={() => {
+                                router.push('/my-courses');
+                                onClose?.();
+                            }}
+                        >
+                            <div className={cx('section-text')}>My learning</div>
+                        </button>
+                    </li>
+                </ul>
+
+                {/* rendered menu */}
+                {renderMenu()}
+
+                <h2 style={{ borderBlockStart: '1px solid var(--border-color)' }} className={cx('section-heading')}>
+                    More on website
+                </h2>
+                <ul className={cx('section-list')}>
+                    <li>
+                        <button className={cx('section-item')}>
+                            <div className={cx('section-text')}>Try Business</div>
+                        </button>
+                    </li>
+                    <li>
+                        <button className={cx('section-item')}>
+                            <div className={cx('section-text')}>Get the app</div>
+                        </button>
+                    </li>
+                    <li>
+                        <button className={cx('section-item')}>
+                            <div className={cx('section-text')}>Invite friends</div>
+                        </button>
+                    </li>
+                    <li>
+                        <button className={cx('section-item')}>
+                            <div className={cx('section-text')}>Help and Support</div>
+                        </button>
+                    </li>
+                </ul>
+
+                <FlexibleButton outline className={cx('language-btn')}>
+                    <FontAwesomeIcon icon={faEarth} />
+                    <span>English</span>
+                </FlexibleButton>
+            </div>
+
+            {/* levels menu container*/}
+            {/* giả sử tối đa 5 cấp menu */}
+            {Array.from({ length: 5 }).map((_, index) => (
                 <div
-                    className={cx('menu-container', {
-                        ['menu-container-hidden']: history.length > 1,
+                    key={index}
+                    className={cx('levels-menu-container', {
+                        ['levels-menu-container-visible']: history.length === index + 2,
                     })}
                 >
-                    <div className={cx('welcome-section')}>
-                        <div className={cx('avatar')}>HT</div>
-
-                        <div className={cx('avatar-name-group')}>
-                            <div className={cx('avatar-name')}>Hi, Phan Thanh Hoan</div>
-                            <div className={cx('avatar-text')}>Welcome back</div>
-                        </div>
+                    <div onClick={handleBack} className={cx('back-btn')}>
                         <div className={cx('chevron-icon')}>
-                            <FontAwesomeIcon fontSize="1rem" icon={faChevronRight} />
+                            <FontAwesomeIcon fontSize="1rem" icon={faChevronLeft} />
                         </div>
+                        <div className={cx('back-text')}>Menu</div>
                     </div>
-
-                    <h2 className={cx('section-heading')}>Learn</h2>
-                    <ul className={cx('section-list')}>
-                        <li>
-                            <button
-                                className={cx('section-item')}
-                                onClick={() => {
-                                    router.push('/my-courses');
-                                    onClose?.();
-                                }}
-                            >
-                                <div className={cx('section-text')}>My learning</div>
-                            </button>
-                        </li>
-                    </ul>
 
                     {/* rendered menu */}
                     {renderMenu()}
-
-                    <h2 style={{ borderBlockStart: '1px solid var(--border-color)' }} className={cx('section-heading')}>
-                        More on website
-                    </h2>
-                    <ul className={cx('section-list')}>
-                        <li>
-                            <button className={cx('section-item')}>
-                                <div className={cx('section-text')}>Try Business</div>
-                            </button>
-                        </li>
-                        <li>
-                            <button className={cx('section-item')}>
-                                <div className={cx('section-text')}>Get the app</div>
-                            </button>
-                        </li>
-                        <li>
-                            <button className={cx('section-item')}>
-                                <div className={cx('section-text')}>Invite friends</div>
-                            </button>
-                        </li>
-                        <li>
-                            <button className={cx('section-item')}>
-                                <div className={cx('section-text')}>Help and Support</div>
-                            </button>
-                        </li>
-                    </ul>
-
-                    <FlexibleButton outline className={cx('language-btn')}>
-                        <FontAwesomeIcon icon={faEarth} />
-                        <span>English</span>
-                    </FlexibleButton>
                 </div>
-
-                {/* levels menu container*/}
-                {/* giả sử tối đa 5 cấp menu */}
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <div
-                        key={index}
-                        className={cx('levels-menu-container', {
-                            ['levels-menu-container-visible']: history.length === index + 2,
-                        })}
-                    >
-                        <div onClick={handleBack} className={cx('back-btn')}>
-                            <div className={cx('chevron-icon')}>
-                                <FontAwesomeIcon fontSize="1rem" icon={faChevronLeft} />
-                            </div>
-                            <div className={cx('back-text')}>Menu</div>
-                        </div>
-
-                        {/* rendered menu */}
-                        {renderMenu()}
-                    </div>
-                ))}
-            </div>
-        </Fragment>
+            ))}
+        </div>
     );
 }
 

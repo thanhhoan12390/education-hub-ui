@@ -10,12 +10,13 @@ const cx = classNames.bind(styles);
 
 interface SearchAutoCompleteProps {
     searchText: string;
+    onSearchChange?: (v: string) => void;
 }
 
-function SearchAutoComplete({ searchText }: SearchAutoCompleteProps) {
+function SearchAutoComplete({ searchText, onSearchChange }: SearchAutoCompleteProps) {
     return (
-        <div className={cx('wrapper')}>
-            <Link href="" className={cx('container')}>
+        <div className={cx('wrapper')} onClick={() => onSearchChange?.(searchText)}>
+            <Link prefetch={false} href={`/search?q=${encodeURIComponent(searchText)}`} className={cx('container')}>
                 <div className={cx('search-icon')}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>

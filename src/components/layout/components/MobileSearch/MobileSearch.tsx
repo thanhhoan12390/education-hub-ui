@@ -22,7 +22,7 @@ function MobileSearch() {
 
             <OverlayModal open={isOpen}>
                 <div className={cx('search-overlay-wrapper')}>
-                    <SearchBar overlaySearch />
+                    <SearchBar overlaySearch onHideSearchOverlay={() => setIsOpen(false)} />
                     <button className={cx('search-close-btn')} onClick={() => setIsOpen(false)}>
                         <FontAwesomeIcon icon={faXmark} />
                     </button>

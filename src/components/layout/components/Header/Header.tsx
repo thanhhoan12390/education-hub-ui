@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
+import { Suspense } from 'react';
 
 import images from '~/assets/images';
 import MultiSubNavigationMenu from '~/components/ui/MultiSubNavigationMenu';
@@ -397,7 +398,9 @@ function Header() {
             </nav>
 
             {/* Search bar */}
-            <SearchBar />
+            <Suspense fallback={<div className={cx('search-bar-skeleton')} />}>
+                <SearchBar />
+            </Suspense>
 
             <div className={cx('nav-item', 'nav-business', 'align-end')}>
                 <Link className={cx('nav-link')} href="">

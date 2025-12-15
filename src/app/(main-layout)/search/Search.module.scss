@@ -1,0 +1,72 @@
+.wrapper {
+    background-color: var(--white-color);
+}
+
+.suggestion-header {
+    padding-block: 2.4rem;
+    padding-inline: 0;
+    background-color: var(--gray-color-100);
+    box-shadow: 0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent),
+        0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent);
+}
+
+.suggestion-container {
+    inline-size: 100%;
+    max-inline-size: 134rem;
+    margin-inline: auto;
+    padding-inline: 2.4rem 2.4rem;
+}
+
+.suggestion-heading {
+    max-inline-size: 60rem;
+    margin-block-end: 1.6rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+
+    span {
+        font-weight: 700;
+    }
+}
+
+.suggestion-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.suggestion-tags .suggestion-btn {
+    inline-size: unset;
+    margin-left: 0rem;
+    border-color: var(--btn-focus-light-background-color);
+    background-color: var(--white-color);
+
+    &:hover {
+        background-color: var(--gray-color-100);
+    }
+
+    span {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        letter-spacing: 0;
+        color: var(--text-color);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.suggestion-icon {
+    font-size: 1.4rem;
+    margin-inline-end: 0.4rem;
+    color: var(--purple-color);
+}
+
+.main-container {
+    inline-size: 100%;
+    max-inline-size: 134rem;
+    margin-inline: auto;
+    padding-inline: 2.4rem 2.4rem;
+}

@@ -63,6 +63,19 @@
     }
 }
 
+.search-bar-skeleton {
+    position: relative;
+    flex: 1;
+    block-size: 4.8rem;
+    inline-size: 100%;
+    min-inline-size: 18rem;
+    margin-inline: 1.2rem;
+    margin-block: 0;
+    z-index: 9;
+    border-radius: 999rem;
+    background-color: var(--gray-color-100);
+}
+
 .nav-business {
     position: relative;
 

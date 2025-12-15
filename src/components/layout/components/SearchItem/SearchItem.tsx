@@ -14,9 +14,10 @@ const cx = classNames.bind(styles);
 
 interface SearchItemProps {
     searchItemURL: string;
+    onSearchChange?: (v: string) => void;
 }
 
-function SearchItem({ searchItemURL }: SearchItemProps) {
+function SearchItem({ searchItemURL, onSearchChange }: SearchItemProps) {
     const { data, error, isLoading } = useSWR<SearchItemInfo>(searchItemURL, {
         revalidateOnFocus: false,
     });
@@ -33,8 +34,8 @@ function SearchItem({ searchItemURL }: SearchItemProps) {
         );
 
     return data ? (
-        <div className={cx('wrapper')}>
-            <Link href="" className={cx('container')}>
+        <div className={cx('wrapper')} onClick={() => onSearchChange?.(data.name)}>
+            <Link prefetch={false} href={`/search?q=${encodeURIComponent(data.name)}`} className={cx('container')}>
                 <div className={cx('search-img')}>
                     <Image
                         src={data.sprites.other['official-artwork'].front_default}

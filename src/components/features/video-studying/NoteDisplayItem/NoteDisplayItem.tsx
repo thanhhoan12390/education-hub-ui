@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { useState, memo, Fragment, useTransition } from 'react';
+import { useState, memo, Fragment } from 'react';
 import type { KeyedMutator } from 'swr';
 
 import { Note } from '~/types';
