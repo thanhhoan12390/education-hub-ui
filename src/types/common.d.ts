@@ -15,6 +15,9 @@ export interface Course {
     ratingCount: number;
     price: number;
     bestSeller?: boolean;
+    level?: 'beginner' | 'intermediate' | 'expert';
+    hasExercises?: boolean;
+    hasPracticeTest?: boolean;
 }
 
 export interface ListParams {

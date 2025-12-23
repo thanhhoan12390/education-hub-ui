@@ -5,7 +5,7 @@ import styles from './PopperWrapper.module.scss';
 const cx = classNames.bind(styles);
 
 interface PopperWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactElement;
+    children: React.ReactNode;
     className?: string;
     ref?: React.Ref<HTMLDivElement>;
 }

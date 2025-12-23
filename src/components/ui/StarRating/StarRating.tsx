@@ -13,9 +13,10 @@ interface StarRatingProps {
     rating: number;
     style?: React.CSSProperties;
     className?: string;
+    isPreventDefault?: boolean;
 }
 
-function StarRating({ rating = 0, style, className }: StarRatingProps) {
+function StarRating({ rating = 0, style, isPreventDefault = true, className }: StarRatingProps) {
     const ratingRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -28,7 +29,12 @@ function StarRating({ rating = 0, style, className }: StarRatingProps) {
 
     return (
         <div className={cx('card-rating-wrapper', className)} style={style}>
-            <span className={cx('card-rating')} onClick={(e) => e.preventDefault()}>
+            <span
+                className={cx('card-rating')}
+                onClick={(e) => {
+                    if (isPreventDefault) e.preventDefault();
+                }}
+            >
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />
                 <FontAwesomeIcon icon={faStar} className={cx('card-star-icon')} />

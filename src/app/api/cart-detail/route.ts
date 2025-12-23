@@ -30,6 +30,9 @@ export async function GET() {
                     ratingCount: 1,
                     price: 1,
                     bestSeller: 1,
+                    level: 1,
+                    hasExercises: 1,
+                    hasPracticeTest: 1,
                 },
             },
         ]);

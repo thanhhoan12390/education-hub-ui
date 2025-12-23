@@ -11,6 +11,9 @@ const CourseSchema = new Schema<Course>({
     ratingCount: { type: Number, required: true },
     price: { type: Number, required: true },
     bestSeller: { type: Boolean, required: false },
+    level: { type: String, required: true },
+    hasExercises: { type: Boolean, required: false },
+    hasPracticeTest: { type: Boolean, required: false },
 });
 
 // Thêm middleware trước khi lưu

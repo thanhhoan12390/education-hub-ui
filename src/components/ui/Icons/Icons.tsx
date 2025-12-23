@@ -41,3 +41,31 @@ export const MenuIcon = ({
         <path d="M6 8.5H18" stroke="#000000" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
+
+export const ListIcon = ({
+    width = '2.4rem',
+    height = '2.4rem',
+    className,
+}: {
+    width?: string;
+    height?: string;
+    className?: string;
+}) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M3 6h18M7 12h10m-7 6h4"
+        />
+    </svg>
+);
