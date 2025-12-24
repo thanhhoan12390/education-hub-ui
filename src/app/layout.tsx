@@ -6,6 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { AntdRegistry } from '@ant-design/nextjs-registry'; //extract and inject AntD's first-screen styles into HTML to avoid page flicker: https://ant.design/docs/react/use-with-next#using-app-router
 
 import SWRProvider from '~/providers/SWRProvider';
+import StoreProvider from './StoreProvider';
 import '~/styles/globals.scss';
 
 config.autoAddCss = false; // Ngăn FA tự chèn CSS chậm trong Fontawesome
@@ -40,12 +41,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${tikTokFont.variable} ${tikTokDisplayFont.variable}`}>
-            <body>
-                <SWRProvider>
-                    <AntdRegistry>{children}</AntdRegistry>
-                </SWRProvider>
-            </body>
-        </html>
+        <StoreProvider>
+            <html lang="en" className={`${tikTokFont.variable} ${tikTokDisplayFont.variable}`}>
+                <body>
+                    <SWRProvider>
+                        <AntdRegistry>{children}</AntdRegistry>
+                    </SWRProvider>
+                </body>
+            </html>
+        </StoreProvider>
     );
 }

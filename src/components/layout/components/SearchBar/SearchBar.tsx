@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import useSWR from 'swr';
 import { Alert, Flex, Spin } from 'antd';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -12,7 +11,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import SearchItem from '../SearchItem';
 import SearchAutoComplete from '../SearchAutoComplete';
 import useDebounce from '~/hooks/useDebounce';
-import type { ListPokemon } from '~/types';
+import { useGetPokemonQuery } from '~/lib/features/search/searchApiSlice';
 import styles from './SearchBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -35,13 +34,10 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
 
     const debouncedValue = useDebounce(searchValue, 500);
 
-    const baseURl = 'https://pokeapi.co/api/v2/pokemon';
-
-    // chi goi khi co debouncedValue
-    const { data, error, isLoading } = useSWR<ListPokemon>(
-        debouncedValue ? [baseURl, { limit: 1000, offset: 0 }] : null,
+    const { data, isError, isLoading } = useGetPokemonQuery(
+        { limit: 1000, offset: 0 },
         {
-            revalidateOnFocus: false,
+            skip: !debouncedValue, // chỉ gọi API khi có debouncedValue
         },
     );
 
@@ -150,7 +146,7 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
                 </div>
             )}
 
-            {error && isOpen && (
+            {isError && isOpen && (
                 <div className={cx('search-result')} tabIndex={-1}>
                     <Alert
                         type="error"

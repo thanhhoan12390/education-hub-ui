@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faCode, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '~/lib/hooks';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import { ListIcon } from '~/components/ui/Icons';
@@ -11,6 +12,7 @@ import ClickableDropdown from '~/components/ui/ClickableDropdown';
 import CustomCheckbox from '~/components/ui/CustomCheckbox';
 import CustomRadio from '~/components/ui/CustomRadio';
 import StarRating from '~/components/ui/StarRating';
+import { selectHasExercises, toggleExercises } from '~/lib/features/search/searchFilterSlice';
 import styles from './SearchFiltersBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -23,6 +25,12 @@ function SearchFiltersBar() {
     const [radioCheckedId, setRadioCheckedId] = useState<number | null>(null);
     const [languageCheckedList, setLanguageCheckedList] = useState<Array<string>>([]);
     const [levelCheckedList, setLevelCheckedList] = useState<Array<string>>([]);
+
+    const hasExercises = useAppSelector(selectHasExercises);
+
+    console.log(hasExercises);
+
+    const dispatch = useAppDispatch();
 
     const handleLanguageCheckedList = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLanguageCheckedList((pre) => {
@@ -56,7 +64,12 @@ function SearchFiltersBar() {
                     <span>All filters</span>
                 </FlexibleButton>
 
-                <FlexibleButton outline rounded className={cx('search-style-btn')}>
+                <FlexibleButton
+                    onClick={() => dispatch(toggleExercises())}
+                    outline
+                    rounded
+                    className={cx('search-style-btn')}
+                >
                     <FontAwesomeIcon icon={faCode} fontSize="1.2rem" />
                     <span>Coding Exercises</span>
                 </FlexibleButton>
