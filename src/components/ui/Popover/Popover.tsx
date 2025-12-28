@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames/bind';
 import ReactDOM from 'react-dom';
 import { useRef, useState, useEffect } from 'react';
@@ -8,10 +10,17 @@ const cx = classNames.bind(styles);
 
 interface PopoverProps {
     children: React.ReactNode;
-    targetRef: React.RefObject<HTMLDivElement | null>;
+    targetRef: React.RefObject<HTMLElement | null>;
     className?: string;
 }
 
+/**
+ * Popover hiển thị nội dung trong portal gắn vào document.body
+ * và tự động canh vị trí theo targetRef.
+ *
+ * @param {PopoverProps} props
+ * @returns {React.ReactPortal}
+ */
 function Popover({ children, targetRef, className }: PopoverProps) {
     const [arrowDirection, setArrowDirection] = useState<
         'popover-arrow-left' | 'popover-arrow-bottom' | 'popover-arrow-right'

@@ -1,0 +1,254 @@
+.wrapper {
+    inline-size: 100%;
+    block-size: 100%;
+}
+
+.searchCard {
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--btn-focus-light-background-color);
+    border-radius: 1.6rem;
+    overflow: hidden;
+    background-color: var(--white-color);
+    cursor: pointer;
+}
+
+.searchCard:hover {
+    background-color: var(--gray-color-100);
+}
+
+.cardPrimaryContent {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 1.6rem;
+}
+
+.primaryTop {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.imgWrapper img {
+    aspect-ratio: 16 / 9;
+    display: block;
+    object-fit: cover;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: auto;
+}
+
+.primaryHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.primaryHeading {
+    max-inline-size: 36em;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.instructor {
+    max-inline-size: 60rem;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: block-axis;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+}
+
+.primaryBottom {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.tagList {
+    list-style: none;
+    max-block-size: 5.2rem;
+    overflow-y: clip;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.tagList li {
+    display: flex;
+    flex: 0 0 auto;
+    padding-inline-start: 0;
+    margin-block-start: 0;
+}
+
+.tagItem {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    vertical-align: baseline;
+    block-size: 2.2rem;
+    padding-block: 0;
+    padding-inline: 0.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+}
+
+.bestsellerBadge {
+    block-size: 2.2rem;
+    margin-inline-end: 0;
+}
+
+.rating {
+    font-weight: 600;
+}
+
+.courseLevel {
+    text-transform: capitalize;
+}
+
+.checkoutGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.coursePrice {
+    display: flex;
+    align-items: center;
+    padding-block: 0.4rem;
+    padding-inline: 0;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.coursePrice span {
+    text-decoration: underline;
+}
+
+.cardSecondaryContent {
+    flex: 0 0 auto;
+    padding: 1.6rem;
+    padding-block-start: 0;
+}
+
+.secondaryWrapper {
+    min-inline-size: 0;
+    overflow: hidden;
+    padding-block-start: 1.6rem;
+    border-block-start: 1px solid var(--border-color);
+}
+
+.lessonTable {
+    inline-size: 100%;
+    max-block-size: 10.7rem;
+    display: block;
+    overflow-y: auto;
+    padding: 1.6rem;
+    border-radius: 0.8rem;
+    background-color: var(--gray-color-100);
+    font-size: 1.2rem;
+}
+
+.lessonTable thead {
+    text-align: start;
+}
+
+.lessonTable thead th {
+    padding-block-end: 0.8rem;
+}
+
+.lessonTable thead th span {
+    margin-inline-end: 0.4rem;
+    color: #33364a;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}
+
+.lessonTable q {
+    quotes: '\201C''\201D''\2018''\2019';
+}
+
+.lessonTable tr {
+    display: flex;
+}
+
+.lessonItem {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.popoverWrapper {
+    inline-size: 40rem !important;
+}
+
+.popoverContent {
+    position: relative;
+}
+
+.popoverHeading {
+    margin-block-end: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.whatLearn {
+    list-style: none;
+}
+
+.whatLearnItem {
+    display: flex;
+    align-items: flex-start;
+    inline-size: 100%;
+    block-size: auto;
+    padding-block: 0.4rem;
+    padding-inline: 0;
+    text-align: start;
+    letter-spacing: normal;
+    white-space: normal;
+}
+
+.whatLearnIcon {
+    padding-block-start: 0.6rem;
+    font-size: 1.1rem;
+}
+
+.whatLearnText {
+    margin-inline-start: 1.6rem;
+    min-block-size: 2.24rem;
+    flex: 1;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+}

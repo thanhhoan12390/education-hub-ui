@@ -13,9 +13,17 @@ interface AddToCartButtonProps {
     medium?: boolean;
     noPrimary?: boolean;
     courseId: number;
+    small?: boolean;
+    isInline?: boolean;
 }
 
-function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToCartButtonProps) {
+function AddToCartButton({
+    courseId,
+    noPrimary = false,
+    medium = false,
+    small = false,
+    isInline = false,
+}: AddToCartButtonProps) {
     const [isPending, startTransition] = useTransition();
 
     const url = '/api/cart';
@@ -34,6 +42,13 @@ function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToC
             outline={noPrimary}
             large={!medium}
             primary={!noPrimary}
+            small={small}
+            style={{
+                ...(isInline && {
+                    inlineSize: 'unset',
+                    minInlineSize: 'unset',
+                }),
+            }}
             onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -68,7 +83,19 @@ function AddToCartButton({ courseId, noPrimary = false, medium = false }: AddToC
             )}
         </FlexibleButton>
     ) : (
-        <FlexibleButton href="/cart" outline={noPrimary} large={!medium} primary={!noPrimary}>
+        <FlexibleButton
+            style={{
+                ...(isInline && {
+                    inlineSize: 'unset',
+                    minInlineSize: 'unset',
+                }),
+            }}
+            href="/cart"
+            outline={noPrimary}
+            large={!medium}
+            primary={!noPrimary}
+            small={small}
+        >
             {isPending || isLoading ? (
                 <Spin
                     style={noPrimary ? { color: 'var(--purple-color)' } : { color: 'var(--gray-color-100)' }}

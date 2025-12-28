@@ -15,6 +15,7 @@ interface ClickableDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     onClose?: () => void;
     dropdownWidth?: string;
     dropdownHeight?: string;
+    dropdownStyles?: React.CSSProperties;
 }
 
 function ClickableDropdown({
@@ -24,7 +25,9 @@ function ClickableDropdown({
     onClose,
     dropdownWidth,
     dropdownHeight,
+    dropdownStyles,
     className,
+
     ...rest
 }: ClickableDropdownProps) {
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -43,12 +46,25 @@ function ClickableDropdown({
                 onClose?.();
             }
         };
+        /**
+         *  document.addEventListener('click', handleClickOutside);
+         * ❗️“Click outside” có thể chạy sau khi React mở dropdown mới
 
-        document.addEventListener('click', handleClickOutside);
+            React onClick chạy ở bubbling phase trên document, trong khi bạn cũng dùng document.addEventListener('click', …).
+
+            ⛔️ Vì vậy khi bạn bấm dropdown B:
+
+            React mở dropdown B (set state → isOpenB = true)
+
+            rồi mới tới document click handler của dropdown A
+
+            A cố đóng lại, nhưng logic UI tổng thể của bạn không sync chung nên 2 dropdown cùng mở
+         */
+        document.addEventListener('pointerdown', handleClickOutside); // hoặc document.addEventListener('click', handleClickOutside, { capture: true });
         document.addEventListener('keydown', handleKeydown);
         return () => {
-            document.removeEventListener('click', handleClickOutside);
-            document.addEventListener('keydown', handleKeydown);
+            document.removeEventListener('pointerdown', handleClickOutside);
+            document.removeEventListener('keydown', handleKeydown);
         };
     }, [isOpen, onClose]);
 
@@ -57,7 +73,7 @@ function ClickableDropdown({
             {children}
 
             <PopperWrapper
-                style={{ inlineSize: dropdownWidth, blockSize: dropdownHeight }}
+                style={{ ...dropdownStyles, inlineSize: dropdownWidth, blockSize: dropdownHeight }}
                 className={cx('dropdown', {
                     ['dropdown-open']: isOpen,
                 })}

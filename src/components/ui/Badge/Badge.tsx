@@ -4,8 +4,8 @@ import styles from './Badge.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Badge() {
-    return <div className={cx('badge-tag')}>Bestseller</div>;
+function Badge({ className }: { className?: string }) {
+    return <div className={cx('badge-tag', className)}>Bestseller</div>;
 }
 
 export default Badge;

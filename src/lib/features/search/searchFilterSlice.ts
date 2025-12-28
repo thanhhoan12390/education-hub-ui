@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-type Language = 'en' | 'es' | 'tr' | 'pt' | 'ar';
-type Level = 'all' | 'beginner' | 'intermediate' | 'expert';
-type Rating = 4.5 | 4 | 3.5 | 3;
+export type Language = 'en' | 'es' | 'tr' | 'pt' | 'ar';
+export type Level = 'all' | 'beginner' | 'intermediate' | 'expert';
+export type Rating = 4.5 | 4 | 3.5 | 3;
 
 export interface SearchFilterSliceState {
     hasExercises: boolean;
     hasPracticeTest: boolean;
-    languages?: Language[];
+    languages: Language[];
     rating?: Rating;
-    level?: Level[];
+    level: Level[];
 }
 
 const initialState: SearchFilterSliceState = {
@@ -31,13 +31,22 @@ export const searchFilterSlice = createSlice({
             state.hasPracticeTest = !state.hasPracticeTest;
         }),
         addLanguage: create.reducer((state, action: PayloadAction<Language>) => {
-            state.languages?.push(action.payload);
+            state.languages.push(action.payload);
+        }),
+        removeLanguage: create.reducer((state, action: PayloadAction<Language>) => {
+            state.languages = state.languages.filter((item) => item !== action.payload);
         }),
         setRating: create.reducer((state, action: PayloadAction<Rating>) => {
             state.rating = action.payload;
         }),
+        clearRating: create.reducer((state) => {
+            state.rating = undefined;
+        }),
         addLevel: create.reducer((state, action: PayloadAction<Level>) => {
-            state.level?.push(action.payload);
+            state.level.push(action.payload);
+        }),
+        removeLevel: create.reducer((state, action: PayloadAction<Level>) => {
+            state.level = state.level.filter((item) => item !== action.payload);
         }),
     }),
     selectors: {
@@ -49,7 +58,16 @@ export const searchFilterSlice = createSlice({
     },
 });
 
-export const { addLanguage, addLevel, setRating, toggleExercises, togglePracticeTest } = searchFilterSlice.actions;
+export const {
+    addLanguage,
+    addLevel,
+    setRating,
+    toggleExercises,
+    togglePracticeTest,
+    removeLanguage,
+    clearRating,
+    removeLevel,
+} = searchFilterSlice.actions;
 
 export const { selectHasExercises, selectHasPracticeTest, selectLanguages, selectLevel, selectRating } =
     searchFilterSlice.selectors;

@@ -7,7 +7,11 @@ export const searchApiSlice = createApi({
     tagTypes: ['Search'],
     endpoints: (build) => ({
         getPokemon: build.query<ListPokemon, { limit: number; offset: number }>({
-            query: ({ limit, offset = 0 }) => `?limit=${limit}&offset=${offset}`,
+            query: (params) => ({
+                url: '',
+                method: 'GET',
+                params,
+            }),
             providesTags: (result, error, arg) => [{ type: 'Search', id: `${arg.limit}-${arg.offset}` }],
         }),
     }),

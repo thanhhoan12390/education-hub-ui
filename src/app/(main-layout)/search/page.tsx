@@ -5,12 +5,15 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import SearchFiltersBar from '~/components/features/search/SearchFiltersBar';
+import { getCourses } from '~/lib/data';
+import SearchCard from '~/components/ui/SearchCard';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
 async function Search({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
     const { q } = await searchParams;
+    const courses = await getCourses();
 
     if (!q) {
         redirect('/');
@@ -47,7 +50,15 @@ async function Search({ searchParams }: { searchParams: Promise<{ [key: string]:
                 {/* filters bar */}
                 <SearchFiltersBar />
 
-                <div className={cx('content-wrapper')}></div>
+                <div className={cx('content-wrapper')}>
+                    <div className={cx('content-area')}>
+                        <div className={cx('search-card-container')}>
+                            {courses.map((course, idx) => (
+                                <SearchCard key={idx} course={course} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

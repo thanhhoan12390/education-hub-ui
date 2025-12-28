@@ -35,14 +35,9 @@
     }
 }
 
-.sort-mode-btn {
-    border: none;
-    box-shadow: none;
-    border-radius: 0.4rem;
-
-    span {
-        font-weight: 700;
-    }
+.search-style-btn-active {
+    background-color: var(--btn-focus-light-background-color);
+    border-color: var(--btn-focus-light-background-color);
 }
 
 .checklist-dropdown-content {
@@ -81,4 +76,67 @@
         display: flex;
         align-items: center;
     }
+}
+
+.rating-clear-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-block-start: 1.6rem;
+    color: var(--purple-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    cursor: default;
+}
+
+.sort-mode {
+    position: relative;
+}
+
+.mode-select {
+    block-size: 4rem;
+    min-inline-size: 0;
+    max-inline-size: 20rem;
+    inline-size: unset;
+    display: flex;
+    text-overflow: ellipsis;
+    text-align: right;
+    padding-block: 0;
+    padding-inline: 0.8rem 3.2rem;
+    border: 0;
+    outline: none;
+    border-radius: 0.4rem;
+    color: var(--text-color);
+    background: var(--white-color);
+    cursor: pointer;
+    font-family: var(--tiktok-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.6rem;
+    letter-spacing: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    &:hover {
+        background-color: var(--gray-color-100);
+    }
+}
+
+.select-option {
+    background-color: var(--white-color);
+}
+
+.sort-mode-icon-wrapper {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    block-size: 100%;
+    inline-size: 3.6rem;
+    padding-block: 0;
+    padding-inline: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
