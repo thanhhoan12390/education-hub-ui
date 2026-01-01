@@ -12,6 +12,7 @@ const Popover = dynamic(() => import('~/components/ui/Popover'), {
 import { Course } from '~/types';
 import Badge from '~/components/ui/Badge';
 import AddToCartButton from '~/components/features/cart/AddToCartButton';
+import { LEVEL_NAME } from '~/components/features/search/SearchFiltersBar/SearchFiltersBar';
 import styles from './SearchCard.module.css';
 
 interface SearchCardProps {
@@ -65,7 +66,9 @@ function SearchCard({ course }: SearchCardProps) {
                                 <div className={styles.tagItem}>728 lectures</div>
                             </li>
                             <li>
-                                <div className={`${styles.tagItem} ${styles.courseLevel}`}>{course.level}</div>
+                                <div className={`${styles.tagItem} ${styles.courseLevel}`}>
+                                    {course.level ? LEVEL_NAME[course.level] : ''}
+                                </div>
                             </li>
                         </ul>
 
