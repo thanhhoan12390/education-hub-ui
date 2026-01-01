@@ -95,6 +95,7 @@ function AddToCartButton({
             large={!medium}
             primary={!noPrimary}
             small={small}
+            onClick={(e) => e.stopPropagation()}
         >
             {isPending || isLoading ? (
                 <Spin

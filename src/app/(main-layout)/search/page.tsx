@@ -5,17 +5,15 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
 import SearchFiltersBar from '~/components/features/search/SearchFiltersBar';
-import { getCourses } from '~/lib/data';
-import SearchCard from '~/components/ui/SearchCard';
+import SearchFilteredContent from '~/components/features/search/SearchFilteredContent';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
 async function Search({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-    const { q } = await searchParams;
-    const courses = await getCourses();
+    const params = await searchParams;
 
-    if (!q) {
+    if (!params.q) {
         redirect('/');
     }
 
@@ -24,7 +22,7 @@ async function Search({ searchParams }: { searchParams: Promise<{ [key: string]:
             <div className={cx('suggestion-header')}>
                 <div className={cx('suggestion-container')}>
                     <h2 className={cx('suggestion-heading')}>
-                        Recommended in <span>{q}</span>
+                        Recommended in <span>{params.q}</span>
                     </h2>
                     <div className={cx('suggestion-tags')}>
                         <FlexibleButton outline rounded className={cx('search-style-btn')}>
@@ -50,15 +48,8 @@ async function Search({ searchParams }: { searchParams: Promise<{ [key: string]:
                 {/* filters bar */}
                 <SearchFiltersBar />
 
-                <div className={cx('content-wrapper')}>
-                    <div className={cx('content-area')}>
-                        <div className={cx('search-card-container')}>
-                            {courses.map((course, idx) => (
-                                <SearchCard key={idx} course={course} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                {/* filtered content */}
+                <SearchFilteredContent />
             </div>
         </div>
     );

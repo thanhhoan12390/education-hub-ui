@@ -1,0 +1,24 @@
+.wrapper {
+    margin-block-end: 3.2rem;
+}
+
+.contentArea {
+    container-type: inline-size;
+    container-name: ud-content-area;
+    inline-size: 100%;
+}
+
+.cardContainer {
+    inline-size: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1.6rem;
+    row-gap: 1.6rem;
+}
+
+.loadingOverlay {
+    position: absolute;
+    inset-block-start: 7.2rem;
+    inset-block-end: 0;
+    inset-inline: 0;
+}
