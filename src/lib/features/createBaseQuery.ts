@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/query/react';
-import { getBaseUrl } from '../getBaseUrl';
+
+import { getBaseUrl } from '~/lib/getBaseUrl';
 // import { RootState } from '../store';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

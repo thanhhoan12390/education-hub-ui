@@ -7,11 +7,11 @@ import { useMemo, useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 import FlexibleButton from '~/components/ui/FlexibleButton';
-import { ListIcon } from '~/components/ui/Icons';
 import ClickableDropdown from '~/components/ui/ClickableDropdown';
 import CustomCheckbox from '~/components/ui/CustomCheckbox';
 import CustomRadio from '~/components/ui/CustomRadio';
 import StarRating from '~/components/ui/StarRating';
+import SearchFilterMenuModal from '~/components/features/search/SearchFilterMenuModal';
 import styles from './SearchFiltersBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -179,6 +179,13 @@ function SearchFiltersBar() {
     const handleRatingChange = (r: Rating | null) => setSelectedRating(r);
     const handleHasExerciseChange = () => setHasExercises((prev) => (prev ? undefined : true));
     const handleHasPracticeTestChange = () => setHasPracticeTest((prev) => (prev ? undefined : true));
+    const handleClearAllFilters = () => {
+        setSelectedLanguages([]);
+        setSelectedLevels([]);
+        setSelectedRating(null);
+        setHasExercises(undefined);
+        setHasPracticeTest(undefined);
+    };
 
     const orderSortMode = useMemo(
         () => [
@@ -191,10 +198,19 @@ function SearchFiltersBar() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('filters-bar')}>
-                <FlexibleButton outline rounded className={cx('search-style-btn')}>
-                    <ListIcon height="1.6rem" width="1.6rem" />
-                    <span>All filters</span>
-                </FlexibleButton>
+                <SearchFilterMenuModal
+                    selectedRating={selectedRating}
+                    onRatingChange={handleRatingChange}
+                    selectedLevels={selectedLevels}
+                    onLevelCheckedListChange={handleLevelCheckedList}
+                    hasExercises={hasExercises}
+                    onHasExerciseChange={handleHasExerciseChange}
+                    hasPracticeTest={hasPracticeTest}
+                    onHasPracticeTestChange={handleHasPracticeTestChange}
+                    selectedLanguages={selectedLanguages}
+                    onLanguageCheckedListChange={handleLanguageCheckedList}
+                    onClearAllFilters={handleClearAllFilters}
+                />
 
                 <FlexibleButton
                     onClick={handleHasExerciseChange}

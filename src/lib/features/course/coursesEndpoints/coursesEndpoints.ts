@@ -1,6 +1,6 @@
-import { Course } from '~/types';
-import type { MyCourseBuilder } from '../courseApiSlice';
-import { Language, Level, Rating } from '~/components/features/search/SearchFiltersBar/SearchFiltersBar';
+import type { Course } from '~/types';
+import type { MyCourseBuilder } from '~/lib/features/course/courseApiSlice';
+import type { Language, Level, Rating } from '~/components/features/search/SearchFiltersBar/SearchFiltersBar';
 
 export const coursesEndpoints = (builder: MyCourseBuilder) => ({
     getCourses: builder.query<

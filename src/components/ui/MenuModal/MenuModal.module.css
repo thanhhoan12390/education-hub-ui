@@ -1,0 +1,64 @@
+.overlayModal {
+    z-index: 99999;
+}
+
+.menuWrapper {
+    --translate-x-direction: 1;
+
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: auto;
+    max-inline-size: 78%;
+    block-size: 100%;
+    background-color: var(--white-color);
+    transform: translateX(calc(var(--translate-x-direction) * -1 * 100vw));
+    transition: transform 150ms cubic-bezier(0.2, 0, 1, 0.9);
+    z-index: 999999;
+}
+
+.menuOpen {
+    transform: translateX(0);
+    transition: transform 250ms cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+.menuContainer {
+    inline-size: 100%;
+    block-size: 100%;
+    clip: rect(auto, auto, auto, auto);
+    opacity: 0;
+    transition: opacity 150ms linear;
+}
+
+.menuContainerShow {
+    opacity: 1;
+    transition: opacity 250ms linear 250ms;
+}
+
+.menuCloseBtn {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 100%;
+    margin: 1.6rem;
+    block-size: 4rem;
+    inline-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100rem;
+    box-shadow: 0 2px 4px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent),
+        0 4px 12px color-mix(in oklch, oklch(27.54% 0.1638 265.98deg) 8%, transparent);
+    transform: scale(0);
+    transition: transform 150ms cubic-bezier(0.2, 0, 1, 0.9);
+    background-color: var(--white-color);
+    cursor: pointer;
+}
+
+.menuCloseBtn:hover {
+    background-color: var(--btn-focus-light-background-color);
+}
+
+.menuCloseBtnVisible {
+    transform: scale(1);
+    transition: transform 100ms cubic-bezier(0, 0, 0.38, 0.9) 400ms;
+}

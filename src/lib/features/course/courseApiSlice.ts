@@ -1,7 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import type { EndpointBuilder } from '@reduxjs/toolkit/query/react';
-import type { MyBaseQueryFn } from '../createBaseQuery';
-import { createBaseQuery } from '../createBaseQuery';
+
+import type { MyBaseQueryFn } from '~/lib/features/createBaseQuery';
+import { createBaseQuery } from '~/lib/features/createBaseQuery';
 import { coursesEndpoints } from './coursesEndpoints/coursesEndpoints';
 
 export type MyCourseBuilder = EndpointBuilder<MyBaseQueryFn, string | never, 'courseApi'>;
