@@ -45,8 +45,6 @@ function SearchFilterMenuModal({
 
     const { isLoading } = useCoursesStatus();
 
-    console.log(isLoading);
-
     return (
         <>
             <FlexibleButton outline rounded className={styles.searchStyleBtn} onClick={() => setIsOpen(true)}>

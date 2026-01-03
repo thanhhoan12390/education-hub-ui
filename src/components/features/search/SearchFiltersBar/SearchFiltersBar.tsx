@@ -60,6 +60,8 @@ function SearchFiltersBar() {
 
     const isRating = (v: number): v is Rating => (RATING_VALUES as readonly number[]).includes(v);
 
+    const q = searchParams.get('q') ?? '';
+
     const [selectedLanguages, setSelectedLanguages] = useState<Language[]>(() =>
         searchParams.getAll('lang').filter(isLanguage),
     );
@@ -89,6 +91,38 @@ function SearchFiltersBar() {
     const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
     const [isRatingDropdownOpen, setIsRatingDropdownOpen] = useState(false);
     const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState(false);
+
+    const handleLanguageCheckedList = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value as Language;
+        setSelectedLanguages((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
+    };
+
+    const handleLevelCheckedList = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value as Level;
+        setSelectedLevels((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
+    };
+
+    const handleRatingChange = (r: Rating | null) => setSelectedRating(r);
+
+    const handleHasExerciseChange = () => setHasExercises((prev) => (prev ? undefined : true));
+
+    const handleHasPracticeTestChange = () => setHasPracticeTest((prev) => (prev ? undefined : true));
+
+    const handleClearAllFilters = () => {
+        setSelectedLanguages([]);
+        setSelectedLevels([]);
+        setSelectedRating(null);
+        setHasExercises(undefined);
+        setHasPracticeTest(undefined);
+    };
+
+    const orderSortMode = useMemo(
+        () => [
+            ...sortModeSelectData.filter((item) => item.value === selectedSortMode),
+            ...sortModeSelectData.filter((item) => item.value !== selectedSortMode),
+        ],
+        [selectedSortMode],
+    );
 
     /* ---------------------------
         SYNC STATE → URL
@@ -166,34 +200,15 @@ function SearchFiltersBar() {
         router,
     ]);
 
-    const handleLanguageCheckedList = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value as Language;
-        setSelectedLanguages((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
-    };
-
-    const handleLevelCheckedList = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value as Level;
-        setSelectedLevels((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
-    };
-
-    const handleRatingChange = (r: Rating | null) => setSelectedRating(r);
-    const handleHasExerciseChange = () => setHasExercises((prev) => (prev ? undefined : true));
-    const handleHasPracticeTestChange = () => setHasPracticeTest((prev) => (prev ? undefined : true));
-    const handleClearAllFilters = () => {
+    useEffect(() => {
+        // reset tất cả filters khi q đổi
         setSelectedLanguages([]);
         setSelectedLevels([]);
         setSelectedRating(null);
         setHasExercises(undefined);
         setHasPracticeTest(undefined);
-    };
-
-    const orderSortMode = useMemo(
-        () => [
-            ...sortModeSelectData.filter((item) => item.value === selectedSortMode),
-            ...sortModeSelectData.filter((item) => item.value !== selectedSortMode),
-        ],
-        [selectedSortMode],
-    );
+        setSelectedSortMode('relevant');
+    }, [q]);
 
     return (
         <div className={cx('wrapper')}>

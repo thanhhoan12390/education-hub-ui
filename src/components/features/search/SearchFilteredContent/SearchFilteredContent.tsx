@@ -5,7 +5,6 @@ import { Loading3QuartersOutlined } from '@ant-design/icons';
 
 import { useGetCoursesQuery } from '~/lib/features/course/courseApiSlice';
 import SearchCard from '~/components/ui/SearchCard';
-import OverlayModal from '~/components/ui/OverlayModal';
 import { useCourseParams } from '~/hooks/useCourseParams';
 import styles from './SearchFilteredContent.module.css';
 

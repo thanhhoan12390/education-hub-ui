@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Alert, Flex, Spin } from 'antd';
 import { Loading3QuartersOutlined } from '@ant-design/icons';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import SearchItem from '../SearchItem';
 import SearchAutoComplete from '../SearchAutoComplete';
@@ -34,6 +34,8 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
 
     const debouncedValue = useDebounce(searchValue, 500);
 
+    const router = useRouter();
+
     const { data, isError, isLoading } = useGetPokemonQuery(
         { limit: 1000, offset: 0 },
         {
@@ -46,6 +48,12 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
 
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
+        }
+    };
+
+    const handleKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key.toLowerCase() === 'enter' && searchValue.trim()) {
+            router.push(`/search?q=${encodeURIComponent(searchValue)}`);
         }
     };
 
@@ -89,6 +97,7 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
                     spellCheck={false}
                     onChange={handleChange}
                     onFocus={() => setIsOpen(true)}
+                    onKeyDown={handleKeydown}
                     className={cx('search-input')}
                     name="search input"
                 />
@@ -97,6 +106,9 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
                     className={cx('search-btn')}
                     onClick={(e) => {
                         e.preventDefault();
+                        if (searchValue.trim()) {
+                            router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+                        }
                     }}
                     disabled={searchValue === ''}
                 >

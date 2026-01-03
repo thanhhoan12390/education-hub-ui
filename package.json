@@ -6,7 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build --turbopack",
         "start": "next start",
-        "lint": "eslint"
+        "lint": "eslint",
+        "test": "jest"
     },
     "dependencies": {
         "@ant-design/nextjs-registry": "^1.2.0",
@@ -31,13 +32,16 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@types/jest": "^30.0.0",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "babel-plugin-react-compiler": "^1.0.0",
         "eslint": "^9",
         "eslint-config-next": "15.5.6",
+        "jest": "^30.2.0",
         "sass": "^1.93.2",
+        "ts-jest": "^29.4.6",
         "typescript": "^5",
         "video.js": "^8.23.4"
     },
