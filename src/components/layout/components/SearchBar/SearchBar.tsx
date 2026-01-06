@@ -54,6 +54,8 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
     const handleKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key.toLowerCase() === 'enter' && searchValue.trim()) {
             router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+            setIsOpen(false);
+            onHideSearchOverlay?.();
         }
     };
 
@@ -108,6 +110,8 @@ function SearchBar({ overlaySearch = false, onHideSearchOverlay }: SearchBarProp
                         e.preventDefault();
                         if (searchValue.trim()) {
                             router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+                            setIsOpen(false);
+                            onHideSearchOverlay?.();
                         }
                     }}
                     disabled={searchValue === ''}
