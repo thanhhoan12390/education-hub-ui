@@ -1,0 +1,6 @@
+.wrapper {
+    flex: 1;
+    min-inline-size: 1px;
+    padding-block-start: 7.2rem;
+    margin-block-end: 6.4rem;
+}
