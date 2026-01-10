@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    block-size: 7.2rem;
+    writing-mode: horizontal-tb;
+    direction: ltr;
+    padding-block: 0;
+    padding-inline: 2.4rem;
+    z-index: 99;
+    background-color: var(--white-color);
+}
+
+.navItem:last-child .navLink {
+    padding-inline: 0.4rem;
+}
+
+.navItem:hover .navLink {
+    color: var(--btn-focus-color);
+}
+
+.navIcon {
+    font-size: 1.8rem;
+}
+
+.navLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 4rem;
+    padding-block: 0;
+    padding-inline: 1.2rem;
+    margin-block: 1.2rem;
+    margin-inline: 0;
+
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-decoration: none;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.navLink:hover {
+    color: var(--btn-focus-color);
+    background-color: var(--btn-focus-background-color);
+    border-radius: var(--btn-border-radius);
+}
+
+.navStudentLink,
+.navNotify {
+    position: relative;
+}
+
+.navStudentLink:hover .navStudentDropdown,
+.navNotify:hover .navNotifyDropdown {
+    display: block;
+}
+
+.navDropdownContent {
+    min-inline-size: 36rem;
+    padding: 1.6rem;
+    text-align: center;
+}
+
+.navStudentDropdownContent {
+    min-inline-size: 28.8rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.navStudentDropdown,
+.navNotifyDropdown {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-end: 0;
+    margin-block-start: 0.4rem;
+    display: none;
+    z-index: 9;
+}
+
+.navNotifyHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: 3.2rem;
+}
+
+.navNotifyHeading {
+    font-weight: 700;
+}
+
+.navNotifySetting {
+    padding: 0;
+    min-inline-size: unset;
+    inline-size: unset;
+}
+.navNotifyText {
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+}

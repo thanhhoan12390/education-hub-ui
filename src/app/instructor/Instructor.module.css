@@ -1,0 +1,50 @@
+.wrapper {
+    display: flex;
+    min-block-size: 100vb;
+    flex-direction: column;
+}
+
+.mainContent {
+    flex: 1 0 auto;
+}
+
+/* 
+Giả sử:
+
+child cao H
+
+margin-top = -M
+
+👉 Phần child tràn lên trên parent = M
+
+👉 Parent chỉ bao H − M
+
+Ví dụ:
+Child height = 20rem
+margin-top   = -7.2rem
+
+=> 7.2rem tràn lên trên parent
+=> parent chỉ thấy 12.8rem
+
+Vì sao margin âm hay dùng cho “overlap design”?
+
+Vì nó cho phép:
+
+element chồng lên element trước
+
+không làm tăng chiều cao layout
+
+Ví dụ:
+
+Card đè lên banner
+
+Avatar đè lên cover
+
+Section chồng nhau
+
+*/
+
+.mainPageFrame {
+    display: flex;
+    margin-block-start: -7.2rem;
+}
